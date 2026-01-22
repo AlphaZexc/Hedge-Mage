@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 3
+  tags:
+  - Enemy
+  - KillZone
+  - LevelEndTrigger
+  - Letter
+  - Fountain
+  - Decor
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Character
+  - Creature
+  - Letter
+  - Obstacles
+  - Node
+  - Background
+  - EnemyIgnoreBush
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3556464591
+    locked: 0
+  - name: Dynamic
+    uniqueID: 3178462243
+    locked: 0
+  - name: UI
+    uniqueID: 3012231225
+    locked: 0
+  - name: Obstacles
+    uniqueID: 337677623
+    locked: 0
+  - name: Pathway
+    uniqueID: 65639691
+    locked: 0
+  - name: Hedge
+    uniqueID: 2492784275
+    locked: 0
+  - name: Letter
+    uniqueID: 2141910193
+    locked: 0
+  - name: Creature
+    uniqueID: 1285006499
+    locked: 0
+  - name: Character
+    uniqueID: 3247192429
+    locked: 0
+  - name: EnemyIgnoreBush
+    uniqueID: 891104247
+    locked: 0
+  m_RenderingLayers:
+  - Default

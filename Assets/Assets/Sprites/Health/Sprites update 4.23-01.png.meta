@@ -1,0 +1,618 @@
+fileFormatVersion: 2
+guid: 63fdfc5bfca1f3247a5f03dc2dcf9890
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5321411531905283416
+    second: Sprites update 4.23-01_0
+  - first:
+      213: -5039467339888435116
+    second: Sprites update 4.23-01_1
+  - first:
+      213: -3597620571028008961
+    second: Sprites update 4.23-01_2
+  - first:
+      213: -4976732888034484037
+    second: Sprites update 4.23-01_3
+  - first:
+      213: -5374886727126236670
+    second: Sprites update 4.23-01_4
+  - first:
+      213: 5641695812032469739
+    second: Sprites update 4.23-01_5
+  - first:
+      213: 8307429546722604913
+    second: Sprites update 4.23-01_6
+  - first:
+      213: 5826223164347500501
+    second: Sprites update 4.23-01_7
+  - first:
+      213: 2596285976922798392
+    second: Sprites update 4.23-01_8
+  - first:
+      213: -2995960240882269909
+    second: Sprites update 4.23-01_9
+  - first:
+      213: 9171457925464581457
+    second: Sprites update 4.23-01_10
+  - first:
+      213: -7141066067574628597
+    second: Sprites update 4.23-01_11
+  - first:
+      213: -2823595115764691161
+    second: Sprites update 4.23-01_12
+  - first:
+      213: 3294409665453437876
+    second: Sprites update 4.23-01_13
+  - first:
+      213: 6190083606489153766
+    second: Sprites update 4.23-01_14
+  - first:
+      213: -4342340210102317771
+    second: Sprites update 4.23-01_15
+  - first:
+      213: 5852018817809817216
+    second: Sprites update 4.23-01_16
+  - first:
+      213: -2399767007281034789
+    second: Sprites update 4.23-01_17
+  - first:
+      213: 3979678142201279983
+    second: Sprites update 4.23-01_18
+  - first:
+      213: -7747130416327259570
+    second: Sprites update 4.23-01_19
+  - first:
+      213: -8601961971676975955
+    second: Sprites update 4.23-01_20
+  - first:
+      213: 7725278603296245120
+    second: Sprites update 4.23-01_21
+  - first:
+      213: -792213434123603028
+    second: Sprites update 4.23-01_22
+  - first:
+      213: 2735247106529310148
+    second: Sprites update 4.23-01_23
+  - first:
+      213: 945009240735765393
+    second: Sprites update 4.23-01_24
+  - first:
+      213: -2222252279533348534
+    second: Sprites update 4.23-01_25
+  - first:
+      213: 6008537113058829925
+    second: Sprites update 4.23-01_26
+  - first:
+      213: 1914686556406470093
+    second: Sprites update 4.23-01_27
+  - first:
+      213: -4965583837908500826
+    second: Sprites update 4.23-01_28
+  - first:
+      213: 845123229880761786
+    second: Sprites update 4.23-01_29
+  - first:
+      213: -6386430810644768062
+    second: Sprites update 4.23-01_30
+  - first:
+      213: -6293709016664555538
+    second: Sprites update 4.23-01_31
+  - first:
+      213: -3170075089280422148
+    second: Sprites update 4.23-01_32
+  - first:
+      213: -5537391948078176497
+    second: Sprites update 4.23-01_33
+  - first:
+      213: -9172182476921803272
+    second: Sprites update 4.23-01_34
+  - first:
+      213: 7929837693285214216
+    second: Sprites update 4.23-01_35
+  - first:
+      213: 1701765001677354708
+    second: Sprites update 4.23-01_36
+  - first:
+      213: 4784014023534446981
+    second: Sprites update 4.23-01_37
+  - first:
+      213: 2468666409810665506
+    second: Sprites update 4.23-01_38
+  - first:
+      213: -554108880617966932
+    second: Sprites update 4.23-01_39
+  - first:
+      213: -3613318958955845879
+    second: Sprites update 4.23-01_40
+  - first:
+      213: 7698614671145788464
+    second: Sprites update 4.23-01_41
+  - first:
+      213: -497529666096115484
+    second: Sprites update 4.23-01_42
+  - first:
+      213: 8576741219988232728
+    second: Sprites update 4.23-01_43
+  - first:
+      213: 3442789575521370951
+    second: Sprites update 4.23-01_44
+  - first:
+      213: 367078218567294551
+    second: Sprites update 4.23-01_45
+  - first:
+      213: 5489232986123718320
+    second: Sprites update 4.23-01_46
+  - first:
+      213: 7167754909679057717
+    second: Sprites update 4.23-01_47
+  - first:
+      213: 7432674135428476085
+    second: Sprites update 4.23-01_48
+  - first:
+      213: -7400718242391558982
+    second: Sprites update 4.23-01_49
+  - first:
+      213: 272706538111234979
+    second: Sprites update 4.23-01_50
+  - first:
+      213: -285766575892294618
+    second: Sprites update 4.23-01_51
+  - first:
+      213: -6046140641033004150
+    second: Sprites update 4.23-01_52
+  - first:
+      213: -4105258571303187979
+    second: Sprites update 4.23-01_53
+  - first:
+      213: 5408377038700994930
+    second: Sprites update 4.23-01_54
+  - first:
+      213: -1914355949156839734
+    second: Sprites update 4.23-01_55
+  - first:
+      213: 2976654267519425076
+    second: Sprites update 4.23-01_56
+  - first:
+      213: -2863047740338165544
+    second: Sprites update 4.23-01_57
+  - first:
+      213: 2763373800448723076
+    second: Sprites update 4.23-01_58
+  - first:
+      213: -6992405623524273899
+    second: Sprites update 4.23-01_59
+  - first:
+      213: 8251802520705191867
+    second: Sprites update 4.23-01_60
+  - first:
+      213: 8835308836220600014
+    second: Sprites update 4.23-01_61
+  - first:
+      213: 5732397239296223235
+    second: Sprites update 4.23-01_62
+  - first:
+      213: -2341510362143667885
+    second: Sprites update 4.23-01_63
+  - first:
+      213: 3381878313242989978
+    second: Sprites update 4.23-01_64
+  - first:
+      213: 2912767292576894877
+    second: Sprites update 4.23-01_65
+  - first:
+      213: 5090220620620456171
+    second: Sprites update 4.23-01_66
+  - first:
+      213: 6660289830101590022
+    second: Sprites update 4.23-01_67
+  - first:
+      213: -7437512169786462442
+    second: Sprites update 4.23-01_68
+  - first:
+      213: 7115844898306209138
+    second: Sprites update 4.23-01_69
+  - first:
+      213: 9166538422747601994
+    second: Sprites update 4.23-01_70
+  - first:
+      213: -5462567725680913362
+    second: Sprites update 4.23-01_71
+  - first:
+      213: 258170174216746429
+    second: Sprites update 4.23-01_72
+  - first:
+      213: -4482428112856332725
+    second: Sprites update 4.23-01_73
+  - first:
+      213: 906043615723410600
+    second: Sprites update 4.23-01_74
+  - first:
+      213: -8166432976916052240
+    second: Sprites update 4.23-01_75
+  - first:
+      213: -2117880569242480195
+    second: Sprites update 4.23-01_76
+  - first:
+      213: 6347343826388899670
+    second: Sprites update 4.23-01_77
+  - first:
+      213: -1161846943155832293
+    second: Sprites update 4.23-01_78
+  - first:
+      213: 8178426120022362012
+    second: Sprites update 4.23-01_79
+  - first:
+      213: 2241815378439967081
+    second: Sprites update 4.23-01_80
+  - first:
+      213: 8048962390477810699
+    second: Sprites update 4.23-01_81
+  - first:
+      213: -243943971063291298
+    second: Sprites update 4.23-01_82
+  - first:
+      213: 5680274290757211175
+    second: Sprites update 4.23-01_83
+  - first:
+      213: -1795824033333420674
+    second: Sprites update 4.23-01_84
+  - first:
+      213: 8954515012453749316
+    second: Sprites update 4.23-01_85
+  - first:
+      213: 197607971113686807
+    second: Sprites update 4.23-01_86
+  - first:
+      213: -6454237281730238230
+    second: Sprites update 4.23-01_87
+  - first:
+      213: -2212940825581209196
+    second: Sprites update 4.23-01_88
+  - first:
+      213: -5765610407473934303
+    second: Sprites update 4.23-01_89
+  - first:
+      213: 4920912296494319820
+    second: Sprites update 4.23-01_90
+  - first:
+      213: 1683931809288222154
+    second: Sprites update 4.23-01_91
+  - first:
+      213: -4779295005482462760
+    second: Sprites update 4.23-01_92
+  - first:
+      213: 891595472403026622
+    second: Sprites update 4.23-01_93
+  - first:
+      213: 328820439785444895
+    second: Sprites update 4.23-01_94
+  - first:
+      213: 787834425558003353
+    second: Sprites update 4.23-01_95
+  - first:
+      213: -8624872981292952858
+    second: Sprites update 4.23-01_96
+  - first:
+      213: 7653324058243896890
+    second: Sprites update 4.23-01_97
+  - first:
+      213: -3524109996854565376
+    second: Sprites update 4.23-01_98
+  - first:
+      213: 1266391852469401419
+    second: Sprites update 4.23-01_99
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Sprites update 4.23-01_0
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 2965
+        width: 757
+        height: 229
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 855b1ee189379d940800000000000000
+      internalID: 5321411531905283416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites update 4.23-01_3
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 2669
+        width: 492
+        height: 229
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb063b26ec71feab0800000000000000
+      internalID: -4976732888034484037
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites update 4.23-01_5
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 2385
+        width: 230
+        height: 229
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bea110733745b4e40800000000000000
+      internalID: 5641695812032469739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites update 4.23-01_6
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 1809
+        width: 387
+        height: 479
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1773cf8782be94370800000000000000
+      internalID: 8307429546722604913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 40dd2f86c99697d46a93dfea9c2fda61
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Sprites update 4.23-01_0: 5321411531905283416
+      Sprites update 4.23-01_1: -5039467339888435116
+      Sprites update 4.23-01_10: 9171457925464581457
+      Sprites update 4.23-01_11: -7141066067574628597
+      Sprites update 4.23-01_12: -2823595115764691161
+      Sprites update 4.23-01_13: 3294409665453437876
+      Sprites update 4.23-01_14: 6190083606489153766
+      Sprites update 4.23-01_15: -4342340210102317771
+      Sprites update 4.23-01_16: 5852018817809817216
+      Sprites update 4.23-01_17: -2399767007281034789
+      Sprites update 4.23-01_18: 3979678142201279983
+      Sprites update 4.23-01_19: -7747130416327259570
+      Sprites update 4.23-01_2: -3597620571028008961
+      Sprites update 4.23-01_20: -8601961971676975955
+      Sprites update 4.23-01_21: 7725278603296245120
+      Sprites update 4.23-01_22: -792213434123603028
+      Sprites update 4.23-01_23: 2735247106529310148
+      Sprites update 4.23-01_24: 945009240735765393
+      Sprites update 4.23-01_25: -2222252279533348534
+      Sprites update 4.23-01_26: 6008537113058829925
+      Sprites update 4.23-01_27: 1914686556406470093
+      Sprites update 4.23-01_28: -4965583837908500826
+      Sprites update 4.23-01_29: 845123229880761786
+      Sprites update 4.23-01_3: -4976732888034484037
+      Sprites update 4.23-01_30: -6386430810644768062
+      Sprites update 4.23-01_31: -6293709016664555538
+      Sprites update 4.23-01_32: -3170075089280422148
+      Sprites update 4.23-01_33: -5537391948078176497
+      Sprites update 4.23-01_34: -9172182476921803272
+      Sprites update 4.23-01_35: 7929837693285214216
+      Sprites update 4.23-01_36: 1701765001677354708
+      Sprites update 4.23-01_37: 4784014023534446981
+      Sprites update 4.23-01_38: 2468666409810665506
+      Sprites update 4.23-01_39: -554108880617966932
+      Sprites update 4.23-01_4: -5374886727126236670
+      Sprites update 4.23-01_40: -3613318958955845879
+      Sprites update 4.23-01_41: 7698614671145788464
+      Sprites update 4.23-01_42: -497529666096115484
+      Sprites update 4.23-01_43: 8576741219988232728
+      Sprites update 4.23-01_44: 3442789575521370951
+      Sprites update 4.23-01_45: 367078218567294551
+      Sprites update 4.23-01_46: 5489232986123718320
+      Sprites update 4.23-01_47: 7167754909679057717
+      Sprites update 4.23-01_48: 7432674135428476085
+      Sprites update 4.23-01_49: -7400718242391558982
+      Sprites update 4.23-01_5: 5641695812032469739
+      Sprites update 4.23-01_50: 272706538111234979
+      Sprites update 4.23-01_51: -285766575892294618
+      Sprites update 4.23-01_52: -6046140641033004150
+      Sprites update 4.23-01_53: -4105258571303187979
+      Sprites update 4.23-01_54: 5408377038700994930
+      Sprites update 4.23-01_55: -1914355949156839734
+      Sprites update 4.23-01_56: 2976654267519425076
+      Sprites update 4.23-01_57: -2863047740338165544
+      Sprites update 4.23-01_58: 2763373800448723076
+      Sprites update 4.23-01_59: -6992405623524273899
+      Sprites update 4.23-01_6: 8307429546722604913
+      Sprites update 4.23-01_60: 8251802520705191867
+      Sprites update 4.23-01_61: 8835308836220600014
+      Sprites update 4.23-01_62: 5732397239296223235
+      Sprites update 4.23-01_63: -2341510362143667885
+      Sprites update 4.23-01_64: 3381878313242989978
+      Sprites update 4.23-01_65: 2912767292576894877
+      Sprites update 4.23-01_66: 5090220620620456171
+      Sprites update 4.23-01_67: 6660289830101590022
+      Sprites update 4.23-01_68: -7437512169786462442
+      Sprites update 4.23-01_69: 7115844898306209138
+      Sprites update 4.23-01_7: 5826223164347500501
+      Sprites update 4.23-01_70: 9166538422747601994
+      Sprites update 4.23-01_71: -5462567725680913362
+      Sprites update 4.23-01_72: 258170174216746429
+      Sprites update 4.23-01_73: -4482428112856332725
+      Sprites update 4.23-01_74: 906043615723410600
+      Sprites update 4.23-01_75: -8166432976916052240
+      Sprites update 4.23-01_76: -2117880569242480195
+      Sprites update 4.23-01_77: 6347343826388899670
+      Sprites update 4.23-01_78: -1161846943155832293
+      Sprites update 4.23-01_79: 8178426120022362012
+      Sprites update 4.23-01_8: 2596285976922798392
+      Sprites update 4.23-01_80: 2241815378439967081
+      Sprites update 4.23-01_81: 8048962390477810699
+      Sprites update 4.23-01_82: -243943971063291298
+      Sprites update 4.23-01_83: 5680274290757211175
+      Sprites update 4.23-01_84: -1795824033333420674
+      Sprites update 4.23-01_85: 8954515012453749316
+      Sprites update 4.23-01_86: 197607971113686807
+      Sprites update 4.23-01_87: -6454237281730238230
+      Sprites update 4.23-01_88: -2212940825581209196
+      Sprites update 4.23-01_89: -5765610407473934303
+      Sprites update 4.23-01_9: -2995960240882269909
+      Sprites update 4.23-01_90: 4920912296494319820
+      Sprites update 4.23-01_91: 1683931809288222154
+      Sprites update 4.23-01_92: -4779295005482462760
+      Sprites update 4.23-01_93: 891595472403026622
+      Sprites update 4.23-01_94: 328820439785444895
+      Sprites update 4.23-01_95: 787834425558003353
+      Sprites update 4.23-01_96: -8624872981292952858
+      Sprites update 4.23-01_97: 7653324058243896890
+      Sprites update 4.23-01_98: -3524109996854565376
+      Sprites update 4.23-01_99: 1266391852469401419
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
