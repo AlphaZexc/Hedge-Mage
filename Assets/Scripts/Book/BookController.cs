@@ -14,12 +14,16 @@ public class BestiaryEntry
 
 public class BookController : MonoBehaviour
 {
-    [Header("Page GameObjects")]
-    [Tooltip("The parent GameObjects for each page. Drag them here in the order you want them to appear.")]
+    private const int BESTIARY_PAGE_INDEX = 2;
+
+    [Header("GameObjects")]
     public List<GameObject> pages;
+    public List<GameObject> tabs;
+    public List<int> tabPageNumbers; // Page number corresponding to each tab in numerical order
+    public Transform tabPositionLeft;
+    public Transform tabPositionRight;
 
     [Header("Creature Bestiary Data")]
-    [Tooltip("The data for your creature pages. This must match the order of your creature pages in the list above.")]
     public List<BestiaryEntry> bestiaryEntries;
 
     [Header("Navigation")]
@@ -33,6 +37,17 @@ public class BookController : MonoBehaviour
     {
         nextButton.onClick.AddListener(GoToNextPage);
         prevButton.onClick.AddListener(GoToPreviousPage);
+
+        if (tabs.Count == tabPageNumbers.Count && tabs.Count > 0)
+        {
+            for (int i = 0; i < tabs.Count; i++)
+            {
+                int tabIndex = i; // capture a copy
+                Button tabButton = tabs[i].GetComponent<Button>();
+                tabButton.onClick.AddListener(() => GoToPage(tabPageNumbers[tabIndex]));
+            }
+
+        }
     }
 
     private void Start()
@@ -46,13 +61,12 @@ public class BookController : MonoBehaviour
     // This new method sets up all the creature pages with their correct sprites once.
     private void PopulateAllPages()
     {
-        // We start at index 1, because page 0 is the Word Status page and doesn't need this data.
-        for (int i = 1; i < pages.Count; i++)
+        for (int i = tabPageNumbers[BESTIARY_PAGE_INDEX]; i < pages.Count; i++)
         {
             BookPage pageComponent = pages[i].GetComponent<BookPage>();
             
             // The first creature entry corresponds to the second page in the book, etc.
-            int bestiaryIndex = i - 1;
+            int bestiaryIndex = i - tabPageNumbers[BESTIARY_PAGE_INDEX];
 
             if (pageComponent != null && bestiaryIndex < bestiaryEntries.Count)
             {
@@ -61,7 +75,11 @@ public class BookController : MonoBehaviour
         }
     }
     
-    // The OnEnable method is no longer needed, Start handles the initial setup.
+    public void GoToPage(int page)
+    {
+        if (page >= 0 && page < pages.Count)
+        ShowPage(page);
+    }
 
     public void GoToNextPage()
     {
@@ -70,7 +88,6 @@ public class BookController : MonoBehaviour
             ShowPage(currentPageIndex + 1);
         }
     }
-
     public void GoToPreviousPage()
     {
         if (currentPageIndex > 0)
@@ -88,6 +105,17 @@ public class BookController : MonoBehaviour
             pages[i].SetActive(i == currentPageIndex);
         }
 
+        for (int i = 0; i < tabs.Count; i++)
+        {
+            if (currentPageIndex > tabPageNumbers[i])
+            {
+                tabs[i].transform.position = new Vector3(tabPositionLeft.position.x, tabs[i].transform.position.y, tabs[i].transform.position.z);
+            } else
+            {
+                tabs[i].transform.position = new Vector3(tabPositionRight.position.x, tabs[i].transform.position.y, tabs[i].transform.position.z);
+            }
+        }
+
         // Refresh word page if this page has one
         BookWordPage wordPage = pages[currentPageIndex].GetComponent<BookWordPage>();
         if (wordPage != null)
@@ -97,8 +125,6 @@ public class BookController : MonoBehaviour
 
         UpdateNavigationButtons();
     }
-
-
 
     private void UpdateNavigationButtons()
     {

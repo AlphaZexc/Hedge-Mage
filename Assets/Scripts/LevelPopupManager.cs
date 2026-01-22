@@ -23,6 +23,15 @@ public class LevelPopupManager : MonoBehaviour
         else Destroy(gameObject);
     }
 
+    private void Update()
+    {
+        // Opens/closes book when escape key is pressed
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            if (bookPopup.activeInHierarchy) CloseBookPopup();
+            else ShowBookPopup();
+        }
+    }
+
     public void ShowLevelFailPopup(float finalTime)
     {
         FormatAndStoreTime(finalTime);
@@ -109,10 +118,6 @@ public class LevelPopupManager : MonoBehaviour
         if (buttonBook != null) buttonBook.SetActive(true);
     }
 }
-
-
-
-
 
 
 // using UnityEngine;
