@@ -10,6 +10,7 @@ TagManager:
   - Letter
   - Fountain
   - Decor
+  - Wall
   layers:
   - Default
   - TransparentFX
