@@ -14,14 +14,9 @@ public class LetterManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+
     }
 
     private void Start()
@@ -45,7 +40,8 @@ public class LetterManager : MonoBehaviour
         availableSpots = new List<Transform>(spawnPoints);
         string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-        // 🔥 NEW: Count duplicates correctly
+        
+        // Count duplicates correctly
         Dictionary<char, int> letterCounts = new Dictionary<char, int>();
         foreach (char c in targetWord)
         {
@@ -65,6 +61,14 @@ public class LetterManager : MonoBehaviour
             }
         }
 
+        // Spawn in guaranteed letters
+        List<char> lettersToInclude = new List<char>() { 'j', 'u', 'm', 'p' };
+        foreach (char letter in lettersToInclude)
+        {
+            char upper = char.ToUpper(letter);
+            SpawnLetter(upper);
+        }
+
         // Spawn decoys
         int decoysPlaced = 0;
         while (decoysPlaced < numberOfDecoys && availableSpots.Count > 0)
@@ -76,12 +80,11 @@ public class LetterManager : MonoBehaviour
                 decoysPlaced++;
             }
         }
-        
+
         Debug.Log($"Spawned {spawnedLetters.Count} letters for word: {targetWord}");
 
     }
 
-    // INSERTED 5/2
     private void SpawnLetter(char letter)
     {
         if (availableSpots.Count == 0) return;
@@ -108,26 +111,5 @@ public class LetterManager : MonoBehaviour
             letterObj.SetLetter(letter);
         }
     }
-
-
-    // private void SpawnLetter(char letter)
-    // {
-    //     if (availableSpots.Count == 0) return;
-
-    //     int index = Random.Range(0, availableSpots.Count);
-    //     Transform spot = availableSpots[index];
-    //     availableSpots.RemoveAt(index);
-
-    //     GameObject obj = Instantiate(letterPrefab, spot.position, Quaternion.identity);
-    //     obj.SetActive(true);
-    //     spawnedLetters.Add(obj);
-
-    //     LetterObject letterObj = obj.GetComponent<LetterObject>();
-    //     if (letterObj != null)
-    //     {
-    //         letterObj.SetLetter(letter);
-    //     }
-    // }
 }
-
 

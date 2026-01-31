@@ -21,7 +21,7 @@ public class WordProgressManager : MonoBehaviour
     public GameObject levelFailPopup;
 
     public TextMeshProUGUI currentLetterText;
-    public List<char> collectedLetters = new List<char>();
+    private List<char> collectedLetters = new List<char>();
     public HashSet<int> collectedIndexes = new HashSet<int>();
 
     public bool AllLettersCollected { get; private set; } // Word is complete
@@ -30,6 +30,8 @@ public class WordProgressManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
+        currentLetterText.text = "";
     }
 
     private void Start()
@@ -51,7 +53,7 @@ public class WordProgressManager : MonoBehaviour
 
     public void StartNewGame()
     {
-        // --- NEW: Reset the flag at the start of every new word. ---
+        // Reset the flag at the start of every new word
         AllLettersCollected = false;
 
         targetWord = GetNextWord().ToUpper();
@@ -84,34 +86,44 @@ public class WordProgressManager : MonoBehaviour
         }
     }
 
-    public void CollectLetter(char collected)
+    public void CollectLetter(char collectedChar)
     {
-        collected = char.ToUpper(collected);
-        collectedLetters.Add(collected);
+        collectedChar = char.ToUpper(collectedChar);
+        collectedLetters.Add(collectedChar);
 
         for (int i = 0; i < targetWord.Length; i++)
         {
-            if (targetWord[i] == collected && !collectedIndexes.Contains(i))
+            if (targetWord[i] == collectedChar && !collectedIndexes.Contains(i))
             {
                 collectedIndexes.Add(i);
                 break;
             }
+        }
+        
+        UpdateCollectedLetters();
+        UpdateSlots();
+
+        // Once collected letters match the word
+        if (collectedIndexes.Count == targetWord.Length)
+        {
+            AllLettersCollected = true;
+            Debug.Log("All letters collected! Return the letters to the fountain.");
+        }
+    }
+
+    // Updates the collected letters in the Book
+    public void UpdateCollectedLetters()
+    {
+        collectedLetters.Clear();
+        foreach (var letterObj in PlayerInventory.Instance.collectedLetters)
+        {
+            collectedLetters.Add(letterObj.letter);
         }
 
         currentLetterText.text = "";
         foreach (var letter in collectedLetters)
         {
             currentLetterText.text += letter.ToString() + " ";
-        }
-
-        UpdateSlots();
-
-        if (collectedIndexes.Count == targetWord.Length)
-        {
-            // --- NEW: Instead, we set a flag and notify the player. ---
-            AllLettersCollected = true;
-            Debug.Log("All letters collected! Return the letters to the fountain.");
-            // You could also trigger a UI notification or sound effect here.
         }
     }
 

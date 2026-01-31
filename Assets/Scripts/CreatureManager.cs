@@ -198,7 +198,7 @@ public class CreatureManager : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
             waitTime += 0.5f;
         }
-        while (!playerInventory.HasItem())
+        while (!playerInventory.hasItem)
         {
             if (waitTime % 2f < 0.01f) Debug.Log("[FlyerSpawnDebug] Player has no letter, waiting...");
             yield return new WaitForSeconds(0.5f);

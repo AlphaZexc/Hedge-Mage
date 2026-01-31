@@ -78,7 +78,7 @@ public class Flyer : MonoBehaviour
             yield return null;
         }
         // Attempt to steal
-        if (playerInventory != null && playerInventory.HasItem() && Random.value < stealSuccessPercent)
+        if (playerInventory != null && playerInventory.hasItem && Random.value < stealSuccessPercent)
         {
             // Take the first letter from the player's inventory
             var letters = playerInventory.GetCollectedLetters();
