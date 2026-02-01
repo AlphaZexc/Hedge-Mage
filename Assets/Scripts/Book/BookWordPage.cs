@@ -12,11 +12,6 @@ public class BookWordPage : MonoBehaviour
 
     private WordProgressManager wpi => WordProgressManager.Instance;
 
-    private void OnEnable()
-    {
-        Refresh();
-    }
-
     public void Refresh()
     {
         ClearLetters();
@@ -37,16 +32,17 @@ public class BookWordPage : MonoBehaviour
             LetterSlotUI slot = letterSlot.GetComponent<LetterSlotUI>();
             Image slotImage = letterSlot.GetComponent<Image>();
 
-            letterSlot.transform.localScale = new Vector3(4, 4, 4); // Set the image scale for each letter
+            slot.Initialize(letter, LetterSpriteDatabase.Instance.GetUncollectedSprite(letter)); 
 
-            slot.SetLetter(letter, LetterSpriteDatabase.Instance.GetUncollectedSprite(letter));
-
+            // Set sprite to collected if player has the letter
             foreach (char c in wpi.collectedLetters)
             {
-                if (c == letter) slot.SetCollectedSprite(LetterSpriteDatabase.Instance.GetCollectedSprite(letter));
+                if (c == letter) slot.SetSprite(LetterSpriteDatabase.Instance.GetCollectedSprite(letter));
             }
 
+            // Set image to proper siee
             slotImage.SetNativeSize();
+            letterSlot.transform.localScale = new Vector3(4, 4, 4); 
         }
     }
 

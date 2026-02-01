@@ -6,16 +6,19 @@ public class LetterSlotUI : MonoBehaviour
     public Image letterImage;
     public char letter { get; private set; }
 
-    public void SetLetter(char c, Sprite uncollectedSprite)
+    public void Initialize(char c, Sprite letterSprite)
     {
-        letter = c;
-        if (letterImage != null)
-            letterImage.sprite = uncollectedSprite;
+        SetLetter(c);
+        SetSprite(letterSprite);
     }
 
-    public void SetCollectedSprite(Sprite collectedSprite)
+    public void SetLetter(char c)
     {
-        if (letterImage != null)
-            letterImage.sprite = collectedSprite;
+        letter = c;
+    }
+
+    public void SetSprite(Sprite letterSprite)
+    {
+        if (letterImage != null) letterImage.sprite = letterSprite;
     }
 }

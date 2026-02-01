@@ -35,6 +35,7 @@ public class WordProgressManager : MonoBehaviour
     private void Start()
     {
         StartNewGame();
+        wordPage.Refresh();
     }
 
     private void Update()
