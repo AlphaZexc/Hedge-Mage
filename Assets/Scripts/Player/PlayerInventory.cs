@@ -29,17 +29,12 @@ public class PlayerInventory : MonoBehaviour
         {
             char collectedChar = char.ToUpper(letterObj.letter);
 
-            // Notify word system
-            WordProgressManager.Instance.CollectLetter(collectedChar);
-
-            // Add to inventory
             collectedLetters.Add(letterObj);
+            WordProgressManager.Instance.CollectLetter(collectedChar);
 
             // Hide letter in world
             if (letterObj.TryGetComponent(out Collider2D col)) col.enabled = false;
             if (letterObj.TryGetComponent(out SpriteRenderer sr)) sr.enabled = false;
-
-            Debug.Log($"Collected letter: {collectedChar}");
         }
     }
 
@@ -58,12 +53,6 @@ public class PlayerInventory : MonoBehaviour
         }
 
         return false;
-    }
-
-
-    public List<LetterObject> GetCollectedLetters()
-    {
-        return new List<LetterObject>(collectedLetters);
     }
 
     public bool RemoveLetter(LetterObject letter)

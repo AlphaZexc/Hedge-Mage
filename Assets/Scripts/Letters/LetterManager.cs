@@ -21,7 +21,7 @@ public class LetterManager : MonoBehaviour
 
     private void Start()
     {
-        SpawnLetters(WordProgressManager.Instance.GetTargetWord());
+        SpawnLetters(WordProgressManager.Instance.targetWord);
     }
 
     public void ResetLettersForNewWord(string newWord)

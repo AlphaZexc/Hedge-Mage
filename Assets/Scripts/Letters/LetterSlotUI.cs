@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class LetterSlotUI : MonoBehaviour
 {
     public Image letterImage;
-    private char letter;
+    public char letter { get; private set; }
 
     public void SetLetter(char c, Sprite uncollectedSprite)
     {
@@ -17,10 +17,5 @@ public class LetterSlotUI : MonoBehaviour
     {
         if (letterImage != null)
             letterImage.sprite = collectedSprite;
-    }
-
-    public char GetLetter()
-    {
-        return letter;
     }
 }

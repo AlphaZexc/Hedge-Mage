@@ -1,18 +1,37 @@
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using System.Collections.Generic;
+using System.Collections;
 
-// ===================================================================================
-// Main MonoBehaviour Class
-// ===================================================================================
 public class AStarGridManager : MonoBehaviour
 {
-    // --- Dynamic avoidance support ---
-    private HashSet<Node> temporarilyUnwalkableNodes = new HashSet<Node>();
+    private Node[,] grid;
+    private int gridSizeX, gridSizeY;
+    private Vector3Int gridOrigin;
+    private List<Node> walkableNodesCache;
 
-    /// <summary>
-    /// Mark a node at world position as temporarily unwalkable (for dynamic avoidance).
-    /// </summary>
+    private HashSet<Node> temporarilyUnwalkableNodes = new HashSet<Node>();
+    private List<Node> lastPathNodes = null;
+
+    [Header("Grid View in Editor")] 
+    public bool showGridGizmos = true;
+    public Color walkableColor = Color.white;
+    public Color unwalkableColor = Color.red;
+    public Color pathColor = Color.green;
+    public Tilemap walkableTilemap;
+    public Tilemap unwalkableTilemap;
+
+    private void Awake()
+    {
+        if (walkableTilemap == null || unwalkableTilemap == null)
+        {
+            Debug.LogError("AStarGridManager: One or more tilemaps are not assigned!");
+            return;
+        }
+        CreateGridFromTilemap();
+    }
+
+    // Mark a node at world position as temporarily unwalkable (for dynamic avoidance).
     public void SetNodeTemporarilyUnwalkable(Vector3 worldPosition, float duration = 1.0f)
     {
         Node node = NodeFromWorldPoint(worldPosition);
@@ -24,25 +43,13 @@ public class AStarGridManager : MonoBehaviour
         }
     }
 
-    private System.Collections.IEnumerator ResetNodeWalkableAfterDelay(Node node, float delay)
+    private IEnumerator ResetNodeWalkableAfterDelay(Node node, float delay)
     {
         yield return new WaitForSeconds(delay);
         node.walkable = true;
         temporarilyUnwalkableNodes.Remove(node);
     }
-    // Visualize grid and paths in the editor
-    public bool showGridGizmos = true;
-    public Color walkableColor = Color.white;
-    public Color unwalkableColor = Color.red;
-    public Color pathColor = Color.green;
-    private List<Node> lastPathNodes = null;
-    public Tilemap walkableTilemap;
-    public Tilemap unwalkableTilemap;
 
-    private Node[,] grid;
-    private int gridSizeX, gridSizeY;
-    private Vector3Int gridOrigin;
-    private List<Node> walkableNodesCache; // --- NEW: Cache for walkable nodes
 
     // Public API for enemy queries
     public bool IsWorldPositionWalkable(Vector3 worldPosition)
@@ -78,15 +85,6 @@ public class AStarGridManager : MonoBehaviour
         return new List<Node>(walkableNodesCache);
     }
 
-    void Awake()
-    {
-        if (walkableTilemap == null || unwalkableTilemap == null)
-        {
-            Debug.LogError("AStarGridManager: One or more tilemaps are not assigned!");
-            return;
-        }
-        CreateGridFromTilemap();
-    }
 
     public void CreateGridFromTilemap()
     {
@@ -304,8 +302,7 @@ public class AStarGridManager : MonoBehaviour
         }
     }
 
-    // --- NEW METHOD to find a random walkable tile ---
-    // This is more efficient as it uses a cache created at the start.
+    // Find a random walkable tile, using cached info
     public Node GetRandomWalkableNode()
     {
         if (walkableNodesCache != null && walkableNodesCache.Count > 0)
@@ -320,12 +317,7 @@ public class AStarGridManager : MonoBehaviour
     }
 }
 
-
-// ===================================================================================
-// Helper Classes - The definitions the compiler was missing
-// ===================================================================================
-// (These classes below are unchanged)
-
+// Helper Classes
 public class Node : IHeapItem<Node>
 {
     public bool walkable;

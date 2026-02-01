@@ -38,7 +38,7 @@ public class BookSpellPage : MonoBehaviour
     // Updates button interactability and masked text
     public void RefreshSpellStates()
     {
-        List<LetterObject> playerLetters = PlayerInventory.Instance.GetCollectedLetters();
+        List<LetterObject> playerLetters = PlayerInventory.Instance.collectedLetters;
 
         foreach (BookSpellEntry entry in spellEntries)
         {

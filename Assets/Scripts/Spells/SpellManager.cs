@@ -7,6 +7,7 @@ public class SpellManager : MonoBehaviour
 
     private List<SpellBase> availableSpells = new List<SpellBase>();
     private PlayerInventory inventory => PlayerInventory.Instance;
+    private SpellUI spellVisuals => SpellUI.Instance;
 
     private void Awake()
     {
@@ -27,19 +28,22 @@ public class SpellManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F) && inventory.lastCompletedSpell != null)
         {
             inventory.lastCompletedSpell.Cast(gameObject);
+            spellVisuals.UpdateSpellUI();
         }
     }
 
     // Called by book UI when player clicks a spell button
     public bool TryCompleteSpell(SpellBase spell)
     {
-        if (!spell.CanBeCompleted(inventory.GetCollectedLetters()))
+        if (!spell.CanBeCompleted(inventory.collectedLetters))
             return false;
 
         // Consume letters and store last completed spell
         spell.ConsumeLetters(inventory);
         WordProgressManager.Instance.UpdateCollectedLetters();
         inventory.SetLastCompletedSpell(spell);
+
+        spellVisuals.UpdateSpellUI(spell);
 
         // Regenerate missing letters for next use
         spell.GenerateMaskedSpell(2);

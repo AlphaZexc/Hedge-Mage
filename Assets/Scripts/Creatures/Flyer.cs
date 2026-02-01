@@ -64,7 +64,7 @@ public class Flyer : MonoBehaviour
 
     IEnumerator SwoopAttempt()
     {
-        int invCount = playerInventory != null ? playerInventory.GetCollectedLetters().Count : -1;
+        int invCount = playerInventory != null ? playerInventory.collectedLetters.Count : -1;
         Debug.Log($"[FlyerDebug] Swoop attempt {swoopAttempts + 1} started. Player has {invCount} letters.");
         // Swoop over player, try to steal letter
         float swoopTime = 1f;
@@ -81,12 +81,12 @@ public class Flyer : MonoBehaviour
         if (playerInventory != null && playerInventory.hasItem && Random.value < stealSuccessPercent)
         {
             // Take the first letter from the player's inventory
-            var letters = playerInventory.GetCollectedLetters();
+            var letters = playerInventory.collectedLetters;
             if (letters.Count > 0)
             {
                 carriedLetterObject = letters[0];
                 bool removed = playerInventory.RemoveLetter(carriedLetterObject);
-                Debug.Log($"[FlyerDebug] RemoveLetter returned {removed}. Player now has {playerInventory.GetCollectedLetters().Count} letters.");
+                Debug.Log($"[FlyerDebug] RemoveLetter returned {removed}. Player now has {playerInventory.collectedLetters.Count} letters.");
                 // Attach to Flyer visual
                 carriedLetterObject.transform.SetParent(carriedLetterVisual.transform);
                 carriedLetterObject.transform.localPosition = Vector3.zero;

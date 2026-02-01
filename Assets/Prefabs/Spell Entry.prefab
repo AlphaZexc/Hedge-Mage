@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -76, y: 5}
-  m_SizeDelta: {x: 115.0529, y: -42.4735}
+  m_AnchoredPosition: {x: -45.306, y: -0.0002632141}
+  m_SizeDelta: {x: -90.6123, y: -41.519}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8856388179901307439
 CanvasRenderer:
@@ -147,6 +147,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4474697826021527762}
   - component: {fileID: 6073919198501786147}
+  - component: {fileID: 469338022129244915}
   m_Layer: 5
   m_Name: Spell Entry
   m_TagString: Untagged
@@ -172,8 +173,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 28.232819, y: 0}
+  m_SizeDelta: {x: 362.3987, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6073919198501786147
 MonoBehaviour:
@@ -189,6 +190,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BookSpellEntry
   spellText: {fileID: 2160088496738622897}
   completeButton: {fileID: 6665326643604690813}
+--- !u!114 &469338022129244915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2822369309007721984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.LayoutElement
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: -1
+  m_FlexibleWidth: 1
+  m_FlexibleHeight: 1
+  m_LayoutPriority: 1
 --- !u!1 &3522153384464431814
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,8 +246,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 124, y: 5}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 135, y: -0.0000066757}
+  m_SizeDelta: {x: 70.3194, y: 58.4805}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7572381666605605359
 CanvasRenderer:
@@ -375,7 +396,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Copmlete
+  m_text: '
 
 '
   m_isRightToLeft: 0

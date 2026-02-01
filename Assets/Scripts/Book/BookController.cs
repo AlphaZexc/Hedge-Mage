@@ -116,13 +116,6 @@ public class BookController : MonoBehaviour
             }
         }
 
-        // Refresh word page if this page has one
-        BookWordPage wordPage = pages[currentPageIndex].GetComponent<BookWordPage>();
-        if (wordPage != null)
-        {
-            wordPage.Refresh();
-        }
-
         UpdateNavigationButtons();
     }
 
