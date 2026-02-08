@@ -652,6 +652,7 @@ Transform:
   - {fileID: 602807194}
   - {fileID: 100367849}
   - {fileID: 19863438}
+  - {fileID: 1340195974}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &59243279
@@ -2528,7 +2529,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &263878319
 Transform:
   m_ObjectHideFlags: 0
@@ -22253,7 +22254,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1073944930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24459,7 +24460,7 @@ MonoBehaviour:
     enableLifetimeRespawn: 1
     minLifetime: 45
     maxLifetime: 75
-  - enabled: 0
+  - enabled: 1
     creatureName: Flyer
     creaturePrefab: {fileID: 5397063830104737135, guid: 22d27d9989121a74981bbfb42d213047, type: 3}
     maxAlive: 1
@@ -24473,7 +24474,7 @@ MonoBehaviour:
     enableLifetimeRespawn: 1
     minLifetime: 45
     maxLifetime: 75
-  mirelightEnabled: 0
+  mirelightEnabled: 1
   mirelightPrefab: {fileID: 4853918066849092202, guid: 341f0a9ba1ffcbc4dab17b85c2e94775, type: 3}
   mirelightSpawnPoints:
   - {fileID: 122832028}
@@ -24500,7 +24501,7 @@ MonoBehaviour:
   - {fileID: 811317318}
   - {fileID: 1552589078}
   - {fileID: 1306291976}
-  mirelightCount: 24
+  mirelightCount: 5
   minMirelightActivationTime: 15
   maxMirelightActivationTime: 45
   flickerDuration: 10
@@ -24522,7 +24523,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1340195972}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -24530,7 +24531,7 @@ Transform:
   - {fileID: 139323836}
   - {fileID: 122832028}
   - {fileID: 1849991559}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 44358482}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1342138329
 GameObject:
@@ -41481,7 +41482,6 @@ SceneRoots:
   - {fileID: 1238959995}
   - {fileID: 1517452154}
   - {fileID: 558213954}
-  - {fileID: 1340195974}
   - {fileID: 1022381200}
   - {fileID: 1473790086}
   - {fileID: 1190910394}

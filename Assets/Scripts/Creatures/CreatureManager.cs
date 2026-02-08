@@ -261,8 +261,6 @@ public class CreatureManager : MonoBehaviour
         Start(); 
     }
 
-    // (The rest of the script is unchanged)
-    #region Unchanged Routines
     private IEnumerator SpawnCreatureRoutine(CreatureSpawnConfig config)
     {
         while (true)
@@ -339,5 +337,4 @@ public class CreatureManager : MonoBehaviour
             }
         }
     }
-    #endregion
 }

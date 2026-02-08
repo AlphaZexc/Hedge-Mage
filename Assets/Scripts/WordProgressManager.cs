@@ -38,16 +38,6 @@ public class WordProgressManager : MonoBehaviour
         wordPage.Refresh();
     }
 
-    private void Update()
-    {
-        string line = "";
-        foreach (char c in collectedLetters)
-        {
-            line += c + " ";
-        }
-        Debug.Log(line);
-    }
-
     public void RetrySameWord()
     {
         isRetrying = true;

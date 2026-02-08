@@ -34,6 +34,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2317317377601822042
 SpriteRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -52,6 +53,8 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -73,9 +76,11 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: -1116505053
   m_SortingLayer: 2
   m_SortingOrder: 7
+  m_MaskInteraction: 0
   m_Sprite: {fileID: 2947782328058103888, guid: 2f920d1092062784da280181d86c763b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -85,7 +90,6 @@ SpriteRenderer:
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &8006780424537518827
 GameObject:
@@ -198,33 +202,21 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f90880138efe3184a96798d3435278d1, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: 
-  detectionRange: 6.5
-  moveSpeed: 1.5
+  m_EditorClassIdentifier: Assembly-CSharp::StraightChaser
+  detectionRange: 5
+  moveSpeed: 3
   damage: 25
   maxLifeDuration: -1
-  wanderSmoothing: 0.45
-  chaseSmoothing: 0.002
-  straightMoveDotThreshold: 0.9
-  waypointProximity: 0.2
-  wanderRadius: 8
-  attackRange: 1.25
   wanderSpeed: 2.5
-  chargeSpeed: 5
-  tilesForTier2Boost: 2
-  tilesForTier3Boost: 3
-  speedTier1: 2.5
-  damageTier1: 10
-  speedTier2: 3.8
-  damageTier2: 18
-  speedTier3: 5
-  damageTier3: 30
-  cooldownAfterHit: 6
-  showGizmos: 1
-  wanderPathColor: {r: 0, g: 1, b: 1, a: 1}
-  chasePathColor: {r: 1, g: 0.38365346, b: 0, a: 1}
-  attackRangeColor: {r: 1, g: 0.18271318, b: 0.015686274, a: 1}
-  waypointGizmoRadius: 0.1
+  chaseSpeed: 4.5
+  chargeSpeed: 10
+  chargeSightRange: 8
+  windupTime: 0.4
+  waypointProximity: 0.35
+  pathRequestCooldown: 1.2
+  stunDuration: 1.25
+  stunMinImpactSpeed: 7
+  cooldownAfterHit: 2
 --- !u!95 &1756443589757083063
 Animator:
   serializedVersion: 7
