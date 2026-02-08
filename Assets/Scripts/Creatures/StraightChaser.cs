@@ -21,30 +21,20 @@ public class StraightChaser : BaseCreature
     [Header("Movement")]
     public float wanderSpeed = 2f;
     public float wanderSmoothing = 0.45f;
-
-    [Header("Charge")]
-    public float chargeSpeed = 5f;
+    public float chaseSpeed = 4f;
+    public float chargeSpeed = 7f;
     public float chargeSightRange = 8f;
-
-    [Header("Tier Escalation")]
-    public int tilesForTier2Boost = 3;
-    public int tilesForTier3Boost = 5;
-    public float speedTier1 = 6f;
-    public float damageTier1 = 30f;
-    public float speedTier2 = 8f;
-    public float damageTier2 = 40f;
-    public float speedTier3 = 12f;
-    public float damageTier3 = 50f;
 
     [Header("Pathing")]
     public float waypointProximity = 0.2f;
-    public float pathRequestCooldown = 0.5f;
+    public float pathRequestCooldown = 0.1f;
 
     [Header("Stun")]
     public float stunDuration = 1.0f;
     public float stunMinImpactSpeed = 9f;
 
     [Header("Cooldown")]
+    public float windupDuration = 1.5f;
     public float cooldownAfterHit = 4f;
 
     [Header("Gizmos")]
@@ -64,6 +54,7 @@ public class StraightChaser : BaseCreature
     private float lastPathRequestTime;
 
     private float cooldownEndTime;
+    private float windupTime;
     private float stunEndTime;
     private float stuckTimer;
 
@@ -90,7 +81,7 @@ public class StraightChaser : BaseCreature
     {
         if (state == CreatureState.Stunned)
         {
-            if (Time.time >= stunEndTime)
+            if (Time.time > stunEndTime)
                 ExitStunState();
             return;
         }
@@ -103,8 +94,7 @@ public class StraightChaser : BaseCreature
         }
 
         // End cooldown
-        if (state == CreatureState.Cooldown &&
-            Time.time >= cooldownEndTime)
+        if (state == CreatureState.Cooldown && Time.time >= cooldownEndTime)
         {
             EnterWanderState();
         }
@@ -124,17 +114,20 @@ public class StraightChaser : BaseCreature
             rb.linearVelocity = Vector2.zero;
             return;
         }
-
+        
         // Move straight during charge
-        if (state == CreatureState.Charging)
+        if (state == CreatureState.Charging && windupTime > Time.time)
         {
             rb.linearVelocity = chargeDirection * chargeSpeed;
+            return;
+        } else if (state == CreatureState.Charging && windupTime < Time.time)
+        {
+            rb.linearVelocity = Vector2.zero;
             return;
         }
 
         // Prevent stuck behavior
         HandleStuckDetection();
-
         // Follow A* path
         FollowPath();
     }
@@ -162,6 +155,7 @@ public class StraightChaser : BaseCreature
                 // If player visible, start charge
                 if (HasLineOfSightToPlayer())
                 {
+                    Debug.Log("Charging");
                     EnterChargeState();
                     return;
                 }
@@ -195,9 +189,9 @@ public class StraightChaser : BaseCreature
     {
         state = CreatureState.Charging;
 
+        windupTime = Time.time + windupDuration;
         // Lock direction ONCE
-        chargeDirection =
-            (player.transform.position - transform.position).normalized;
+        chargeDirection = (player.transform.position - transform.position).normalized;
 
         path = null;
     }
@@ -227,14 +221,12 @@ public class StraightChaser : BaseCreature
         if (state == CreatureState.Chasing)
         {
             moveDir = desiredDir;
-            speed = speedTier1;
+            speed = chaseSpeed;
         }
         // Smooth movement while wandering
         else
         {
-            moveDir = Vector2.Lerp(lastMoveDir,
-                                   desiredDir,
-                                   wanderSmoothing).normalized;
+            moveDir = Vector2.Lerp(lastMoveDir, desiredDir, wanderSmoothing).normalized;
             speed = wanderSpeed;
         }
 
@@ -291,9 +283,7 @@ public class StraightChaser : BaseCreature
     private void OnCollisionEnter2D(Collision2D collision)
     {
         // Wall slam causes stun
-        if (state == CreatureState.Charging &&
-            collision.gameObject.CompareTag("Wall") &&
-            rb.linearVelocity.magnitude >= stunMinImpactSpeed)
+        if (state == CreatureState.Charging && collision.gameObject.CompareTag("Wall") && rb.linearVelocity.magnitude >= stunMinImpactSpeed)
         {
             EnterStunState();
             return;
@@ -303,11 +293,9 @@ public class StraightChaser : BaseCreature
         if (collision.gameObject.CompareTag("Player"))
         {
             if (playerHealth == null)
-                playerHealth =
-                    collision.gameObject.GetComponent<PlayerHealth>();
+                playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
 
-            if (playerHealth != null &&
-                !playerHealth.IsDead)
+            if (playerHealth != null && !playerHealth.IsDead)
             {
                 playerHealth.TakeDamage(damage);
                 state = CreatureState.Cooldown;

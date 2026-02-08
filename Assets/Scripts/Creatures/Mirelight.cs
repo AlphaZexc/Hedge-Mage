@@ -99,6 +99,8 @@ public class Mirelight : MonoBehaviour
         flickerTimeOffset = Random.Range(0f, 1000f);
         flickerFrequency = Random.Range(flickerFrequencyMin, flickerFrequencyMax);
         animator = GetComponent<Animator>();
+
+
         if (lightConeTransform != null)
         {
             lampLight = lightConeTransform.GetComponent<Light2D>(); 

@@ -207,16 +207,20 @@ MonoBehaviour:
   moveSpeed: 3
   damage: 25
   maxLifeDuration: -1
-  wanderSpeed: 2.5
-  chaseSpeed: 4.5
-  chargeSpeed: 10
+  wanderSpeed: 2
+  wanderSmoothing: 0.45
+  chaseSpeed: 4
+  chargeSpeed: 7
   chargeSightRange: 8
-  windupTime: 0.4
-  waypointProximity: 0.35
-  pathRequestCooldown: 1.2
-  stunDuration: 1.25
-  stunMinImpactSpeed: 7
-  cooldownAfterHit: 2
+  waypointProximity: 0.2
+  pathRequestCooldown: 0.1
+  stunDuration: 1
+  stunMinImpactSpeed: 9
+  cooldownAfterHit: 4
+  showGizmos: 1
+  wanderPathColor: {r: 0, g: 1, b: 1, a: 1}
+  chasePathColor: {r: 1, g: 0, b: 0, a: 1}
+  waypointGizmoRadius: 0.1
 --- !u!95 &1756443589757083063
 Animator:
   serializedVersion: 7
