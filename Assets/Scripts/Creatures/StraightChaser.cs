@@ -192,8 +192,6 @@ public class StraightChaser : BaseCreature
         windupTime = Time.time + windupDuration;
         // Lock direction ONCE
         chargeDirection = (player.transform.position - transform.position).normalized;
-
-        path = null;
     }
 
 
