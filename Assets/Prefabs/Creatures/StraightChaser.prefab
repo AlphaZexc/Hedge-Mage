@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 118674783140220029}
   - component: {fileID: 2317317377601822042}
+  - component: {fileID: 7852242957130120412}
   m_Layer: 7
   m_Name: Visuals
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2987520370084053484}
@@ -81,7 +82,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 7
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 2947782328058103888, guid: 2f920d1092062784da280181d86c763b, type: 3}
+  m_Sprite: {fileID: 5545702468475521899, guid: 5fb9c49f1b999c24dae5aa9695acd09e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -91,6 +92,28 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!95 &7852242957130120412
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2222632301392997245}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 51be96197dcbfbb45846a1301aeb8943, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8006780424537518827
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,7 +126,6 @@ GameObject:
   - component: {fileID: 3703327530222693161}
   - component: {fileID: 3590295420737606288}
   - component: {fileID: 8151791057037428648}
-  - component: {fileID: 1756443589757083063}
   m_Layer: 7
   m_Name: StraightChaser
   m_TagString: Enemy
@@ -216,30 +238,9 @@ MonoBehaviour:
   pathRequestCooldown: 0.1
   stunDuration: 1
   stunMinImpactSpeed: 9
+  windupDuration: 1.5
   cooldownAfterHit: 4
   showGizmos: 1
   wanderPathColor: {r: 0, g: 1, b: 1, a: 1}
   chasePathColor: {r: 1, g: 0, b: 0, a: 1}
   waypointGizmoRadius: 0.1
---- !u!95 &1756443589757083063
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8006780424537518827}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b7991e005b9a663449971fc2d0fbd22e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
