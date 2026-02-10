@@ -5,9 +5,6 @@ public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5f;
 
-    [Header("Component Links")]
-    public Transform playerLightTransform;  // Still assignable, but unused now
-
     private Vector2 movement;
     private Rigidbody2D rb;
     private PlayerHealth playerHealth;

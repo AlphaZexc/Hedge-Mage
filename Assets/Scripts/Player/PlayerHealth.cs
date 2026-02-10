@@ -134,6 +134,7 @@ public class PlayerHealth : MonoBehaviour
         isDead = false;
 
         if (playerMovement != null) playerMovement.SetMovementEnabled(true);
+        animator.SetBool("isDead", false);
 
         UpdateUI();
     }

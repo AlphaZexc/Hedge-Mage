@@ -28,8 +28,8 @@ public class CameraFollow : MonoBehaviour
 
     [Header("Light Settings")]
     public Light2D mainLight2D;
-    public float mazeLightRadius = 5f;
-    public float courtyardLightRadius = 10f;
+    public float mazeLightRadius = 7f;
+    public float courtyardLightRadius = 15f;
     public float lightSmoothSpeed = 2f;
 
     private Camera cam;

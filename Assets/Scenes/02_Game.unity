@@ -2603,7 +2603,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 3.5
+  m_PointLightOuterRadius: 7
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -20496,8 +20496,8 @@ MonoBehaviour:
   courtyardZoom: 6
   zoomSmoothSpeed: 1
   mainLight2D: {fileID: 263878322}
-  mazeLightRadius: 4
-  courtyardLightRadius: 7
+  mazeLightRadius: 6
+  courtyardLightRadius: 9
   lightSmoothSpeed: 1
 --- !u!1 &809643277
 GameObject:
@@ -23912,8 +23912,8 @@ GameObject:
   - component: {fileID: 1320585237}
   - component: {fileID: 1320585238}
   - component: {fileID: 1320585241}
-  - component: {fileID: 1320585242}
   - component: {fileID: 1320585243}
+  - component: {fileID: 1320585244}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -23958,8 +23958,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.8, z: 10}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 0}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 156269467}
   - {fileID: 263878319}
@@ -23978,7 +23978,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 4
-  playerLightTransform: {fileID: 263878319}
 --- !u!114 &1320585237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24002,7 +24001,7 @@ MonoBehaviour:
   life1Sprite: {fileID: 5641695812032469739, guid: 63fdfc5bfca1f3247a5f03dc2dcf9890, type: 3}
   healthText: {fileID: 517349374}
   timerText: {fileID: 1604532510}
-  animator: {fileID: 0}
+  animator: {fileID: 1320585243}
 --- !u!114 &1320585238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24031,7 +24030,29 @@ MonoBehaviour:
   interactionPrompt: {fileID: 181210463}
   interactionDistance: 2
   interactKey: 101
---- !u!70 &1320585242
+--- !u!95 &1320585243
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320585231}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: dbb7ab5776b8f4e4ab517efe46214c32, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!70 &1320585244
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -24065,31 +24086,9 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.22}
-  m_Size: {x: 0.94, y: 0.43}
+  m_Offset: {x: 0.06, y: 0.18}
+  m_Size: {x: 0.69, y: 0.35}
   m_Direction: 1
---- !u!95 &1320585243
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1320585231}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: dbb7ab5776b8f4e4ab517efe46214c32, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1323205203
 GameObject:
   m_ObjectHideFlags: 0
