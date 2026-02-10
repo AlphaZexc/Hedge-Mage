@@ -66,11 +66,14 @@ public class StraightChaser : BaseCreature
     {
         base.Start();
 
-        // Get animator
-        animator = GetComponent<Animator>();
+        // Get animator (on child Visuals object)
+        animator = GetComponentInChildren<Animator>();
 
         // Find grid manager
         grid = FindFirstObjectByType<AStarGridManager>();
+
+        // Initialize facing direction
+        lastMoveDir = Vector2.down;
 
         // Start wandering
         state = CreatureState.Wandering;
@@ -119,6 +122,7 @@ public class StraightChaser : BaseCreature
         if (state == CreatureState.Charging && windupTime > Time.time)
         {
             rb.linearVelocity = chargeDirection * chargeSpeed;
+            lastMoveDir = chargeDirection; // Track charge direction for animation
             return;
         } else if (state == CreatureState.Charging && windupTime < Time.time)
         {
@@ -325,10 +329,15 @@ public class StraightChaser : BaseCreature
     {
         if (!animator) return;
 
-        Vector2 v = rb.linearVelocity;
-        animator.SetFloat("Horizontal", v.x);
-        animator.SetFloat("Vertical", v.y);
-        animator.SetFloat("Speed", v.sqrMagnitude);
+        // Use lastMoveDir for direction (so animation doesn't reset to default when stopped)
+        // Use actual velocity for speed
+        if (lastMoveDir.sqrMagnitude > 0.01f)
+        {
+            animator.SetFloat("Horizontal", lastMoveDir.x);
+            animator.SetFloat("Vertical", lastMoveDir.y);
+        }
+        
+        animator.SetFloat("Speed", rb.linearVelocity.sqrMagnitude);
     }
 
     // Debug drawing
