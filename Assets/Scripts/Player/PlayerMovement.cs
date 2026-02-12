@@ -3,50 +3,36 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("References")]
+    [SerializeField] private Animator animator;
+    [SerializeField] private Rigidbody2D rb;
+
     public float moveSpeed = 5f;
 
+    private PlayerHealth playerHealth => PlayerHealth.Instance;
+
     private Vector2 movement;
-    private Rigidbody2D rb;
-    private PlayerHealth playerHealth;
-    private Animator animator;
-    private bool canMove = true;
     private Vector2 lastMoveDirection = Vector2.down;
+    private bool canMove = true;
     private bool isBookOpen = false;
 
-    void Start()
-    {
-        rb = GetComponent<Rigidbody2D>();
-        playerHealth = GetComponent<PlayerHealth>();
-        animator = GetComponent<Animator>();
-
-        if (animator == null)
-        {
-            Debug.LogWarning("PlayerMovement: Animator component not found!");
-        }
-    }
 
     void Update()
     {
         HandleBookToggle();
 
-        if (playerHealth != null && playerHealth.IsDead)
+        if (playerHealth != null && playerHealth.isDead)
         {
             movement = Vector2.zero;
 
             if (animator != null)
             {
-                animator.SetBool("IsDead", true);
                 animator.SetFloat("MoveX", 0f);
                 animator.SetFloat("MoveY", -1f);
                 animator.SetFloat("Speed", 0f);
             }
 
             return;
-        }
-
-        if (animator != null)
-        {
-            animator.SetBool("IsDead", false);
         }
 
         if (!canMove)
@@ -85,7 +71,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!canMove || (playerHealth != null && playerHealth.IsDead))
+        if (!canMove || playerHealth.isDead)
         {
             rb.linearVelocity = Vector2.zero;
             return;
@@ -124,7 +110,6 @@ public class PlayerMovement : MonoBehaviour
         {
             movement = Vector2.zero;
             rb.linearVelocity = Vector2.zero;
-            UpdateAnimatorMovement(Vector2.zero);
         }
     }
 

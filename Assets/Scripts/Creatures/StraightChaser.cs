@@ -90,7 +90,7 @@ public class StraightChaser : BaseCreature
         }
 
         // If player missing or dead, wander
-        if (player == null || (playerHealth != null && playerHealth.IsDead))
+        if (player == null || (playerHealth != null && playerHealth.isDead))
         {
             EnterWanderState();
             return;
@@ -297,7 +297,7 @@ public class StraightChaser : BaseCreature
             if (playerHealth == null)
                 playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
 
-            if (playerHealth != null && !playerHealth.IsDead)
+            if (playerHealth != null && !playerHealth.isDead)
             {
                 playerHealth.TakeDamage(damage);
                 state = CreatureState.Cooldown;

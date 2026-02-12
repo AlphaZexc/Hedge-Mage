@@ -29,8 +29,7 @@ public class PlayerHealth : MonoBehaviour
     private int currentLives;
     private int currentHealth;
     private float lastDamageTime = -10f;
-    private bool isDead = false;
-    public bool IsDead => isDead;
+    public bool isDead { get; private set; } = false;
 
     private float levelStartTime;
     private PlayerMovement playerMovement;
@@ -44,7 +43,7 @@ public class PlayerHealth : MonoBehaviour
     private void Start()
     {
         gridManager = FindFirstObjectByType<AStarGridManager>();
-        playerMovement = GetComponent<PlayerMovement>();
+        playerMovement = FindFirstObjectByType<PlayerMovement>();
         ResetForNewLevel();
     }
 
@@ -66,7 +65,6 @@ public class PlayerHealth : MonoBehaviour
         Vector3Int playerCell = gridManager.walkableTilemap.WorldToCell(transform.position);
         Vector3 snappedPos = gridManager.walkableTilemap.GetCellCenterWorld(playerCell);
         transform.position = snappedPos;
-
 
         currentLives = maxLives;
         currentHealth = maxHealth;
@@ -116,6 +114,10 @@ public class PlayerHealth : MonoBehaviour
             }
             else
             {
+                isDead = true;
+                playerMovement.SetMovementEnabled(false);
+                animator.SetTrigger("die");
+
                 currentHealth = maxHealth;
                 StartCoroutine(HandleRespawn());
             }
@@ -124,25 +126,19 @@ public class PlayerHealth : MonoBehaviour
 
     private IEnumerator HandleRespawn()
     {
-        isDead = true;
-        if (animator != null) animator.SetTrigger("Die");
-        if (playerMovement != null) playerMovement.SetMovementEnabled(false);
-
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
 
         transform.position = spawnPoint.position;
         isDead = false;
 
         if (playerMovement != null) playerMovement.SetMovementEnabled(true);
-        animator.SetBool("isDead", false);
-
         UpdateUI();
     }
 
     private IEnumerator HandlePlayerDeath()
     {
         isDead = true;
-        if (animator != null) animator.SetTrigger("Die");
+        if (animator != null) animator.SetTrigger("die");
         if (playerMovement != null) playerMovement.SetMovementEnabled(false);
 
         yield return new WaitForSeconds(1f);
