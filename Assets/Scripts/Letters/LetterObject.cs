@@ -40,8 +40,7 @@ public class LetterObject : MonoBehaviour
             }
             else Debug.LogWarning("LetterObject: AudioSource or clip missing.");
 
-            // Delay destroy to let sound play
-            Destroy(gameObject, 0.5f);
+            gameObject.SetActive(false);
         }
     }
 }

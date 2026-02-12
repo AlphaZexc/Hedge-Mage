@@ -12,7 +12,7 @@ public class Flyer : MonoBehaviour
     public GameObject carriedLetterVisual; // Assign a child GameObject to show the letter
 
     private Transform player;
-    private PlayerInventory playerInventory;
+    private PlayerInventory playerInventory => PlayerInventory.Instance;
     private LetterObject carriedLetterObject;
     private int swoopAttempts = 0;
     private Vector3 dropPosition;
@@ -21,12 +21,11 @@ public class Flyer : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
-        playerInventory = player.GetComponent<PlayerInventory>();
         carriedLetterVisual.SetActive(false);
         StartCoroutine(FlyerRoutine());
     }
 
-    IEnumerator FlyerRoutine()
+    private IEnumerator FlyerRoutine()
     {
         // 1. Circling phase
         float timer = 0f;
@@ -52,7 +51,7 @@ public class Flyer : MonoBehaviour
         yield return EscapeAndDespawn();
     }
 
-    void CirclePlayer()
+    private void CirclePlayer()
     {
         // Simple circling logic (can be replaced with animation/path)
         float radius = 4f;
@@ -62,14 +61,15 @@ public class Flyer : MonoBehaviour
         transform.position = player.position + offset;
     }
 
-    IEnumerator SwoopAttempt()
+    private IEnumerator SwoopAttempt()
     {
-        int invCount = playerInventory != null ? playerInventory.collectedLetters.Count : -1;
-        Debug.Log($"[FlyerDebug] Swoop attempt {swoopAttempts + 1} started. Player has {invCount} letters.");
+        Debug.Log($"[FlyerDebug] Swoop attempt {swoopAttempts + 1} started. Player has {playerInventory.collectedLetters.Count} letters.");
+
         // Swoop over player, try to steal letter
         float swoopTime = 1f;
         Vector3 start = transform.position;
         Vector3 end = player.position + Vector3.up * 2f;
+
         float t = 0f;
         while (t < 1f)
         {
@@ -78,24 +78,32 @@ public class Flyer : MonoBehaviour
             yield return null;
         }
         // Attempt to steal
-        if (playerInventory != null && playerInventory.hasItem && Random.value < stealSuccessPercent)
+        if (playerInventory.hasItem && Random.value < stealSuccessPercent)
         {
             // Take the first letter from the player's inventory
             var letters = playerInventory.collectedLetters;
             if (letters.Count > 0)
             {
                 carriedLetterObject = letters[0];
-                bool removed = playerInventory.RemoveLetter(carriedLetterObject);
-                Debug.Log($"[FlyerDebug] RemoveLetter returned {removed}. Player now has {playerInventory.collectedLetters.Count} letters.");
+
+                Debug.Log("Current carriedLetterObject:" + carriedLetterObject.letter);
+
+                carriedLetterVisual.SetActive(true);
+                carriedLetterObject.gameObject.SetActive(true);
+
+                if (carriedLetterObject.TryGetComponent<SpriteRenderer>(out var sr)) sr.enabled = true;
+                if (carriedLetterObject.TryGetComponent<Collider2D>(out var col)) col.enabled = false;
+
                 // Attach to Flyer visual
                 carriedLetterObject.transform.SetParent(carriedLetterVisual.transform);
                 carriedLetterObject.transform.localPosition = Vector3.zero;
-                carriedLetterObject.gameObject.SetActive(true);
-                if (carriedLetterObject.TryGetComponent<SpriteRenderer>(out var sr)) sr.enabled = true;
-                if (carriedLetterObject.TryGetComponent<Collider2D>(out var col)) col.enabled = false;
-                carriedLetterVisual.SetActive(true);
+
+
                 hasStolenLetter = true;
                 Debug.Log($"[FlyerDebug] Flyer stole letter '{carriedLetterObject.letter}' from player.");
+
+                bool removed = playerInventory.RemoveLetter(carriedLetterObject);
+                Debug.Log($"[FlyerDebug] RemoveLetter returned {removed}. Player now has {playerInventory.collectedLetters.Count} letters.");
             }
         }
         else
@@ -105,7 +113,7 @@ public class Flyer : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
     }
 
-    IEnumerator CarryAndDropLetter()
+    private IEnumerator CarryAndDropLetter()
     {
         // Find a valid drop position on a Pathway tile, away from player
         dropPosition = FindDropPosition();
@@ -127,13 +135,14 @@ public class Flyer : MonoBehaviour
             if (carriedLetterObject.TryGetComponent<SpriteRenderer>(out var sr)) sr.enabled = true;
             if (carriedLetterObject.TryGetComponent<Collider2D>(out var col)) col.enabled = true;
             Debug.Log($"[FlyerDebug] Flyer dropped letter '{carriedLetterObject.letter}' at {dropPosition}.");
+
             carriedLetterObject = null;
             carriedLetterVisual.SetActive(false);
         }
         yield return new WaitForSeconds(0.5f);
     }
 
-    IEnumerator EscapeAndDespawn()
+    private IEnumerator EscapeAndDespawn()
     {
         // Move off screen and destroy
         Vector3 escapeDir = (transform.position - player.position).normalized;
@@ -150,7 +159,7 @@ public class Flyer : MonoBehaviour
         Destroy(gameObject);
     }
 
-    Vector3 FindDropPosition()
+     private Vector3 FindDropPosition()
     {
         // TODO: Implement logic to find a Pathway tile at minDropDistanceFromPlayer
         // For now, just pick a random point away from player

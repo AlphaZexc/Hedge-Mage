@@ -52,8 +52,7 @@ public class CreatureManager : MonoBehaviour
     private PlayerInventory playerInventory;
     private bool flyerSpawnStarted = false;
 
-    [Header("Mirelight Director Settings")]
-    [Tooltip("Enable Mirelight spawning and events for testing")]
+    [Header("Mirelight Settings")]
     public bool mirelightEnabled = true;
     public GameObject mirelightPrefab;
     public Transform[] mirelightSpawnPoints;
@@ -271,8 +270,7 @@ public class CreatureManager : MonoBehaviour
             int globalMax = (difficultyTiers.Count > 0) ? difficultyTiers[currentDifficultyTierIndex].maxTotalCreatures : config.maxAlive;
 
             if (activeCreatures.ContainsKey(config.creatureName) && 
-                activeCreatures[config.creatureName].Count < config.maxAlive &&
-                totalCreaturesAlive < globalMax)
+                activeCreatures[config.creatureName].Count < config.maxAlive)
             {
                 SpawnCreature(config);
             }
