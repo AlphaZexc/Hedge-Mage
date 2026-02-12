@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 3b11136cfd0d23540940791a20f3e1de
+timeCreated: 1482558353
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 77222
+  packageName: Book - Page Curl Pro
+  packageVersion: 2.3
+  assetPath: Assets/Book-Page Curl Pro/Prefabs/BookPro.prefab
+  uploadId: 828698

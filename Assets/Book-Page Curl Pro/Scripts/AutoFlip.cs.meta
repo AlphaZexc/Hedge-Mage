@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 35bbf9999c1f06348866e3deff9bdbab
+timeCreated: 1499957858
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 77222
+  packageName: Book - Page Curl Pro
+  packageVersion: 2.3
+  assetPath: Assets/Book-Page Curl Pro/Scripts/AutoFlip.cs
+  uploadId: 828698

@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 6eb24af4ce395274c99d9ae179040a0c
+timeCreated: 1479139378
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 77222
+  packageName: Book - Page Curl Pro
+  packageVersion: 2.3
+  assetPath: Assets/Book-Page Curl Pro/Examples/scripts/BotAnimationControl.cs
+  uploadId: 828698

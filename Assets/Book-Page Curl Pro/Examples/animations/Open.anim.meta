@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 85b371c22738ca64fbf3fa7c451c7d08
+timeCreated: 1479135184
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 77222
+  packageName: Book - Page Curl Pro
+  packageVersion: 2.3
+  assetPath: Assets/Book-Page Curl Pro/Examples/animations/Open.anim
+  uploadId: 828698

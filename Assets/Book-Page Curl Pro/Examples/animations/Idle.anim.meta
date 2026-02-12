@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: ee39c6e421ed86c4781b3b99ee651531
+timeCreated: 1479135107
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 77222
+  packageName: Book - Page Curl Pro
+  packageVersion: 2.3
+  assetPath: Assets/Book-Page Curl Pro/Examples/animations/Idle.anim
+  uploadId: 828698

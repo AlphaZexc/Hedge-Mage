@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 4e62bb08fb8724629a1a783e5c11b297
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4890085278179872738
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 77222
+  packageName: Book - Page Curl Pro
+  packageVersion: 2.3
+  assetPath: Assets/Book-Page Curl Pro/Examples/scenes/Example_2Settings.lighting
+  uploadId: 828698

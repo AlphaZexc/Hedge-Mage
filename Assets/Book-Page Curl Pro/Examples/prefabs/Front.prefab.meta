@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 95765253d762ca342999a664958d2852
+timeCreated: 1574018442
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 77222
+  packageName: Book - Page Curl Pro
+  packageVersion: 2.3
+  assetPath: Assets/Book-Page Curl Pro/Examples/prefabs/Front.prefab
+  uploadId: 828698

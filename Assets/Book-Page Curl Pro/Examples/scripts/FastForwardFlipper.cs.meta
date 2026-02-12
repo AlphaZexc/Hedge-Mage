@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 4c6868bbfbc05cd4693cebc0104342c9
+timeCreated: 1574002473
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 77222
+  packageName: Book - Page Curl Pro
+  packageVersion: 2.3
+  assetPath: Assets/Book-Page Curl Pro/Examples/scripts/FastForwardFlipper.cs
+  uploadId: 828698

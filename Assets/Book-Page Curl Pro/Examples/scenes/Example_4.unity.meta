@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d9daac75b1ac3444b8c57ecce4c4e670
+timeCreated: 1502555411
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 77222
+  packageName: Book - Page Curl Pro
+  packageVersion: 2.3
+  assetPath: Assets/Book-Page Curl Pro/Examples/scenes/Example_4.unity
+  uploadId: 828698

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: dce06a4abb3b90942928f39cfafb6b76
+timeCreated: 1479135107
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 77222
+  packageName: Book - Page Curl Pro
+  packageVersion: 2.3
+  assetPath: Assets/Book-Page Curl Pro/Examples/animations/Image.controller
+  uploadId: 828698
