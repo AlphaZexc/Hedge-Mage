@@ -7,7 +7,6 @@ public class WordProgressManager : MonoBehaviour
     public static WordProgressManager Instance;
 
     [Header("Popups")]
-    public GameObject bookPopup;
     public GameObject levelCompletePopup;
     public GameObject levelFailPopup;
 

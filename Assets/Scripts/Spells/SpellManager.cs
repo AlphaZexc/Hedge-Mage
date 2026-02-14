@@ -20,6 +20,7 @@ public class SpellManager : MonoBehaviour
         // Initialize spells
         availableSpells.Add(new Spell_Jump());
         availableSpells.Add(new Spell_Repulse());
+        availableSpells.Add(new Spell_Restore());
     }
 
     private void Update()
