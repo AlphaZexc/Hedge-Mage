@@ -54,16 +54,22 @@ namespace BookCurlPro
         {
             isBookInteractable = ControledBook.interactable;
             ControledBook.interactable = false;
+
+            // Change flip mode based on direction
+            targetPaper = target;
+            if (target > ControledBook.CurrentPaper) Mode = FlipMode.RightToLeft;
+            else if (target < ControledBook.CurrentPaper) Mode = FlipMode.LeftToRight;
+
+            Debug.Log("Flipping Started!");
             flippingStarted = true;
             elapsedTime = 0;
             nextPageCountDown = 0;
-            targetPaper = target;
-            if (target > ControledBook.CurrentPaper) Mode = FlipMode.RightToLeft;
-            else if (target < ControledBook.currentPaper) Mode = FlipMode.LeftToRight;
+            DelayBeforeStart = 0;
         }
 
         public void GotoPage(int pageNum)
         {
+            Debug.Log("Flipping to page " + pageNum);
             if (pageNum < 0) pageNum = 0;
             if (pageNum > ControledBook.papers.Length * 2) pageNum = ControledBook.papers.Length * 2 - 1;
             TimeBetweenPages = 0;
@@ -75,9 +81,11 @@ namespace BookCurlPro
             if (Input.GetKey(KeyCode.RightArrow))
             {
                 FlipRightPage(singlePageFlip);
+                return;
             } else if (Input.GetKey(KeyCode.LeftArrow))
             {
                 FlipLeftPage(singlePageFlip);
+                return;
             }
 
             if (flippingStarted)
@@ -97,10 +105,9 @@ namespace BookCurlPro
                         }
                         else
                         {
+                            Debug.Log("Flipping ended!");
                             flippingStarted = false;
-                            ControledBook.interactable = isBookInteractable;
-                            this.enabled = false;
-
+                            ControledBook.interactable = true;
                         }
 
                         nextPageCountDown = multiPageFlip + TimeBetweenPages + Time.deltaTime;
