@@ -16,7 +16,7 @@ namespace BookCurlPro.Examples
             if (pageNum < 0) pageNum = 0;
             if (pageNum > flipper.ControledBook.papers.Length * 2) pageNum = flipper.ControledBook.papers.Length * 2 - 1;
             flipper.enabled = true;
-            flipper.PageFlipTime = 0.2f;
+            flipper.singlePageFlip = 0.2f;
             flipper.TimeBetweenPages = 0;
             flipper.StartFlipping((pageNum + 1) / 2);
         }

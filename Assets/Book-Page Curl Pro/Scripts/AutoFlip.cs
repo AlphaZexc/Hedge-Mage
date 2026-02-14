@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.UI;
 
 namespace BookCurlPro
 {
@@ -9,7 +10,8 @@ namespace BookCurlPro
     {
         public BookPro ControledBook;
         public FlipMode Mode;
-        public float PageFlipTime = 1;
+        public float singlePageFlip = 1;
+        public float multiPageFlip = 0.1f;
         public float DelayBeforeStart;
         public float TimeBetweenPages = 5;
         public bool AutoStartFlip = true;
@@ -27,19 +29,25 @@ namespace BookCurlPro
             if (AutoStartFlip)
                 StartFlipping(ControledBook.EndFlippingPaper + 1);
         }
-        public void FlipRightPage()
+        public void FlipRightPage(float flipTime, int numPages = 1)
         {
-            if (isPageFlipping) return;
-            if (ControledBook.CurrentPaper >= ControledBook.papers.Length) return;
-            isPageFlipping = true;
-            PageFlipper.FlipPage(ControledBook, PageFlipTime, FlipMode.RightToLeft, () => { isPageFlipping = false; });
+            for (int i = 0; i < numPages; i++)
+            {
+                if (isPageFlipping) return;
+                if (ControledBook.CurrentPaper >= ControledBook.papers.Length) return;
+                isPageFlipping = true;
+                PageFlipper.FlipPage(ControledBook, flipTime, FlipMode.RightToLeft, () => { isPageFlipping = false; });
+            }
         }
-        public void FlipLeftPage()
+        public void FlipLeftPage(float flipTime, int numPages = 1)
         {
-            if (isPageFlipping) return;
-            if (ControledBook.CurrentPaper <= 0) return;
-            isPageFlipping = true;
-            PageFlipper.FlipPage(ControledBook, PageFlipTime, FlipMode.LeftToRight, () => { isPageFlipping = false; });
+            for (int i = 0; i < numPages; i++)
+            {
+                if (isPageFlipping) return;
+                if (ControledBook.CurrentPaper <= 0) return;
+                isPageFlipping = true;
+                PageFlipper.FlipPage(ControledBook, flipTime, FlipMode.LeftToRight, () => { isPageFlipping = false; });
+            }
         }
         int targetPaper;
         public void StartFlipping(int target)
@@ -53,14 +61,23 @@ namespace BookCurlPro
             if (target > ControledBook.CurrentPaper) Mode = FlipMode.RightToLeft;
             else if (target < ControledBook.currentPaper) Mode = FlipMode.LeftToRight;
         }
+
+        public void GotoPage(int pageNum)
+        {
+            if (pageNum < 0) pageNum = 0;
+            if (pageNum > ControledBook.papers.Length * 2) pageNum = ControledBook.papers.Length * 2 - 1;
+            TimeBetweenPages = 0;
+            StartFlipping((pageNum + 1) / 2);
+        }
+
         void Update()
         {
             if (Input.GetKey(KeyCode.RightArrow))
             {
-                FlipRightPage();
+                FlipRightPage(singlePageFlip);
             } else if (Input.GetKey(KeyCode.LeftArrow))
             {
-                FlipLeftPage();
+                FlipLeftPage(singlePageFlip);
             }
 
             if (flippingStarted)
@@ -76,7 +93,7 @@ namespace BookCurlPro
                             Mode == FlipMode.LeftToRight))
                         {
                             isPageFlipping = true;
-                            PageFlipper.FlipPage(ControledBook, PageFlipTime, Mode, () => { isPageFlipping = false; });
+                            PageFlipper.FlipPage(ControledBook, multiPageFlip, Mode, () => { isPageFlipping = false; });
                         }
                         else
                         {
@@ -86,7 +103,7 @@ namespace BookCurlPro
 
                         }
 
-                        nextPageCountDown = PageFlipTime + TimeBetweenPages + Time.deltaTime;
+                        nextPageCountDown = multiPageFlip + TimeBetweenPages + Time.deltaTime;
                     }
                     nextPageCountDown -= Time.deltaTime;
                 }
