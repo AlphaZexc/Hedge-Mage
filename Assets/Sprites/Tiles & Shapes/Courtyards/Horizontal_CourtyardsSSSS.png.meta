@@ -1,0 +1,435 @@
+fileFormatVersion: 2
+guid: 3d5929865a7c3114f8e412d7bdbe0e28
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6763849751756529615
+    second: Horizontal_CourtyardsSSSS_0
+  - first:
+      213: -1924051715114335263
+    second: Horizontal_CourtyardsSSSS_1
+  - first:
+      213: 3053083399792570595
+    second: Horizontal_CourtyardsSSSS_2
+  - first:
+      213: 8668739277252285872
+    second: Horizontal_CourtyardsSSSS_3
+  - first:
+      213: -8533215993452095415
+    second: Horizontal_CourtyardsSSSS_4
+  - first:
+      213: -727638314163179944
+    second: Horizontal_CourtyardsSSSS_5
+  - first:
+      213: 2221306979018262960
+    second: Horizontal_CourtyardsSSSS_6
+  - first:
+      213: 7912660506536965557
+    second: Horizontal_CourtyardsSSSS_7
+  - first:
+      213: 2848295723773620106
+    second: Horizontal_CourtyardsSSSS_8
+  - first:
+      213: -550184014839651214
+    second: Horizontal_CourtyardsSSSS_9
+  - first:
+      213: -2344516697267751716
+    second: Horizontal_CourtyardsSSSS_10
+  - first:
+      213: 670033046901371939
+    second: Horizontal_CourtyardsSSSS_11
+  - first:
+      213: 296432530927215836
+    second: Horizontal_CourtyardsSSSS_12
+  - first:
+      213: -464652968141091872
+    second: Horizontal_CourtyardsSSSS_13
+  - first:
+      213: -4386978827593364133
+    second: Horizontal_CourtyardsSSSS_14
+  - first:
+      213: -3315703172846048722
+    second: Horizontal_CourtyardsSSSS_15
+  - first:
+      213: -3073842998949818386
+    second: Horizontal_CourtyardsSSSS_16
+  - first:
+      213: -2105759122019137680
+    second: Horizontal_CourtyardsSSSS_17
+  - first:
+      213: -6864237547395580630
+    second: Horizontal_CourtyardsSSSS_18
+  - first:
+      213: 6091897027552274520
+    second: Horizontal_CourtyardsSSSS_19
+  - first:
+      213: 7200469489007008384
+    second: Horizontal_CourtyardsSSSS_20
+  - first:
+      213: -6821523699250349722
+    second: Horizontal_CourtyardsSSSS_21
+  - first:
+      213: -1113195649491596975
+    second: Horizontal_CourtyardsSSSS_22
+  - first:
+      213: 9131742495223693685
+    second: Horizontal_CourtyardsSSSS_23
+  - first:
+      213: 4194442664397367116
+    second: Horizontal_CourtyardsSSSS_24
+  - first:
+      213: -6394053120518697232
+    second: Horizontal_CourtyardsSSSS_25
+  - first:
+      213: -6336127273732295422
+    second: Horizontal_CourtyardsSSSS_26
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 1
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Horizontal_CourtyardsSSSS_30
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 144
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48162606bc8cb534392679d389bc3c72
+      internalID: -645902216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Horizontal_CourtyardsSSSS_39
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 128
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d90e8b72cab5104aabc2c83ead7e778
+      internalID: -692179808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Horizontal_CourtyardsSSSS_40
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 128
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c2fcd418fd2f524a8a07cf7c4082b5f
+      internalID: 679821231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Horizontal_CourtyardsSSSS_49
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 112
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7580d4a0efeffaf4c822b4ad750149c3
+      internalID: 1697040046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Horizontal_CourtyardsSSSS_59
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d828bc1d393c99b40bc5295704596c1e
+      internalID: -466162918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Horizontal_CourtyardsSSSS_60
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 96
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbff25b3d8298b5459cfd895ae10c3e2
+      internalID: -1123492910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Horizontal_CourtyardsSSSS_69
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f12b3b1f8b5e474986b74b0098291ed
+      internalID: 1649378867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 91166c8f6961cfa4282a340910c3339b
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":16.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Horizontal_CourtyardsSSSS_0: -6763849751756529615
+      Horizontal_CourtyardsSSSS_1: -1924051715114335263
+      Horizontal_CourtyardsSSSS_10: -2344516697267751716
+      Horizontal_CourtyardsSSSS_11: 670033046901371939
+      Horizontal_CourtyardsSSSS_12: 296432530927215836
+      Horizontal_CourtyardsSSSS_13: -464652968141091872
+      Horizontal_CourtyardsSSSS_14: -4386978827593364133
+      Horizontal_CourtyardsSSSS_15: -3315703172846048722
+      Horizontal_CourtyardsSSSS_16: -3073842998949818386
+      Horizontal_CourtyardsSSSS_17: -2105759122019137680
+      Horizontal_CourtyardsSSSS_18: -6864237547395580630
+      Horizontal_CourtyardsSSSS_19: 6091897027552274520
+      Horizontal_CourtyardsSSSS_2: 3053083399792570595
+      Horizontal_CourtyardsSSSS_20: 7200469489007008384
+      Horizontal_CourtyardsSSSS_21: -6821523699250349722
+      Horizontal_CourtyardsSSSS_22: -1113195649491596975
+      Horizontal_CourtyardsSSSS_23: 9131742495223693685
+      Horizontal_CourtyardsSSSS_24: 4194442664397367116
+      Horizontal_CourtyardsSSSS_25: -6394053120518697232
+      Horizontal_CourtyardsSSSS_26: -6336127273732295422
+      Horizontal_CourtyardsSSSS_27: 411175412
+      Horizontal_CourtyardsSSSS_28: -1182593249
+      Horizontal_CourtyardsSSSS_29: 390617294
+      Horizontal_CourtyardsSSSS_3: 8668739277252285872
+      Horizontal_CourtyardsSSSS_30: -645902216
+      Horizontal_CourtyardsSSSS_31: -1765571013
+      Horizontal_CourtyardsSSSS_32: -1024930012
+      Horizontal_CourtyardsSSSS_33: 611027458
+      Horizontal_CourtyardsSSSS_34: -2125754757
+      Horizontal_CourtyardsSSSS_35: -1354025531
+      Horizontal_CourtyardsSSSS_36: -416412565
+      Horizontal_CourtyardsSSSS_37: 602041071
+      Horizontal_CourtyardsSSSS_38: -382044361
+      Horizontal_CourtyardsSSSS_39: -692179808
+      Horizontal_CourtyardsSSSS_4: -8533215993452095415
+      Horizontal_CourtyardsSSSS_40: 679821231
+      Horizontal_CourtyardsSSSS_41: -1723953732
+      Horizontal_CourtyardsSSSS_42: -841632876
+      Horizontal_CourtyardsSSSS_43: -571403377
+      Horizontal_CourtyardsSSSS_44: -25877701
+      Horizontal_CourtyardsSSSS_45: -2043395582
+      Horizontal_CourtyardsSSSS_46: 1021119975
+      Horizontal_CourtyardsSSSS_47: -546348236
+      Horizontal_CourtyardsSSSS_48: 1144381469
+      Horizontal_CourtyardsSSSS_49: 1697040046
+      Horizontal_CourtyardsSSSS_5: -727638314163179944
+      Horizontal_CourtyardsSSSS_50: -1526774460
+      Horizontal_CourtyardsSSSS_51: -176797567
+      Horizontal_CourtyardsSSSS_52: -1594165220
+      Horizontal_CourtyardsSSSS_53: -810208613
+      Horizontal_CourtyardsSSSS_54: 499154505
+      Horizontal_CourtyardsSSSS_55: -812685954
+      Horizontal_CourtyardsSSSS_56: 377322510
+      Horizontal_CourtyardsSSSS_57: 1293828551
+      Horizontal_CourtyardsSSSS_58: 2058295627
+      Horizontal_CourtyardsSSSS_59: -466162918
+      Horizontal_CourtyardsSSSS_6: 2221306979018262960
+      Horizontal_CourtyardsSSSS_60: -1123492910
+      Horizontal_CourtyardsSSSS_61: 884086025
+      Horizontal_CourtyardsSSSS_62: -42742528
+      Horizontal_CourtyardsSSSS_63: -2021327448
+      Horizontal_CourtyardsSSSS_64: 585150639
+      Horizontal_CourtyardsSSSS_65: 1408101721
+      Horizontal_CourtyardsSSSS_66: -2125915096
+      Horizontal_CourtyardsSSSS_67: -1630107459
+      Horizontal_CourtyardsSSSS_68: 732265479
+      Horizontal_CourtyardsSSSS_69: 1649378867
+      Horizontal_CourtyardsSSSS_7: 7912660506536965557
+      Horizontal_CourtyardsSSSS_70: 438472253
+      Horizontal_CourtyardsSSSS_71: -421631750
+      Horizontal_CourtyardsSSSS_72: 892658197
+      Horizontal_CourtyardsSSSS_73: -25523573
+      Horizontal_CourtyardsSSSS_74: -658491177
+      Horizontal_CourtyardsSSSS_75: -1044722879
+      Horizontal_CourtyardsSSSS_76: 121981675
+      Horizontal_CourtyardsSSSS_77: 1392758642
+      Horizontal_CourtyardsSSSS_78: -834390294
+      Horizontal_CourtyardsSSSS_79: 940462952
+      Horizontal_CourtyardsSSSS_8: 2848295723773620106
+      Horizontal_CourtyardsSSSS_80: -412912879
+      Horizontal_CourtyardsSSSS_9: -550184014839651214
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
