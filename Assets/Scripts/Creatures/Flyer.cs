@@ -11,6 +11,8 @@ public class Flyer : MonoBehaviour
     public float flyOverDuration = 2f;
     public GameObject carriedLetterVisual; // Assign a child GameObject to show the letter
 
+    private Animator animator; // Reference to the Animator
+
     private Transform player;
     private PlayerInventory playerInventory => PlayerInventory.Instance;
     private LetterObject carriedLetterObject;
@@ -18,10 +20,17 @@ public class Flyer : MonoBehaviour
     private Vector3 dropPosition;
     private bool hasStolenLetter = false;
 
+
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         carriedLetterVisual.SetActive(false);
+        // Get Animator from child 'Visuals'
+        var visuals = transform.Find("Visuals");
+        if (visuals != null)
+            animator = visuals.GetComponent<Animator>();
+        else
+            Debug.LogWarning("[Flyer] Could not find 'Visuals' child for Animator reference.");
         StartCoroutine(FlyerRoutine());
     }
 
@@ -58,7 +67,23 @@ public class Flyer : MonoBehaviour
         float speed = 2f;
         float angle = Time.time * speed;
         Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius;
-        transform.position = player.position + offset;
+        Vector3 newPos = player.position + offset;
+        SetAnimatorDirection(newPos - transform.position);
+        transform.position = newPos;
+    }
+
+    // Helper to set animator direction based on movement vector
+    private void SetAnimatorDirection(Vector3 move)
+    {
+        if (animator == null) return;
+        if (move.magnitude < 0.01f) return;
+        
+        // Normalize the movement vector
+        Vector3 normalized = move.normalized;
+        
+        // Set animator parameters for smooth transitions
+        animator.SetFloat("MoveX", normalized.x);
+        animator.SetFloat("MoveY", normalized.y);
     }
 
     private IEnumerator SwoopAttempt()
@@ -74,7 +99,9 @@ public class Flyer : MonoBehaviour
         while (t < 1f)
         {
             t += Time.deltaTime / swoopTime;
-            transform.position = Vector3.Lerp(start, end, t);
+            Vector3 newPos = Vector3.Lerp(start, end, t);
+            SetAnimatorDirection(newPos - transform.position);
+            transform.position = newPos;
             yield return null;
         }
         // Attempt to steal
@@ -124,7 +151,9 @@ public class Flyer : MonoBehaviour
         while (t < 1f)
         {
             t += Time.deltaTime / travelTime;
-            transform.position = Vector3.Lerp(start, dropPosition, t);
+            Vector3 newPos = Vector3.Lerp(start, dropPosition, t);
+            SetAnimatorDirection(newPos - transform.position);
+            transform.position = newPos;
             yield return null;
         }
         // Drop the letter
@@ -153,7 +182,9 @@ public class Flyer : MonoBehaviour
         while (t < 1f)
         {
             t += Time.deltaTime / escapeTime;
-            transform.position = Vector3.Lerp(start, escapeTarget, t);
+            Vector3 newPos = Vector3.Lerp(start, escapeTarget, t);
+            SetAnimatorDirection(newPos - transform.position);
+            transform.position = newPos;
             yield return null;
         }
         Destroy(gameObject);
