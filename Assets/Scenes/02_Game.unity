@@ -19010,6 +19010,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1000011901245788, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1000012786231884, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
       propertyPath: m_Name
       value: Word Page 1
@@ -19044,7 +19048,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114000012848874552, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
       propertyPath: currentPaper
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114000012848874552, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
       propertyPath: EndFlippingPaper
@@ -19256,27 +19260,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 225000010544012140, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
       propertyPath: m_Alpha
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 225000010544012140, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
       propertyPath: m_BlocksRaycasts
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 225000011866381234, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
+      propertyPath: m_Alpha
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 225000011866381234, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
+      propertyPath: m_BlocksRaycasts
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 225000012080956364, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
+      propertyPath: m_Alpha
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 225000011866381234, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
-      propertyPath: m_Alpha
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 225000011866381234, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
-      propertyPath: m_BlocksRaycasts
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 225000012080956364, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
-      propertyPath: m_Alpha
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 225000012080956364, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
       propertyPath: m_BlocksRaycasts
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 225000013765485012, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
       propertyPath: m_Alpha
@@ -19290,47 +19294,20 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 224000012149926270, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 1368840476}
-    - targetCorrespondingSourceObject: {fileID: 224000012149926270, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
-      insertIndex: 3
+      insertIndex: 1
       addedObject: {fileID: 2012276769}
+    - targetCorrespondingSourceObject: {fileID: 224000012149926270, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 1750369792}
     - targetCorrespondingSourceObject: {fileID: 224000012149926270, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
       insertIndex: 4
       addedObject: {fileID: 299073349}
     - targetCorrespondingSourceObject: {fileID: 224000012149926270, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
       insertIndex: 5
-      addedObject: {fileID: 1750369792}
+      addedObject: {fileID: 1368840476}
     - targetCorrespondingSourceObject: {fileID: 224000012149926270, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
       insertIndex: 8
       addedObject: {fileID: 1930003722}
-    - targetCorrespondingSourceObject: {fileID: 224000013707306760, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 134346905}
-    - targetCorrespondingSourceObject: {fileID: 224000013707306760, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1763488013}
-    - targetCorrespondingSourceObject: {fileID: 224000013707306760, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 865796287}
-    - targetCorrespondingSourceObject: {fileID: 224000010976852724, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 29802429}
-    - targetCorrespondingSourceObject: {fileID: 224000013301220784, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1933581854}
-    - targetCorrespondingSourceObject: {fileID: 224000013301220784, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 15274720}
-    - targetCorrespondingSourceObject: {fileID: 224000013301220784, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 695643182}
-    - targetCorrespondingSourceObject: {fileID: 224000013301220784, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2064492048}
-    - targetCorrespondingSourceObject: {fileID: 224000013301220784, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 899099997}
     - targetCorrespondingSourceObject: {fileID: 224000010674522366, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
       insertIndex: -1
       addedObject: {fileID: 46644386}
@@ -19349,6 +19326,33 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 224000010674522366, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2019226043}
+    - targetCorrespondingSourceObject: {fileID: 224000013707306760, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 134346905}
+    - targetCorrespondingSourceObject: {fileID: 224000013707306760, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1763488013}
+    - targetCorrespondingSourceObject: {fileID: 224000013707306760, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 865796287}
+    - targetCorrespondingSourceObject: {fileID: 224000013301220784, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1933581854}
+    - targetCorrespondingSourceObject: {fileID: 224000013301220784, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 15274720}
+    - targetCorrespondingSourceObject: {fileID: 224000013301220784, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 695643182}
+    - targetCorrespondingSourceObject: {fileID: 224000013301220784, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2064492048}
+    - targetCorrespondingSourceObject: {fileID: 224000013301220784, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 899099997}
+    - targetCorrespondingSourceObject: {fileID: 224000010976852724, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 29802429}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1000010894660052, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
       insertIndex: -1
@@ -29806,9 +29810,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1368840471}
   m_Enabled: 1
-  m_Alpha: 1
+  m_Alpha: 0
   m_Interactable: 1
-  m_BlocksRaycasts: 1
+  m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
 --- !u!114 &1368840473
 MonoBehaviour:
@@ -32831,9 +32835,9 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1750369787}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
-  m_BlocksRaycasts: 0
+  m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!114 &1750369789
 MonoBehaviour:
