@@ -1,55 +1,55 @@
 fileFormatVersion: 2
-guid: 634e627f40f908140b48b9c4b6b629bf
+guid: 456e78ed7ed5434469f49d285b4ecde4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2158156182815499936
-    second: Flyer_SpriteSheet_Flight_0
+      213: -4768059064008839980
+    second: flyer_mask_0
   - first:
-      213: 1661464722285098981
-    second: Flyer_SpriteSheet_Flight_1
+      213: -5938943587386777019
+    second: flyer_mask_1
   - first:
-      213: 277972852479354670
-    second: Flyer_SpriteSheet_Flight_2
+      213: -7837626653848167354
+    second: flyer_mask_2
   - first:
-      213: 112388180797947063
-    second: Flyer_SpriteSheet_Flight_3
+      213: 6465001902548881521
+    second: flyer_mask_3
   - first:
-      213: 4631495609664357443
-    second: Flyer_SpriteSheet_Flight_4
+      213: -5490471338172605528
+    second: flyer_mask_4
   - first:
-      213: 1690295642955881110
-    second: Flyer_SpriteSheet_Flight_5
+      213: -2250809150427002680
+    second: flyer_mask_5
   - first:
-      213: 1809604372166447632
-    second: Flyer_SpriteSheet_Flight_6
+      213: -4665109778955726693
+    second: flyer_mask_6
   - first:
-      213: -1296010419719702873
-    second: Flyer_SpriteSheet_Flight_7
+      213: -4325768023732796556
+    second: flyer_mask_7
   - first:
-      213: 1922464310065758345
-    second: Flyer_SpriteSheet_Flight_8
+      213: 2204233712590343205
+    second: flyer_mask_8
   - first:
-      213: -2604489554976040495
-    second: Flyer_SpriteSheet_Flight_9
+      213: -1818652770226667402
+    second: flyer_mask_9
   - first:
-      213: 159339214351931928
-    second: Flyer_SpriteSheet_Flight_10
+      213: 8707079466138582478
+    second: flyer_mask_10
   - first:
-      213: -1668657664234134823
-    second: Flyer_SpriteSheet_Flight_11
+      213: 2048615081750171540
+    second: flyer_mask_11
   - first:
-      213: -5630758801672753576
-    second: Flyer_SpriteSheet_Flight_12
+      213: 4641916078161902546
+    second: flyer_mask_12
   - first:
-      213: 5187907210196744326
-    second: Flyer_SpriteSheet_Flight_13
+      213: 8580387422983022968
+    second: flyer_mask_13
   - first:
-      213: -193922940736909002
-    second: Flyer_SpriteSheet_Flight_14
+      213: 8289028781933121089
+    second: flyer_mask_14
   - first:
-      213: -1486877497506533630
-    second: Flyer_SpriteSheet_Flight_15
+      213: -5549795305518786129
+    second: flyer_mask_15
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -145,7 +145,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Left1
+      name: LM1
       rect:
         serializedVersion: 2
         x: 0
@@ -160,14 +160,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0691879d260bc02e0800000000000000
-      internalID: -2158156182815499936
+      spriteID: 4dceba52b8374ddb0800000000000000
+      internalID: -4768059064008839980
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Left2
+      name: LM2
       rect:
         serializedVersion: 2
         x: 64
@@ -182,14 +182,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5e775a2bc55be0710800000000000000
-      internalID: 1661464722285098981
+      spriteID: 5422abce542a49da0800000000000000
+      internalID: -5938943587386777019
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Left3
+      name: LM3
       rect:
         serializedVersion: 2
         x: 128
@@ -204,14 +204,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: e27eb3926de8bd300800000000000000
-      internalID: 277972852479354670
+      spriteID: 64c1f3775182b3390800000000000000
+      internalID: -7837626653848167354
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Left4
+      name: LM4
       rect:
         serializedVersion: 2
         x: 192
@@ -226,14 +226,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7bcf96974784f8100800000000000000
-      internalID: 112388180797947063
+      spriteID: 17096a13afc48b950800000000000000
+      internalID: 6465001902548881521
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Down1
+      name: DM1
       rect:
         serializedVersion: 2
         x: 0
@@ -248,14 +248,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 34443d0e7b0664040800000000000000
-      internalID: 4631495609664357443
+      spriteID: 8ab12ce586dedc3b0800000000000000
+      internalID: -5490471338172605528
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Down2
+      name: DM2
       rect:
         serializedVersion: 2
         x: 64
@@ -270,14 +270,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 69a96c38ee2257710800000000000000
-      internalID: 1690295642955881110
+      spriteID: 8c88993c00583c0e0800000000000000
+      internalID: -2250809150427002680
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Down3
+      name: DM3
       rect:
         serializedVersion: 2
         x: 128
@@ -292,14 +292,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 01299fab6910d1910800000000000000
-      internalID: 1809604372166447632
+      spriteID: b9094237f53324fb0800000000000000
+      internalID: -4665109778955726693
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Down4
+      name: DM4
       rect:
         serializedVersion: 2
         x: 192
@@ -314,14 +314,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7a6f66bc365a30ee0800000000000000
-      internalID: -1296010419719702873
+      spriteID: 473c9acb6e8c7f3c0800000000000000
+      internalID: -4325768023732796556
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Right1
+      name: RM1
       rect:
         serializedVersion: 2
         x: 0
@@ -334,16 +334,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 98006d6ba17fdaa10800000000000000
-      internalID: 1922464310065758345
+      spriteID: 56d5c48073401554c8ae9be8f1b51880
+      internalID: 430761461
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Right2
+      name: RM2
       rect:
         serializedVersion: 2
         x: 64
@@ -356,19 +356,19 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 1d910768c8efadbd0800000000000000
-      internalID: -2604489554976040495
+      spriteID: 91688187a123b6447b1fb023c4ff75fc
+      internalID: 633325144
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Right3
+      name: RM3
       rect:
         serializedVersion: 2
-        x: 128
+        x: 127
         y: 33
         width: 64
         height: 32
@@ -378,16 +378,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 81a9c36db26163200800000000000000
-      internalID: 159339214351931928
+      spriteID: d8c95eafabe535844a85d88032e145eb
+      internalID: 35515924
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Right4
+      name: RM4
       rect:
         serializedVersion: 2
         x: 192
@@ -400,16 +400,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 9d2679ff1bcb7d8e0800000000000000
-      internalID: -1668657664234134823
+      spriteID: a5fb61f84c58279428a748ad35e3aa48
+      internalID: -405633665
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Up1
+      name: UM1
       rect:
         serializedVersion: 2
         x: 0
@@ -422,16 +422,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 85e2462f3b68bd1b0800000000000000
-      internalID: -5630758801672753576
+      spriteID: 2cf7e765a926de04ead7308bbe103889
+      internalID: -2122235907
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Up2
+      name: UM2
       rect:
         serializedVersion: 2
         x: 64
@@ -444,16 +444,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 688f677fe162ff740800000000000000
-      internalID: 5187907210196744326
+      spriteID: 9408a95763c40234c999c181fd5039be
+      internalID: -1683420512
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Up3
+      name: UM3
       rect:
         serializedVersion: 2
         x: 128
@@ -466,16 +466,16 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 631d393ec1c0f4df0800000000000000
-      internalID: -193922940736909002
+      spriteID: 6bd9488618b328446a211ab7645ca41a
+      internalID: -2055150505
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Up4
+      name: UM4
       rect:
         serializedVersion: 2
         x: 192
@@ -488,10 +488,10 @@ TextureImporter:
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 20fe9983bcc8d5be0800000000000000
-      internalID: -1486877497506533630
+      spriteID: 82d3fc9fdeb7a2f4e8b30f4fdddd6b81
+      internalID: -137281858
       vertices: []
       indices: 
       edges: []
@@ -500,36 +500,34 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 32c156a65bd374140a67fee4d223a7ae
+    spriteID: 0c3b1cd20c93daa47b3e7fafd6656ec1
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
-    secondaryTextures:
-    - texture: {fileID: 2800000, guid: 456e78ed7ed5434469f49d285b4ecde4, type: 3}
-      name: _EmissionMap
+    secondaryTextures: []
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Down1: 4631495609664357443
-      Down2: 1690295642955881110
-      Down3: 1809604372166447632
-      Down4: -1296010419719702873
-      Left1: -2158156182815499936
-      Left2: 1661464722285098981
-      Left3: 277972852479354670
-      Left4: 112388180797947063
-      Right1: 1922464310065758345
-      Right2: -2604489554976040495
-      Right3: 159339214351931928
-      Right4: -1668657664234134823
-      Up1: -5630758801672753576
-      Up2: 5187907210196744326
-      Up3: -193922940736909002
-      Up4: -1486877497506533630
+      DM1: -5490471338172605528
+      DM2: -2250809150427002680
+      DM3: -4665109778955726693
+      DM4: -4325768023732796556
+      LM1: -4768059064008839980
+      LM2: -5938943587386777019
+      LM3: -7837626653848167354
+      LM4: 6465001902548881521
+      RM1: 430761461
+      RM2: 633325144
+      RM3: 35515924
+      RM4: -405633665
+      UM1: -2122235907
+      UM2: -1683420512
+      UM3: -2055150505
+      UM4: -137281858
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
