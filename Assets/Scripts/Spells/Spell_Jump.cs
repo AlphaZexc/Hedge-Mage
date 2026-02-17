@@ -6,10 +6,13 @@ public class Spell_Jump : SpellBase
     {
         spellName = "JUMP";
         GenerateMaskedSpell(NUMBER_MASKED_CHARS);
+
+        spellType = SpellType.Mobility;
     }
 
     public override void Cast(GameObject player)
     {
+        base.Cast(player);
         Rigidbody2D rb = player.GetComponent<Rigidbody2D>();
         if (rb != null)
         {

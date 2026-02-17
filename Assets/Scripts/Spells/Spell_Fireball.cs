@@ -6,17 +6,20 @@ public class Spell_Fireball : SpellBase
     {
         spellName = "FIREBALL";
         GenerateMaskedSpell(NUMBER_MASKED_CHARS);
+
+        spellType = SpellType.Attack;
     }
 
     public override void Cast(GameObject player)
     {
+        base.Cast(player);
         PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
 
         if (playerHealth != null)
         {
             playerHealth.maxLives += 1;
 
-            Debug.Log("Restore cast!");
+            Debug.Log("Fireball cast!");
         }
     }
 }

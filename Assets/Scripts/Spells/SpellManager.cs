@@ -19,17 +19,30 @@ public class SpellManager : MonoBehaviour
     {
         // Initialize spells
         availableSpells.Add(new Spell_Jump());
-        availableSpells.Add(new Spell_Repulse());
+        availableSpells.Add(new Spell_Fireball());
         availableSpells.Add(new Spell_Restore());
     }
-
     private void Update()
     {
-        // Cast last completed spell with F
+        foreach (var spell in availableSpells)
+            spell.TickCooldown(Time.deltaTime);
+
         if (Input.GetKeyDown(KeyCode.F) && inventory.lastCompletedSpell != null)
         {
-            inventory.lastCompletedSpell.Cast(gameObject);
-            spellVisuals.UpdateSpellUI();
+            Debug.Log("F pressed");
+
+            if (inventory.lastCompletedSpell == null)
+                Debug.Log("Last spell is NULL");
+            else
+                Debug.Log("Last spell is " + inventory.lastCompletedSpell.spellName);
+
+            Debug.Log($"Cooldown: {inventory.lastCompletedSpell.CooldownPercent}");
+
+            if (!inventory.lastCompletedSpell.IsOnCooldown)
+            {
+                inventory.lastCompletedSpell.Cast(gameObject);
+                spellVisuals.UpdateSpellUI(inventory.lastCompletedSpell);
+            }
         }
     }
 
@@ -48,6 +61,8 @@ public class SpellManager : MonoBehaviour
 
         // Regenerate missing letters for next use
         spell.GenerateMaskedSpell(2);
+
+        spell.ResetCooldown();
 
         Debug.Log($"Completed spell: {spell.spellName}");
         return true;

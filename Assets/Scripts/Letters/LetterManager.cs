@@ -62,7 +62,7 @@ public class LetterManager : MonoBehaviour
         }
 
         // Spawn in guaranteed letters
-        List<char> lettersToInclude = new List<char>() { 'j', 'u', 'm', 'p' };
+        List<char> lettersToInclude = new List<char>() { 'j', 'u', 'm', 'p', 'f', 'i', 'r', 'e', 'b', 'a', 'l', 's', 't', 'o' };
         foreach (char letter in lettersToInclude)
         {
             char upper = char.ToUpper(letter);

@@ -6,10 +6,13 @@ public class Spell_Restore : SpellBase
     {
         spellName = "RESTORE";
         GenerateMaskedSpell(NUMBER_MASKED_CHARS);
+
+        spellType = SpellType.Support;
     }
 
     public override void Cast(GameObject player)
     {
+        base.Cast(player);
         PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
 
         if (playerHealth != null) 

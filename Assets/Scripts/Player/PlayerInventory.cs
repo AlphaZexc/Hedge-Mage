@@ -6,7 +6,7 @@ public class PlayerInventory : MonoBehaviour
     public static PlayerInventory Instance;
 
     public List<LetterObject> collectedLetters = new List<LetterObject>();
-    public SpellBase lastCompletedSpell;   // Last completed spell
+    public SpellBase lastCompletedSpell { get; private set; }
 
     public bool hasItem => collectedLetters.Count > 0;
     public int LetterCount => collectedLetters.Count;

@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class SpellUI : MonoBehaviour
 {
-    public static SpellUI Instance; 
+    public static SpellUI Instance;
 
     public TextMeshProUGUI currentSpellText;
+    public SpellBookIconUI bookIcon;
 
     void Awake()
     {
@@ -20,10 +21,12 @@ public class SpellUI : MonoBehaviour
         if (spell != null)
         {
             currentSpellText.text = spell.spellName;
+            bookIcon.SetSpell(spell);
         }
         else
         {
             currentSpellText.text = string.Empty;
+            bookIcon.SetSpell(null);
         }
     }
 }
