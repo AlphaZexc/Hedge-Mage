@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 2076320766193900707}
   - component: {fileID: 3642758770867956012}
   - component: {fileID: 6077844513850195278}
-  - component: {fileID: 5736131093674656466}
   m_Layer: 7
   m_Name: Lumenwing
   m_TagString: Untagged
@@ -150,28 +149,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0.027781785, y: -0.040767193}
   m_Size: {x: 1.050757, y: 1.8169279}
   m_Direction: 0
---- !u!95 &5736131093674656466
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2299412231005582585}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1d6fdc8db1cc26149b206283dcdedfb4, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8044798123023471892
 GameObject:
   m_ObjectHideFlags: 0
