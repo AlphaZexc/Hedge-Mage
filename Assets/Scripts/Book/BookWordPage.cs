@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class BookWordPage : MonoBehaviour
 {
     [Header("Letter Layout")]
-    public TextMeshProUGUI wordText;
     public GameObject letterSlotPrefab;
     public Transform letterSlotContainer;
 
@@ -15,8 +14,6 @@ public class BookWordPage : MonoBehaviour
     {
         ClearLetters();
         SetupLetterSlots();
-
-        wordText.text = wpi.targetWord;
     }
 
     private void SetupLetterSlots()

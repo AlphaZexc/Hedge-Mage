@@ -6,7 +6,7 @@ public class Flyer : MonoBehaviour
 {
     public float cooldown = 60f;
     public int maxSwoopAttempts = 3;
-    [Range(0f, 1f)] public float stealSuccessPercent = 1.0f; // Set to 1.0 for testing
+    [Range(0f, 1f)] public float stealSuccessPercent = 0.3f; // Set to 1.0 for testing
     public float minDropDistanceFromPlayer = 5f;
     public float flyOverDuration = 2f;
     public GameObject carriedLetterVisual; // Assign a child GameObject to show the letter

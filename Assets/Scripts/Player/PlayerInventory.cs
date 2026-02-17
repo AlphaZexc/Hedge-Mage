@@ -11,11 +11,15 @@ public class PlayerInventory : MonoBehaviour
     public bool hasItem => collectedLetters.Count > 0;
     public int LetterCount => collectedLetters.Count;
 
-    private void Start()
+    private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
 
+    }
+
+    private void Start()
+    {
         if (CreatureManager.Instance != null)
         {
             CreatureManager.Instance.NotifyPlayerReady(this);

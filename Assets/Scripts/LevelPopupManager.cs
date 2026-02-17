@@ -22,6 +22,8 @@ public class LevelPopupManager : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
+
+        CloseBookPopup();
     }
 
     private void Update()

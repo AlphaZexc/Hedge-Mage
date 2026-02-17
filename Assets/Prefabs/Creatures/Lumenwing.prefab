@@ -82,7 +82,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Flyer
   cooldown: 60
   maxSwoopAttempts: 3
-  stealSuccessPercent: 1
+  stealSuccessPercent: 0.3
   minDropDistanceFromPlayer: 5
   flyOverDuration: 2
   carriedLetterVisual: {fileID: 1238505737685759461}
