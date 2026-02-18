@@ -18,14 +18,6 @@ public class PlayerInventory : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-        if (CreatureManager.Instance != null)
-        {
-            CreatureManager.Instance.NotifyPlayerReady(this);
-        }
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         LetterObject letterObj = other.GetComponent<LetterObject>();

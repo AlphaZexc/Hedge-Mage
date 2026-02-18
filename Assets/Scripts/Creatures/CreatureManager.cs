@@ -49,9 +49,6 @@ public class CreatureManager : MonoBehaviour
     [Header("Continuous Spawning Configurations")]
     public List<CreatureSpawnConfig> creatureConfigs;
 
-    private PlayerInventory playerInventory;
-    private bool flyerSpawnStarted = false;
-
     [Header("Mirelight Settings")]
     public bool mirelightEnabled = true;
     public GameObject mirelightPrefab;
@@ -67,7 +64,8 @@ public class CreatureManager : MonoBehaviour
 
     private Dictionary<string, List<ManagedCreature>> activeCreatures;
     private Dictionary<string, CreatureSpawnConfig> creatureConfigMap;
-    
+    private PlayerInventory playerInventory => PlayerInventory.Instance;
+
     private int currentDifficultyTierIndex = 0;
     private int totalCreaturesAlive = 0;
 
@@ -78,7 +76,6 @@ public class CreatureManager : MonoBehaviour
 
         activeCreatures = new Dictionary<string, List<ManagedCreature>>();
         creatureConfigMap = new Dictionary<string, CreatureSpawnConfig>();
-        // No player lookup here; will be notified when player is ready
     }
 
     private void Start()
@@ -170,14 +167,9 @@ public class CreatureManager : MonoBehaviour
                 creatureConfigMap.Add(config.creatureName, config);
             }
             // Only gate Flyer spawns on player having a letter
-            if (config.creatureName.ToLower().Contains("flyer"))
+            if (config.creatureName.ToLower().Contains("lumenwing"))
             {
-                // Only start Flyer spawn if player is already known
-                if (playerInventory != null && !flyerSpawnStarted)
-                {
-                    flyerSpawnStarted = true;
-                    StartCoroutine(SpawnFlyerWhenPlayerHasLetter(config));
-                }
+                StartCoroutine(SpawnFlyerWhenPlayerHasLetter(config));
             }
             else
             {
@@ -189,14 +181,8 @@ public class CreatureManager : MonoBehaviour
 
     private IEnumerator SpawnFlyerWhenPlayerHasLetter(CreatureSpawnConfig config)
     {
-        // Robustly wait for player and PlayerInventory, and for player to have a letter
+        // Wait for player to get a letter before spawning Lumenwing
         float waitTime = 0f;
-        while (playerInventory == null)
-        {
-            if (waitTime % 2f < 0.01f) Debug.Log("[FlyerSpawnDebug] Waiting for playerInventory via NotifyPlayerReady...");
-            yield return new WaitForSeconds(0.5f);
-            waitTime += 0.5f;
-        }
         while (!playerInventory.hasItem)
         {
             if (waitTime % 2f < 0.01f) Debug.Log("[FlyerSpawnDebug] Player has no letter, waiting...");
@@ -207,23 +193,6 @@ public class CreatureManager : MonoBehaviour
         yield return StartCoroutine(SpawnCreatureRoutine(config));
     }
 
-    // Call this from Player's Start or Awake
-    public void NotifyPlayerReady(PlayerInventory inv)
-    {
-        playerInventory = inv;
-        if (!flyerSpawnStarted && creatureConfigs != null)
-        {
-            foreach (var config in creatureConfigs)
-            {
-                if (config.creatureName.ToLower().Contains("flyer"))
-                {
-                    flyerSpawnStarted = true;
-                    StartCoroutine(SpawnFlyerWhenPlayerHasLetter(config));
-                }
-            }
-        }
-    }
-    
     public void ResetCreatures()
     {
         StopAllCoroutines();

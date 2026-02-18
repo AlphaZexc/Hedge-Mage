@@ -29,18 +29,17 @@ public class PlayerInteraction : MonoBehaviour
             interactionPrompt.SetActive(false);
         }
 
-        // Get the last direction the player was moving
+        // Perform a CircleCast in front of player
         Vector2 facingDirection = playerMovement.GetLastMoveDirection();
+        RaycastHit2D hit = Physics2D.CircleCast(transform.position, 2f, facingDirection, interactionDistance);
 
-        // Perform a CircleCast to see what's in front of the player
-        RaycastHit2D hit = Physics2D.CircleCast(transform.position, 0.5f, facingDirection, interactionDistance);
-
-        // Check if we hit something
         if (hit.collider != null)
         {
             // Check if the thing we hit is the Fountain
             if (hit.collider.CompareTag("Fountain"))
             {
+                Debug.Log("In Fountain Range");
+
                 // If it is the fountain, check if the word is complete
                 if (WordProgressManager.Instance.AllLettersCollected)
                 {
@@ -64,9 +63,6 @@ public class PlayerInteraction : MonoBehaviour
     {
         Debug.Log("Player interacted with Fountain! Level Complete.");
         
-        // You could tell the fountain to play an animation here if you wanted
-        // fountainObject.GetComponent<Animator>().SetTrigger("Activate");
-
         float finalTime = PlayerHealth.Instance.GetElapsedLevelTime();
         LevelPopupManager.Instance.ShowLevelCompletePopup(finalTime);
     }
