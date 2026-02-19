@@ -133,11 +133,22 @@ public class AStarGridManager : MonoBehaviour
         Node startNode = NodeFromWorldPoint(startPos);
         Node targetNode = NodeFromWorldPoint(targetPos);
 
-        if (startNode == null || targetNode == null || !startNode.walkable)
+        if (startNode == null || targetNode == null)
         {
             lastPathNodes = null;
             return null;
         }
+
+        if (!startNode.walkable)
+        {
+            startNode = FindClosestWalkableNode(startNode);
+            if (startNode == null)
+            {
+                lastPathNodes = null;
+                return null;
+            }
+        }
+
 
         if (!targetNode.walkable)
         {
@@ -150,6 +161,17 @@ public class AStarGridManager : MonoBehaviour
             {
                 lastPathNodes = null;
                 return null;
+            }
+        }
+
+        // Reset all nodes before searching
+        for (int x = 0; x < gridSizeX; x++)
+        {
+            for (int y = 0; y < gridSizeY; y++)
+            {
+                grid[x, y].gCost = 0;
+                grid[x, y].hCost = 0;
+                grid[x, y].parent = null;
             }
         }
 

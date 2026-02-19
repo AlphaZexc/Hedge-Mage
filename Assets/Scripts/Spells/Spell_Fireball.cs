@@ -13,6 +13,9 @@ public class Spell_Fireball : SpellBase
     public override void Cast(GameObject player)
     {
         base.Cast(player);
+
+        Debug.Log("Fireball cast!");
+
         PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
 
         if (playerHealth != null)

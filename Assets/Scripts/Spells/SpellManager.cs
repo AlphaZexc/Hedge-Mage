@@ -36,7 +36,7 @@ public class SpellManager : MonoBehaviour
             else
                 Debug.Log("Last spell is " + inventory.lastCompletedSpell.spellName);
 
-            Debug.Log($"Cooldown: {inventory.lastCompletedSpell.CooldownPercent}");
+            Debug.Log($"Cooldown: {inventory.lastCompletedSpell.CooldownPercent}"); 
 
             if (!inventory.lastCompletedSpell.IsOnCooldown)
             {
