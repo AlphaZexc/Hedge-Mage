@@ -12,6 +12,7 @@ public class Flyer : MonoBehaviour
     public GameObject carriedLetterVisual; // Assign a child GameObject to show the letter
 
     private Animator animator; // Reference to the Animator
+    private FlyerGlowController glowController; // Reference to the glow controller
 
     private Transform player;
     private PlayerInventory playerInventory => PlayerInventory.Instance;
@@ -28,9 +29,15 @@ public class Flyer : MonoBehaviour
         // Get Animator from child 'Visuals'
         var visuals = transform.Find("Visuals");
         if (visuals != null)
+        {
             animator = visuals.GetComponent<Animator>();
+            glowController = visuals.GetComponent<FlyerGlowController>();
+            if (glowController == null)
+                Debug.LogWarning("[Flyer] 'Visuals' child is missing a FlyerGlowController component. " +
+                    "Add FlyerGlowController to the Visuals child to enable the animated glow.");
+        }
         else
-            Debug.LogWarning("[Flyer] Could not find 'Visuals' child for Animator reference.");
+            Debug.LogWarning("[Flyer] Could not find 'Visuals' child for Animator/Glow reference.");
         StartCoroutine(FlyerRoutine());
     }
 
@@ -127,6 +134,8 @@ public class Flyer : MonoBehaviour
 
 
                 hasStolenLetter = true;
+                // Boost glow colour to red/orange when carrying a stolen letter
+                glowController?.SetGlowColor(new Color(2.5f, 0.6f, 0f, 1f));
                 Debug.Log($"[FlyerDebug] Flyer stole letter '{carriedLetterObject.letter}' from player.");
 
                 bool removed = playerInventory.RemoveLetter(carriedLetterObject);
@@ -167,6 +176,8 @@ public class Flyer : MonoBehaviour
 
             carriedLetterObject = null;
             carriedLetterVisual.SetActive(false);
+            // Restore default glow colour after dropping the letter
+            glowController?.SetGlowColor(new Color(0.3f, 1.0f, 0.9f, 1f));
         }
         yield return new WaitForSeconds(0.5f);
     }

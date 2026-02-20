@@ -160,6 +160,7 @@ GameObject:
   - component: {fileID: 2232149481090931772}
   - component: {fileID: 2375906859913541645}
   - component: {fileID: 4304101543209506939}
+  - component: {fileID: 5710396997167590818}
   m_Layer: 7
   m_Name: Visuals
   m_TagString: Untagged
@@ -208,7 +209,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: b3e4a008c23fef049bfc4835d6ff48bf, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -263,3 +264,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5710396997167590818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8044798123023471892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0621a028d4d7d4b9832a1eccf9d54d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlyerGlowController
+  glowColor: {r: 0.3, g: 1, b: 0.9, a: 1}
+  pulseMin: 0.7
+  pulseMax: 1.5
+  pulseSpeed: 1.2
+  enablePulse: 1
