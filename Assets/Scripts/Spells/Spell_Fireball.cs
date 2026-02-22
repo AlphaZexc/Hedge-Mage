@@ -2,12 +2,17 @@ using UnityEngine;
 
 public class Spell_Fireball : SpellBase
 {
-    public Spell_Fireball()
+    private GameObject fireballPrefab;
+    private Transform firePoint;
+    public Spell_Fireball(GameObject fireballPrefab, Transform firePoint)
     {
         spellName = "FIREBALL";
         GenerateMaskedSpell(NUMBER_MASKED_CHARS);
 
         spellType = SpellType.Attack;
+
+        this.fireballPrefab = fireballPrefab;
+        this.firePoint = firePoint; 
     }
 
     public override void Cast(GameObject player)
@@ -15,14 +20,7 @@ public class Spell_Fireball : SpellBase
         base.Cast(player);
 
         Debug.Log("Fireball cast!");
-
-        PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
-
-        if (playerHealth != null)
-        {
-            playerHealth.maxLives += 1;
-
-            Debug.Log("Fireball cast!");
-        }
+        PlayerSpell playerSpell = player.GetComponent<PlayerSpell>();
+        playerSpell.CastFireball(fireballPrefab, firePoint);
     }
 }

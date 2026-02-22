@@ -9,6 +9,10 @@ public class SpellManager : MonoBehaviour
     private PlayerInventory inventory => PlayerInventory.Instance;
     private SpellUI spellVisuals => SpellUI.Instance;
 
+    [Header("Fireball")]
+    [SerializeField] private GameObject fireballPrefab;
+    [SerializeField] private Transform firePoint;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -19,7 +23,7 @@ public class SpellManager : MonoBehaviour
     {
         // Initialize spells
         availableSpells.Add(new Spell_Jump());
-        availableSpells.Add(new Spell_Fireball());
+        availableSpells.Add(new Spell_Fireball(fireballPrefab, firePoint));
         availableSpells.Add(new Spell_Restore());
     }
     private void Update()
@@ -40,7 +44,7 @@ public class SpellManager : MonoBehaviour
 
             if (!inventory.lastCompletedSpell.IsOnCooldown)
             {
-                inventory.lastCompletedSpell.Cast(gameObject);
+                inventory.lastCompletedSpell.Cast(inventory.gameObject);
                 spellVisuals.UpdateSpellUI(inventory.lastCompletedSpell);
             }
         }

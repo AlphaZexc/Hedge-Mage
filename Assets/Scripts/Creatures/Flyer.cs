@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.Rendering.Universal;
+using System.Collections.Generic;
 
 public class Flyer : MonoBehaviour
 {
@@ -186,7 +187,7 @@ public class Flyer : MonoBehaviour
     {
         // Move off screen and destroy
         Vector3 escapeDir = (transform.position - player.position).normalized;
-        Vector3 escapeTarget = transform.position + escapeDir * 10f;
+        Vector3 escapeTarget = transform.position + escapeDir * 20f;
         float t = 0f;
         float escapeTime = 1.5f;
         Vector3 start = transform.position;
@@ -201,13 +202,47 @@ public class Flyer : MonoBehaviour
         Destroy(gameObject);
     }
 
-     private Vector3 FindDropPosition()
+    private Vector3 FindDropPosition()
     {
-        // TODO: Implement logic to find a Pathway tile at minDropDistanceFromPlayer
-        // For now, just pick a random point away from player
-        Vector3 randomDir = Random.insideUnitCircle.normalized;
-        Vector3 candidate = player.position + (Vector3)randomDir * minDropDistanceFromPlayer;
-        candidate.z = 0;
-        return candidate;
+        AStarGridManager grid = FindFirstObjectByType<AStarGridManager>();
+        if (grid == null)
+        {
+            Debug.LogWarning("[Flyer] No AStarGridManager found. Falling back to random position.");
+            return player.position + (Vector3)(Random.insideUnitCircle.normalized * minDropDistanceFromPlayer);
+        }
+
+        List<Node> walkableNodes = grid.GetAllWalkableNodes();
+        List<Node> validNodes = new List<Node>();
+
+        foreach (Node node in walkableNodes)
+        {
+            // Check minimum distance from player
+            float distance = Vector3.Distance(player.position, node.worldPosition);
+            if (distance < minDropDistanceFromPlayer)
+                continue;
+
+            // Check that player can actually reach this node
+            var path = grid.FindPath(player.position, node.worldPosition);
+            if (path != null && path.Count > 0)
+            {
+                validNodes.Add(node);
+            }
+        }
+
+        if (validNodes.Count > 0)
+        {
+            Node chosen = validNodes[Random.Range(0, validNodes.Count)];
+            return chosen.worldPosition;
+        }
+
+        Debug.LogWarning("[Flyer] No valid drop tiles found. Using random walkable tile.");
+
+        // Fallback: pick any random walkable node
+        Node fallback = grid.GetRandomWalkableNode();
+        if (fallback != null)
+            return fallback.worldPosition;
+
+        // Absolute fallback
+        return player.position + (Vector3)(Random.insideUnitCircle.normalized * minDropDistanceFromPlayer);
     }
 }
