@@ -695,6 +695,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1512bc2a2c810c49b573d30b07ba10e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpellManager
+  fireballPrefab: {fileID: 5128686294645763025, guid: e2f64c74e6d18784bbaaa5fb808052b3, type: 3}
+  firePoint: {fileID: 1320585235}
 --- !u!114 &19863440
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29019,6 +29021,7 @@ GameObject:
   - component: {fileID: 1320585241}
   - component: {fileID: 1320585243}
   - component: {fileID: 1320585244}
+  - component: {fileID: 1320585245}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -29197,6 +29200,18 @@ CapsuleCollider2D:
   m_Offset: {x: 0.06, y: 0.18}
   m_Size: {x: 0.69, y: 0.35}
   m_Direction: 1
+--- !u!114 &1320585245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320585231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8fc387ce4b295943a28373a49035eb3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSpell
 --- !u!1 &1323205203
 GameObject:
   m_ObjectHideFlags: 0
