@@ -735,7 +735,7 @@ Transform:
   m_GameObject: {fileID: 27038576}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 24.8, y: 21.44, z: 0}
+  m_LocalPosition: {x: 24.99, y: 21.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1685,7 +1685,7 @@ RectTransform:
   m_Father: {fileID: 181887210}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2149,7 +2149,7 @@ Transform:
   m_GameObject: {fileID: 119172908}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24.91, y: -20.4, z: 0}
+  m_LocalPosition: {x: -25, y: -20.56, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3742,8 +3742,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1708671312}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -19625,7 +19625,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010894660052, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1000011901245788, guid: 3b11136cfd0d23540940791a20f3e1de, type: 3}
       propertyPath: m_IsActive
@@ -26880,7 +26880,7 @@ Transform:
   m_GameObject: {fileID: 1045394463}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 25.2, y: -20.2, z: 0}
+  m_LocalPosition: {x: 24.98, y: -20.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -30422,6 +30422,7 @@ MonoBehaviour:
     maxLifetime: 75
   mirelightEnabled: 1
   mirelightPrefab: {fileID: 4853918066849092202, guid: 341f0a9ba1ffcbc4dab17b85c2e94775, type: 3}
+  lightPostPrefab: {fileID: 4853918066849092202, guid: 74ce6feac3211c2468fd1f833550f864, type: 3}
   mirelightSpawnPoints:
   - {fileID: 408727451}
   - {fileID: 1744664144}
@@ -50192,7 +50193,7 @@ Transform:
   m_GameObject: {fileID: 1986027866}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24.91, y: 21.44, z: 0}
+  m_LocalPosition: {x: -24.97, y: 21.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
