@@ -56,6 +56,26 @@ public class PlayerInteraction : MonoBehaviour
                     }
                 }
             }
+
+            // Check if the thing we hit is a Gate
+            if (hit.collider.CompareTag("Gate"))
+            {
+                Gate gate = hit.collider.GetComponent<Gate>();
+
+                if (gate != null && !gate.IsOpen && !gate.isLocked)
+                {
+                    // Show the interaction prompt when the player can open the gate
+                    if (interactionPrompt != null)
+                    {
+                        interactionPrompt.SetActive(true);
+                    }
+
+                    if (Input.GetKeyDown(interactKey))
+                    {
+                        gate.Interact();
+                    }
+                }
+            }
         }
     }
     

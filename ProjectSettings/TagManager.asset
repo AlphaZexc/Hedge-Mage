@@ -11,6 +11,7 @@ TagManager:
   - Fountain
   - Decor
   - Wall
+  - Gate
   layers:
   - Default
   - TransparentFX
