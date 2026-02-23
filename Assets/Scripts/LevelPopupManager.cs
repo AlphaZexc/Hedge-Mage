@@ -28,10 +28,16 @@ public class LevelPopupManager : MonoBehaviour
 
     private void Update()
     {
-        // Opens/closes book when escape key is pressed
-        if (Input.GetKeyDown(KeyCode.Escape)) {
-            if (bookPopup.activeInHierarchy) CloseBookPopup();
-            else ShowBookPopup();
+        // Do NOT allow book during tutorial or end states
+        if (GameManager.Instance.CurrentState != GameManager.GameState.Playing)
+            return;
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (bookPopup.activeInHierarchy)
+                CloseBookPopup();
+            else
+                ShowBookPopup();
         }
     }
 

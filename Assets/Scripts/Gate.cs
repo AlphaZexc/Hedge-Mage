@@ -81,6 +81,9 @@ public class Gate : MonoBehaviour
     {
         IsOpen = true;
 
+        BoxCollider2D collider2D = GetComponent<BoxCollider2D>();
+        collider2D.enabled = false;
+
         if (animator != null)
         {
             animator.SetTrigger("Open");

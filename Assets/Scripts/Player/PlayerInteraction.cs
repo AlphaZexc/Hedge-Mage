@@ -1,89 +1,115 @@
 using UnityEngine;
 
+[RequireComponent(typeof(PlayerMovement))]
 public class PlayerInteraction : MonoBehaviour
 {
     [Header("Interaction Settings")]
-    [Tooltip("The UI element to show when the player can interact.")]
     public GameObject interactionPrompt;
-    [Tooltip("How far in front of the player to check for interactable objects.")]
-    public float interactionDistance = 1.5f;
-    [Tooltip("The key the player must press to interact.")]
+    public float interactionDistance = 0.5f;
+    public float interactionRadius = 0.3f;
     public KeyCode interactKey = KeyCode.E;
 
-    private PlayerMovement playerMovement; // Reference to get the player's facing direction
+    [Header("Prompt Settings")]
+    public Vector3 promptOffset = new Vector3(0f, 1.2f, 0f);
+
+    [Header("Layer Filtering")]
+    public LayerMask interactionLayer;
+
+    private PlayerMovement playerMovement;
 
     private void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
+
         if (interactionPrompt != null)
-        {
             interactionPrompt.SetActive(false);
-        }
     }
 
     private void Update()
     {
-        // Hide the prompt by default each frame
-        if (interactionPrompt != null)
-        {
-            interactionPrompt.SetActive(false);
-        }
+        if (playerMovement == null)
+            return;
 
-        // Perform a CircleCast in front of player
         Vector2 facingDirection = playerMovement.GetLastMoveDirection();
-        RaycastHit2D hit = Physics2D.CircleCast(transform.position, 2f, facingDirection, interactionDistance);
+        if (facingDirection == Vector2.zero)
+            facingDirection = Vector2.down;
+
+        bool foundInteractable = false;
+
+        RaycastHit2D hit = Physics2D.CircleCast(
+            transform.position,
+            interactionRadius,
+            facingDirection,
+            interactionDistance,
+            interactionLayer
+        );
 
         if (hit.collider != null)
         {
-            // Check if the thing we hit is the Fountain
-            if (hit.collider.CompareTag("Fountain"))
-            {
-                Debug.Log("In Fountain Range");
+            GameObject hitObject = hit.collider.gameObject;
 
-                // If it is the fountain, check if the word is complete
+            if (hitObject.CompareTag("Fountain"))
+            {
                 if (WordProgressManager.Instance.AllLettersCollected)
                 {
-                    // If all conditions are met, show the prompt!
-                    if (interactionPrompt != null)
-                    {
-                        interactionPrompt.SetActive(true);
-                    }
+                    foundInteractable = true;
 
-                    // And check if the player presses the interact key
                     if (Input.GetKeyDown(interactKey))
-                    {
-                        CompleteLevelAtFountain(hit.collider.gameObject);
-                    }
+                        CompleteLevelAtFountain(hitObject);
                 }
             }
-
-            // Check if the thing we hit is a Gate
-            if (hit.collider.CompareTag("Gate"))
+            else if (hitObject.CompareTag("Gate"))
             {
-                Gate gate = hit.collider.GetComponent<Gate>();
+                Gate gate = hitObject.GetComponent<Gate>();
 
                 if (gate != null && !gate.IsOpen && !gate.isLocked)
                 {
-                    // Show the interaction prompt when the player can open the gate
-                    if (interactionPrompt != null)
-                    {
-                        interactionPrompt.SetActive(true);
-                    }
+                    foundInteractable = true;
 
                     if (Input.GetKeyDown(interactKey))
-                    {
                         gate.Interact();
-                    }
                 }
             }
         }
+
+        HandlePrompt(foundInteractable);
     }
-    
+
+    private void HandlePrompt(bool shouldShow)
+    {
+        if (interactionPrompt == null)
+            return;
+
+        interactionPrompt.SetActive(shouldShow);
+
+        if (shouldShow)
+        {
+            interactionPrompt.transform.position = transform.position + promptOffset;
+        }
+    }
+
     private void CompleteLevelAtFountain(GameObject fountainObject)
     {
-        Debug.Log("Player interacted with Fountain! Level Complete.");
-        
         float finalTime = PlayerHealth.Instance.GetElapsedLevelTime();
         LevelPopupManager.Instance.ShowLevelCompletePopup(finalTime);
+    }
+
+    // ---------------- GIZMO ----------------
+    private void OnDrawGizmosSelected()
+    {
+        PlayerMovement movement = GetComponent<PlayerMovement>();
+        if (movement == null)
+            return;
+
+        Vector2 direction = movement.GetLastMoveDirection();
+        if (direction == Vector2.zero)
+            direction = Vector2.down;
+
+        Vector3 origin = transform.position;
+        Vector3 end = origin + (Vector3)(direction.normalized * interactionDistance);
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(origin, end);
+        Gizmos.DrawWireSphere(end, interactionRadius);
     }
 }
