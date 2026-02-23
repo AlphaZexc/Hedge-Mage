@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-// (The helper classes at the top are unchanged)
 #region Helper Classes
 public class ManagedCreature
 {
@@ -16,7 +15,6 @@ public class ManagedCreature
 public class CreatureSpawnConfig
 {
     [Header("Debug/Testing")]
-    [Tooltip("Enable this creature for spawning and testing")]
     public bool enabled = true;
     public string creatureName;
     public GameObject creaturePrefab;
@@ -24,8 +22,7 @@ public class CreatureSpawnConfig
     public float minSpawnInterval = 3.0f;
     public float maxSpawnInterval = 5.0f;
     public Transform[] spawnPoints;
-    
-    [Space(10)]
+
     [Header("Lifetime Settings")]
     public bool enableLifetimeRespawn = false;
     public float minLifetime = 80.0f;
@@ -41,7 +38,6 @@ public class DifficultyTier
 }
 #endregion
 
-
 public class CreatureManager : MonoBehaviour
 {
     public static CreatureManager Instance;
@@ -52,8 +48,10 @@ public class CreatureManager : MonoBehaviour
     [Header("Mirelight Settings")]
     public bool mirelightEnabled = true;
     public GameObject mirelightPrefab;
+    public GameObject lightPostPrefab;
     public Transform[] mirelightSpawnPoints;
     public int mirelightCount = 5;
+
     [Space(10)]
     public float minMirelightActivationTime = 15f;
     public float maxMirelightActivationTime = 30f;
@@ -62,12 +60,16 @@ public class CreatureManager : MonoBehaviour
     [Header("Global Difficulty Tiers")]
     public List<DifficultyTier> difficultyTiers;
 
+    [Header("Difficulty Scaling System")]
+    [SerializeField] private DifficultyScaling difficultyScaling;
+
     private Dictionary<string, List<ManagedCreature>> activeCreatures;
     private Dictionary<string, CreatureSpawnConfig> creatureConfigMap;
-    private PlayerInventory playerInventory => PlayerInventory.Instance;
 
-    private int currentDifficultyTierIndex = 0;
+    private PlayerInventory playerInventory => PlayerInventory.Instance;
     private int totalCreaturesAlive = 0;
+
+    #region Unity Lifecycle
 
     private void Awake()
     {
@@ -76,50 +78,61 @@ public class CreatureManager : MonoBehaviour
 
         activeCreatures = new Dictionary<string, List<ManagedCreature>>();
         creatureConfigMap = new Dictionary<string, CreatureSpawnConfig>();
+
+        if (difficultyScaling == null)
+            difficultyScaling = new DifficultyScaling();
     }
 
     private void Start()
     {
-        difficultyTiers.Sort((a, b) => a.timeToActivate.CompareTo(b.timeToActivate));
-        
+        difficultyScaling.Initialize(difficultyTiers);
+
         if (mirelightEnabled)
         {
             PlaceInitialMirelights();
             StartCoroutine(MirelightActivationCycle());
         }
+
         StartContinuousSpawning();
-        
-        StartCoroutine(MirelightActivationCycle());
         StartCoroutine(ManageCreatureLifetimesRoutine());
     }
-    
+
     private void Update()
     {
-        if (difficultyTiers.Count == 0) return;
-
-        int nextTierIndex = currentDifficultyTierIndex + 1;
-        if (nextTierIndex < difficultyTiers.Count)
-        {
-            if (Time.time >= difficultyTiers[nextTierIndex].timeToActivate)
-            {
-                currentDifficultyTierIndex = nextTierIndex;
-                Debug.Log($"Difficulty increased to Tier: {difficultyTiers[currentDifficultyTierIndex].tierName}");
-            }
-        }
+        difficultyScaling.UpdateDifficulty(Time.time);
     }
-    
+
+    #endregion
+
+    #region Mirelights
+
     private void PlaceInitialMirelights()
     {
-        if (mirelightPrefab == null || mirelightSpawnPoints.Length == 0) return;
-        
-        List<Transform> availableSpawnPoints = new List<Transform>(mirelightSpawnPoints);
+        if (mirelightSpawnPoints == null || mirelightSpawnPoints.Length == 0)
+            return;
 
-        for (int i = 0; i < mirelightCount && availableSpawnPoints.Count > 0; i++)
+        List<Transform> shuffledPoints =
+            mirelightSpawnPoints.OrderBy(x => Random.value).ToList();
+
+        int mirelightsToSpawn = Mathf.Min(mirelightCount, shuffledPoints.Count);
+
+        // Spawn Mirelights
+        for (int i = 0; i < mirelightsToSpawn; i++)
         {
-            int randIndex = Random.Range(0, availableSpawnPoints.Count);
-            Transform spawnPoint = availableSpawnPoints[randIndex];
-            Instantiate(mirelightPrefab, spawnPoint.position, spawnPoint.rotation);
-            availableSpawnPoints.RemoveAt(randIndex);
+            Instantiate(mirelightPrefab,
+                        shuffledPoints[i].position,
+                        shuffledPoints[i].rotation);
+        }
+
+        // Fill remaining slots with LightPosts
+        for (int i = mirelightsToSpawn; i < shuffledPoints.Count; i++)
+        {
+            if (lightPostPrefab != null)
+            {
+                Instantiate(lightPostPrefab,
+                            shuffledPoints[i].position,
+                            shuffledPoints[i].rotation);
+            }
         }
     }
 
@@ -130,103 +143,57 @@ public class CreatureManager : MonoBehaviour
             float waitTime = Random.Range(minMirelightActivationTime, maxMirelightActivationTime);
             yield return new WaitForSeconds(waitTime);
 
-            var idleMirelights = Mirelight.AllMirelights.Where(m => m.IsIdle).ToList();
-            if (idleMirelights.Count == 0) continue;
+            var idleMirelights = Mirelight.AllMirelights
+                .Where(m => m != null && m.IsIdle)
+                .ToList();
+
+            if (idleMirelights.Count == 0)
+                continue;
 
             foreach (var mirelight in idleMirelights)
-            {
                 mirelight.StartFlickering();
-            }
 
             yield return new WaitForSeconds(flickerDuration);
-            
-            if (idleMirelights.Count > 0)
-            {
-                Mirelight chosenMirelight = idleMirelights[Random.Range(0, idleMirelights.Count)];
-                chosenMirelight.Arm();
 
-                foreach (var mirelight in idleMirelights)
-                {
-                    if (mirelight != chosenMirelight)
-                    {
-                        mirelight.StopFlickering();
-                    }
-                }
-            }
+            Mirelight chosen = idleMirelights[Random.Range(0, idleMirelights.Count)];
+            chosen.Arm();
+
+            foreach (var mirelight in idleMirelights)
+                if (mirelight != chosen)
+                    mirelight.StopFlickering();
         }
     }
+
+    #endregion
+
+    #region Spawning
 
     public void StartContinuousSpawning()
     {
         foreach (var config in creatureConfigs)
         {
-            if (!config.enabled) continue;
+            if (!config.enabled)
+                continue;
+
             if (!activeCreatures.ContainsKey(config.creatureName))
             {
                 activeCreatures.Add(config.creatureName, new List<ManagedCreature>());
                 creatureConfigMap.Add(config.creatureName, config);
             }
-            // Only gate Flyer spawns on player having a letter
-            if (config.creatureName.ToLower().Contains("lumenwing"))
-            {
-                StartCoroutine(SpawnFlyerWhenPlayerHasLetter(config));
-            }
-            else
-            {
-                StartCoroutine(SpawnCreatureRoutine(config));
-            }
-        }
 
+            if (config.creatureName.ToLower().Contains("lumenwing"))
+                StartCoroutine(SpawnFlyerWhenPlayerHasLetter(config));
+            else
+                StartCoroutine(SpawnCreatureRoutine(config));
+        }
     }
 
     private IEnumerator SpawnFlyerWhenPlayerHasLetter(CreatureSpawnConfig config)
     {
-        // Wait for player to get a letter before spawning Lumenwing
-        float waitTime = 0f;
         while (!playerInventory.hasItem)
-        {
-            if (waitTime % 2f < 0.01f) Debug.Log("[FlyerSpawnDebug] Player has no letter, waiting...");
             yield return new WaitForSeconds(0.5f);
-            waitTime += 0.5f;
-        }
-        Debug.Log("[FlyerSpawnDebug] Player has a letter, starting Flyer spawn routine.");
+
         yield return StartCoroutine(SpawnCreatureRoutine(config));
-    }
-
-    public void ResetCreatures()
-    {
-        StopAllCoroutines();
-
-        // This first loop is for StraightChasers and other creatures from your configs. It's safe.
-        foreach (var creatureList in activeCreatures.Values)
-        {
-            foreach (var managedCreature in creatureList)
-            {
-                if (managedCreature.gameObject != null)
-                {
-                    Destroy(managedCreature.gameObject);
-                }
-            }
-        }
-        
-        // --- MODIFIED: Replaced the faulty Mirelight loop with a safe, backwards for-loop ---
-        if (mirelightEnabled)
-        {
-            for (int i = Mirelight.AllMirelights.Count - 1; i >= 0; i--)
-            {
-                if (Mirelight.AllMirelights[i] != null)
-                {
-                    Destroy(Mirelight.AllMirelights[i].gameObject);
-                }
-            }
-        }
-
-        // Now we can safely clear all the tracking data and restart.
-        activeCreatures.Clear();
-        creatureConfigMap.Clear();
-        totalCreaturesAlive = 0;
-        currentDifficultyTierIndex = 0;
-        Start(); 
     }
 
     private IEnumerator SpawnCreatureRoutine(CreatureSpawnConfig config)
@@ -236,72 +203,109 @@ public class CreatureManager : MonoBehaviour
             float waitTime = Random.Range(config.minSpawnInterval, config.maxSpawnInterval);
             yield return new WaitForSeconds(waitTime);
 
-            int globalMax = (difficultyTiers.Count > 0) ? difficultyTiers[currentDifficultyTierIndex].maxTotalCreatures : config.maxAlive;
+            int globalMax = difficultyScaling.GetMaxTotalCreatures(config.maxAlive);
 
-            if (activeCreatures.ContainsKey(config.creatureName) && 
-                activeCreatures[config.creatureName].Count < config.maxAlive)
-            {
-                SpawnCreature(config);
-            }
+            if (totalCreaturesAlive >= globalMax)
+                continue;
+
+            if (activeCreatures[config.creatureName].Count >= config.maxAlive)
+                continue;
+
+            SpawnCreature(config);
         }
     }
 
     private void SpawnCreature(CreatureSpawnConfig config)
     {
-        if (config.creaturePrefab == null || config.spawnPoints.Length == 0) return;
+        if (config.creaturePrefab == null || config.spawnPoints.Length == 0)
+            return;
 
-        Transform spawnPoint = config.spawnPoints[Random.Range(0, config.spawnPoints.Length)];
-        if (spawnPoint == null) return;
+        Transform spawnPoint =
+            config.spawnPoints[Random.Range(0, config.spawnPoints.Length)];
 
-        GameObject newCreatureObject = Instantiate(config.creaturePrefab, spawnPoint.position, Quaternion.identity);
-        
-        ManagedCreature newManagedCreature = new ManagedCreature
+        GameObject obj = Instantiate(config.creaturePrefab,
+                                     spawnPoint.position,
+                                     Quaternion.identity);
+
+        ManagedCreature creature = new ManagedCreature
         {
-            gameObject = newCreatureObject,
+            gameObject = obj,
             spawnTime = Time.time,
             lifetime = Random.Range(config.minLifetime, config.maxLifetime)
         };
 
-        activeCreatures[config.creatureName].Add(newManagedCreature);
+        activeCreatures[config.creatureName].Add(creature);
         totalCreaturesAlive++;
     }
-    
+
+    #endregion
+
+    #region Lifetime Management
+
     private IEnumerator ManageCreatureLifetimesRoutine()
     {
-        while(true)
+        while (true)
         {
-            yield return new WaitForSeconds(2.0f); 
+            yield return new WaitForSeconds(2f);
 
-            List<ManagedCreature> creaturesToRemove = new List<ManagedCreature>();
-
-            foreach(var creatureListEntry in activeCreatures)
+            foreach (var entry in activeCreatures)
             {
-                string creatureName = creatureListEntry.Key;
-                List<ManagedCreature> managedCreatures = creatureListEntry.Value;
-                if (!creatureConfigMap.ContainsKey(creatureName)) continue;
-                CreatureSpawnConfig config = creatureConfigMap[creatureName];
-                creaturesToRemove.Clear();
+                string creatureName = entry.Key;
+                var list = entry.Value;
 
-                foreach(var creature in managedCreatures)
-                {
-                    if (creature.gameObject == null)
-                    {
-                        creaturesToRemove.Add(creature);
-                        continue;
-                    }
-                    if (config.enableLifetimeRespawn && Time.time - creature.spawnTime > creature.lifetime)
-                    {
-                        Destroy(creature.gameObject);
-                        creaturesToRemove.Add(creature);
-                    }
-                }
+                if (!creatureConfigMap.ContainsKey(creatureName))
+                    continue;
 
-                if (creaturesToRemove.Count > 0)
+                var config = creatureConfigMap[creatureName];
+
+                for (int i = list.Count - 1; i >= 0; i--)
                 {
-                    totalCreaturesAlive -= creaturesToRemove.Count;
-                    managedCreatures.RemoveAll(c => creaturesToRemove.Contains(c));
+                    var creature = list[i];
+
+                    if (creature.gameObject == null ||
+                        (config.enableLifetimeRespawn &&
+                         Time.time - creature.spawnTime > creature.lifetime))
+                    {
+                        if (creature.gameObject != null)
+                            Destroy(creature.gameObject);
+
+                        list.RemoveAt(i);
+                        totalCreaturesAlive--;
+                    }
                 }
             }
         }
     }
+
+    #endregion
+
+    #region Reset
+
+    public void ResetCreatures()
+    {
+        StopAllCoroutines();
+
+        foreach (var list in activeCreatures.Values)
+            foreach (var creature in list)
+                if (creature.gameObject != null)
+                    Destroy(creature.gameObject);
+
+        if (mirelightEnabled)
+        {
+            for (int i = Mirelight.AllMirelights.Count - 1; i >= 0; i--)
+                if (Mirelight.AllMirelights[i] != null)
+                    Destroy(Mirelight.AllMirelights[i].gameObject);
+        }
+
+        activeCreatures.Clear();
+        creatureConfigMap.Clear();
+        totalCreaturesAlive = 0;
+
+        difficultyScaling.Reset();
+        difficultyScaling.Initialize(difficultyTiers);
+
+        Start();
+    }
+
+    #endregion
 }
