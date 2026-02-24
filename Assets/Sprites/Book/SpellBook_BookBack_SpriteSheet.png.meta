@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 8af3d9ba4f8fde5468afb3a4d03e67d3
+guid: 54d230c0db9e8bf42a42339220b8828c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5696249899445166978
-    second: SpellBook_BlankPages_SpriteSheet_0
-  - first:
-      213: 1414564916466680733
-    second: SpellBook_BlankPages_SpriteSheet_1
+      213: 1956785670994238896
+    second: SpellBook_BookBack_SpriteSheet_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -99,30 +96,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: iOS
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SpellBook_BlankPages_SpriteSheet_0
+      name: SpellBook_BookBack_SpriteSheet_0
       rect:
         serializedVersion: 2
-        x: 149
-        y: 197
-        width: 808
-        height: 1219
+        x: 10
+        y: 8
+        width: 79
+        height: 113
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,30 +115,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 283a8408a152d0f40800000000000000
-      internalID: 5696249899445166978
+      spriteID: 0bd9f254336e72b10800000000000000
+      internalID: 1956785670994238896
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: SpellBook_BlankPages_SpriteSheet_1
+      name: SpellBook_BookBack_SpriteSheet_1
       rect:
         serializedVersion: 2
-        x: 1042
-        y: 188
-        width: 809
-        height: 1215
+        x: 89
+        y: 8
+        width: 80
+        height: 113
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: d930abdfb4b81a310800000000000000
-      internalID: 1414564916466680733
+      spriteID: df9857b99648c2b4cb4119ec7d7e00ab
+      internalID: 27434123
       vertices: []
       indices: 
       edges: []
@@ -163,7 +147,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 8f90f4baa6acc4b4e923fcfabd0a0b2a
+    spriteID: ce8c5ace701e9cf4a8d59d55a937089d
     internalID: 0
     vertices: []
     indices: 
@@ -173,10 +157,10 @@ TextureImporter:
     spriteCustomMetadata:
       entries:
       - key: SpriteEditor.SliceSettings
-        value: '{"sliceOnImport":false,"gridCellCount":{"x":2.0,"y":1.0},"gridSpriteSize":{"x":89.0,"y":129.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":2.0,"y":1.0},"gridSpriteSize":{"x":89.0,"y":129.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      SpellBook_BlankPages_SpriteSheet_0: 5696249899445166978
-      SpellBook_BlankPages_SpriteSheet_1: 1414564916466680733
+      SpellBook_BookBack_SpriteSheet_0: 1956785670994238896
+      SpellBook_BookBack_SpriteSheet_1: 27434123
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
