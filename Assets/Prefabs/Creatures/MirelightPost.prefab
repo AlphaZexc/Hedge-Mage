@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6061402928878894633}
   - component: {fileID: 55285435727897539}
   - component: {fileID: 2641310302772179969}
+  - component: {fileID: 1612389804592815171}
   m_Layer: 7
   m_Name: Visuals
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 70933641867129759}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -82,7 +83,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 11
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -8044361169626014461, guid: 6b66864644fe6094cb07bb087c873b01, type: 3}
+  m_Sprite: {fileID: -1801731320470351637, guid: 879467a95e99b16469f611c409edf9db, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -105,6 +106,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   yOffset: 0
+--- !u!95 &1612389804592815171
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 70933641867129759}
+  m_Enabled: 0
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9f4068c9441a1bc4587a15a020333a1b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4853918066849092202
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,7 +138,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2167121762977020580}
   - component: {fileID: 6097331300630707512}
-  - component: {fileID: 5525020355809383894}
   - component: {fileID: -1454193063034667229}
   m_Layer: 7
   m_Name: MirelightPost
@@ -176,28 +198,6 @@ MonoBehaviour:
   armedTimeout: 60
   maxAttackersPerCycle: 1
   cycleCooldown: 10
---- !u!95 &5525020355809383894
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4853918066849092202}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 9f4068c9441a1bc4587a15a020333a1b, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!70 &-1454193063034667229
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -291,8 +291,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8260984684610200608}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: 1.673, z: 0}
+  m_LocalRotation: {x: 1, y: -0, z: -0, w: 0}
+  m_LocalPosition: {x: 0, y: 1.595, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -336,10 +336,10 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 34.06007
-  m_PointLightOuterAngle: 74.13
-  m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 1.8324425
+  m_PointLightInnerAngle: 128.47
+  m_PointLightOuterAngle: 128.47
+  m_PointLightInnerRadius: 0.29
+  m_PointLightOuterRadius: 1.7069559
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
