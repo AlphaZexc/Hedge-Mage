@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 70933641867129759}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.788, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 11
   m_MaskInteraction: 0
-  m_Sprite: {fileID: -8044361169626014461, guid: 6b66864644fe6094cb07bb087c873b01, type: 3}
+  m_Sprite: {fileID: -1801731320470351637, guid: 879467a95e99b16469f611c409edf9db, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -173,8 +173,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.225932}
-  m_Size: {x: 0.4, y: 0.43186402}
+  m_Offset: {x: 0, y: 0.07142036}
+  m_Size: {x: 0.4, y: 0.46619996}
   m_Direction: 0
 --- !u!1 &8260984684610200608
 GameObject:
@@ -185,7 +185,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1586083215075517262}
-  - component: {fileID: 2027019711637515000}
+  - component: {fileID: 2172445105065601779}
   m_Layer: 7
   m_Name: LightCone
   m_TagString: Untagged
@@ -202,13 +202,13 @@ Transform:
   m_GameObject: {fileID: 8260984684610200608}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: 1.673, z: 0}
+  m_LocalPosition: {x: 0, y: 1.441, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2167121762977020580}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
---- !u!114 &2027019711637515000
+--- !u!114 &2172445105065601779
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -246,10 +246,10 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 34.06007
-  m_PointLightOuterAngle: 74.13
-  m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 1.8324425
+  m_PointLightInnerAngle: 77.14285
+  m_PointLightOuterAngle: 120
+  m_PointLightInnerRadius: 0.29
+  m_PointLightOuterRadius: 1.7069559
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1

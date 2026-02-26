@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 70933641867129759}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.2, z: 0}
+  m_LocalPosition: {x: 0, y: 0.786, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -114,7 +114,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 70933641867129759}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 9f4068c9441a1bc4587a15a020333a1b, type: 2}
   m_CullingMode: 0
@@ -176,28 +176,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28e1e8d25b3b5094980a505276db2c25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flickerDuration: 5
-  enlightenDuration: 30
-  postStatePause: 5
-  aimTime: 3
-  attackRange: 3
-  pounceSpeed: 10
+  attackRange: 4
+  pounceSpeed: 20
   pounceDamage: 40
+  armingTime: 3
   lightConeTransform: {fileID: 1586083215075517262}
   attackPoint: {fileID: 3357975942492281832}
-  flickerSpeedMin: 0.5
-  flickerSpeedMax: 4.01
-  flickerIntensityMinMin: 0.08
-  flickerIntensityMinMax: 0.428
-  flickerIntensityMaxMin: 0.85
-  flickerIntensityMaxMax: 1.343
-  blackoutChanceMin: 0.0054
-  blackoutChanceMax: 0.0404
-  flickerFrequencyMin: 0.5
-  flickerFrequencyMax: 1.5
-  armedTimeout: 60
-  maxAttackersPerCycle: 1
-  cycleCooldown: 10
+  flickerIntensityMin: 0.1
+  flickerIntensityMax: 1.4
+  flickerSpeedMin: 4
+  flickerSpeedMax: 10
 --- !u!70 &-1454193063034667229
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -232,8 +220,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.225932}
-  m_Size: {x: 0.4, y: 0.43186402}
+  m_Offset: {x: 0, y: -0.100835025}
+  m_Size: {x: 0.4, y: 0.4235915}
   m_Direction: 0
 --- !u!1 &7525605558733047138
 GameObject:
@@ -292,7 +280,7 @@ Transform:
   m_GameObject: {fileID: 8260984684610200608}
   serializedVersion: 2
   m_LocalRotation: {x: 1, y: -0, z: -0, w: 0}
-  m_LocalPosition: {x: 0, y: 1.595, z: 0}
+  m_LocalPosition: {x: 0, y: 1.549, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -336,8 +324,8 @@ MonoBehaviour:
   m_LocalBounds:
     m_Center: {x: 0, y: -0.00000011920929, z: 0}
     m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
-  m_PointLightInnerAngle: 128.47
-  m_PointLightOuterAngle: 128.47
+  m_PointLightInnerAngle: 77.14285
+  m_PointLightOuterAngle: 120
   m_PointLightInnerRadius: 0.29
   m_PointLightOuterRadius: 1.7069559
   m_ShapeLightParametricSides: 5

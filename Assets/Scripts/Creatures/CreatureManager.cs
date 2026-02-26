@@ -106,6 +106,8 @@ public class CreatureManager : MonoBehaviour
 
     #region Mirelights
 
+    private Coroutine mirelightCycleRoutine;
+
     private void PlaceInitialMirelights()
     {
         if (mirelightSpawnPoints == null || mirelightSpawnPoints.Length == 0)
@@ -116,7 +118,6 @@ public class CreatureManager : MonoBehaviour
 
         int mirelightsToSpawn = Mathf.Min(mirelightCount, shuffledPoints.Count);
 
-        // Spawn Mirelights
         for (int i = 0; i < mirelightsToSpawn; i++)
         {
             Instantiate(mirelightPrefab,
@@ -124,7 +125,6 @@ public class CreatureManager : MonoBehaviour
                         shuffledPoints[i].rotation);
         }
 
-        // Fill remaining slots with LightPosts
         for (int i = mirelightsToSpawn; i < shuffledPoints.Count; i++)
         {
             if (lightPostPrefab != null)
@@ -143,24 +143,25 @@ public class CreatureManager : MonoBehaviour
             float waitTime = Random.Range(minMirelightActivationTime, maxMirelightActivationTime);
             yield return new WaitForSeconds(waitTime);
 
-            var idleMirelights = Mirelight.AllMirelights
-                .Where(m => m != null && m.IsIdle)
-                .ToList();
-
-            if (idleMirelights.Count == 0)
+            if (Mirelight.AllMirelights.Count == 0)
                 continue;
 
-            foreach (var mirelight in idleMirelights)
-                mirelight.StartFlickering();
+            // All Mirelights flicker
+            foreach (var m in Mirelight.AllMirelights)
+            {
+                if (m != null)
+                    m.StartFlicker();
+            }
 
+            // Wait flicker duration
             yield return new WaitForSeconds(flickerDuration);
 
-            Mirelight chosen = idleMirelights[Random.Range(0, idleMirelights.Count)];
-            chosen.Arm();
-
-            foreach (var mirelight in idleMirelights)
-                if (mirelight != chosen)
-                    mirelight.StopFlickering();
+            // Tell all Mirelights to resolve
+            foreach (var m in Mirelight.AllMirelights)
+            {
+                if (m != null)
+                    m.ResolvePostFlicker();
+            }
         }
     }
 
