@@ -21,9 +21,7 @@ public class GameSettings : MonoBehaviour
         Screen.fullScreen = true;
     }
 
-    /* =========================
-     * AUDIO
-     * ========================= */
+    // Audio
 
     // Expected slider range: 0.0001 - 1
     public void SetMasterVolume(float value)
@@ -32,9 +30,7 @@ public class GameSettings : MonoBehaviour
         audioMixer.SetFloat(masterVolumeParameter, volume);
     }
 
-    /* =========================
-     * WINDOW MODE
-     * ========================= */
+    // Window Mode
 
     public void SetWindowMode(int index)
     {
