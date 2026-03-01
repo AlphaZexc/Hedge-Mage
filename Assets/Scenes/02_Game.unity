@@ -25400,7 +25400,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BookLetterPage
   letterPrefab: {fileID: 8849282990194688918, guid: 1287a57de0c08e844b5d855985a5805c, type: 3}
   letterContainer: {fileID: 1578968634}
-  lettersToSpawn: 610078006a0075006d007000
 --- !u!1 &871475829
 GameObject:
   m_ObjectHideFlags: 0
@@ -52099,7 +52098,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: This
+  m_text: 'Letters go here
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
