@@ -48,9 +48,10 @@ public class BookSpellPage : MonoBehaviour
     }
 
     // Called by BookSpellEntry when a spell button is clicked
-    public void OnSpellButtonPressed(SpellBase spell)
+    public void OnSpellButtonPressed(SpellBase spell, BookSpellEntry bse)
     {
-        bool success = SpellManager.Instance.TryCompleteSpell(spell);
+        bool success = SpellManager.Instance.TryCompleteSpell(spell, bse);
+        Debug.Log($"Tried to complete spell: {spell.spellName} with a result of '{success}'");
 
         if (success)
         {

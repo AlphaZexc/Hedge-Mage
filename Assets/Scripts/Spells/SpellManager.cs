@@ -51,19 +51,32 @@ public class SpellManager : MonoBehaviour
     }
 
     // Called by book UI when player clicks a spell button
-    public bool TryCompleteSpell(SpellBase spell)
+    public bool TryCompleteSpell(SpellBase spell, BookSpellEntry entry)
     {
-        if (!spell.CanBeCompleted(inventory.collectedLetters))
+        // Ensure all slots are filled
+        if (!entry.AreAllSlotsFilled())
             return false;
 
-        // Consume letters and store last completed spell
-        spell.ConsumeLetters(inventory);
+        // Get letters inserted into the spell UI
+        List<DraggableLetterUI> usedLetters = entry.GetInsertedLetters();
+
+        // Remove those letters from the UI and inventory
+        foreach (var letter in usedLetters)
+        {
+            inventory.ConsumeLetter(letter.Letter);
+
+            if (letter != null)
+                Destroy(letter.gameObject);
+        }
+
         WordProgressManager.Instance.UpdateCollectedLetters();
+
+        // Store completed spell
         inventory.SetLastCompletedSpell(spell);
 
         spellVisuals.UpdateSpellUI(spell);
 
-        // Regenerate missing letters for next use
+        // Regenerate next puzzle
         spell.GenerateMaskedSpell(2);
 
         spell.ResetCooldown();

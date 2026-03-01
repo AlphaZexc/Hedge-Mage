@@ -7,7 +7,7 @@ public class LetterDropSlotUI : MonoBehaviour, IDropHandler
     public char requiredLetter;
     public Image slotImage;
 
-    private DraggableLetterUI currentLetter;
+    protected DraggableLetterUI currentLetter;
 
     private void Awake()
     {
@@ -39,12 +39,22 @@ public class LetterDropSlotUI : MonoBehaviour, IDropHandler
         AcceptLetter(draggedLetter);
     }
 
-    private void AcceptLetter(DraggableLetterUI letter)
+    protected virtual void AcceptLetter(DraggableLetterUI letter)
     {
         currentLetter = letter;
 
         letter.transform.SetParent(transform);
         RectTransform rect = letter.GetComponent<RectTransform>();
         rect.anchoredPosition = Vector2.zero;
+    }
+
+    public bool HasLetter()
+    {
+        return currentLetter != null;
+    }
+
+    public DraggableLetterUI GetCurrentLetter()
+    {
+        return currentLetter;
     }
 }

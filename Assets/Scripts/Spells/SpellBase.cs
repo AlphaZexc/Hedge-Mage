@@ -79,7 +79,6 @@ public abstract class SpellBase
         }
     }
 
-    public string GetMaskedSpell() => maskedSpell;
 
     // What happens when the spell is cast
     public virtual void Cast(GameObject player)
@@ -100,5 +99,17 @@ public abstract class SpellBase
 
         if (currentCooldown < 0f)
             currentCooldown = 0f;
+    }
+
+    // Getter Methods
+    public string GetMaskedSpell() => maskedSpell;
+    public HashSet<char> GetMissingLetters()
+    {
+        return new HashSet<char>(missingLetters);
+    }
+
+    public string GetFullSpell()
+    {
+        return spellName;
     }
 }
