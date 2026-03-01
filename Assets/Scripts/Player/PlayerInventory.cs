@@ -28,9 +28,10 @@ public class PlayerInventory : MonoBehaviour
             collectedLetters.Add(letterObj);
             WordProgressManager.Instance.CollectLetter(collectedChar);
 
-            // Hide letter in world
             if (letterObj.TryGetComponent(out Collider2D col)) col.enabled = false;
             if (letterObj.TryGetComponent(out SpriteRenderer sr)) sr.enabled = false;
+
+            BookLetterPage.Instance.RefreshFromInventory();
         }
     }
 

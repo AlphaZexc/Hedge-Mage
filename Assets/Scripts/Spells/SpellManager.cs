@@ -70,6 +70,9 @@ public class SpellManager : MonoBehaviour
         }
 
         WordProgressManager.Instance.UpdateCollectedLetters();
+        BookLetterPage page = FindFirstObjectByType<BookLetterPage>();
+        if (page != null)
+            page.RefreshFromInventory();
 
         inventory.SetLastCompletedSpell(spell);
         spellVisuals.UpdateSpellUI(spell);

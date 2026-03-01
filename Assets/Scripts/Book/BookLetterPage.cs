@@ -3,27 +3,32 @@ using UnityEngine;
 
 public class BookLetterPage : MonoBehaviour
 {
+    public static BookLetterPage Instance;
+
     [Header("Spawn Settings")]
     public DraggableLetterUI letterPrefab;
     public Transform letterContainer;
 
-    [Header("Letters On This Page")]
-    public List<char> lettersToSpawn = new List<char>();
-
     private List<DraggableLetterUI> spawnedLetters = new List<DraggableLetterUI>();
 
-    private void Start()
+    private void Awake()
     {
-        SpawnLetters(lettersToSpawn);
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
     }
 
-    public void SpawnLetters(List<char> letters)
+    private void OnEnable()
+    {
+        RefreshFromInventory();
+    }
+
+    public void RefreshFromInventory()
     {
         ClearPage();
 
-        foreach (char c in letters)
+        foreach (var letterObj in PlayerInventory.Instance.collectedLetters)
         {
-            SpawnLetter(c);
+            SpawnLetter(letterObj.letter);
         }
     }
 
