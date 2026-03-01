@@ -57,4 +57,9 @@ public class LetterDropSlotUI : MonoBehaviour, IDropHandler
     {
         return currentLetter;
     }
+
+    public void ClearSlot()
+    {
+        currentLetter = null;
+    }
 }

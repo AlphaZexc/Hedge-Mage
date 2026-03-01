@@ -57,10 +57,10 @@ public class SpellManager : MonoBehaviour
         if (!entry.AreAllSlotsFilled())
             return false;
 
-        // Get letters inserted into the spell UI
+        // Get letters placed in UI
         List<DraggableLetterUI> usedLetters = entry.GetInsertedLetters();
 
-        // Remove those letters from the UI and inventory
+        // Consume from inventory + destroy UI letters
         foreach (var letter in usedLetters)
         {
             inventory.ConsumeLetter(letter.Letter);
@@ -71,14 +71,19 @@ public class SpellManager : MonoBehaviour
 
         WordProgressManager.Instance.UpdateCollectedLetters();
 
-        // Store completed spell
         inventory.SetLastCompletedSpell(spell);
-
         spellVisuals.UpdateSpellUI(spell);
 
-        // Regenerate next puzzle
+        // Clear UI slots
+        entry.ClearSlotsAndLetters();
+
+        // Generate new mask (new missing letters)
         spell.GenerateMaskedSpell(2);
 
+        // Rebuild UI with new slots
+        entry.RebuildSpellUI();
+
+        // Reset cooldown
         spell.ResetCooldown();
 
         Debug.Log($"Completed spell: {spell.spellName}");

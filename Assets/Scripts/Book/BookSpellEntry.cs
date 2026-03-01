@@ -108,4 +108,24 @@ public class BookSpellEntry : MonoBehaviour
 
         return letters;
     }
+
+    public void ClearSlotsAndLetters()
+    {
+        foreach (var slot in activeSlots)
+        {
+            var letter = slot.GetCurrentLetter();
+
+            if (letter != null)
+            {
+                Destroy(letter.gameObject);
+            }
+
+            slot.ClearSlot();
+        }
+    }
+
+    public void RebuildSpellUI()
+    {
+        BuildSpellUI();
+    }
 }
