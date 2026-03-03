@@ -229,8 +229,6 @@ public class StraightChaser : BaseCreature
         return hasLineOfSight;
     }
 
-
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!collision.gameObject.CompareTag("Player"))

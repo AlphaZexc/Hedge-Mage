@@ -6,6 +6,12 @@ public class Fireball : MonoBehaviour
     [SerializeField] private float lifetime = 5f;
 
     private Vector2 moveDirection;
+    private Animator anim;
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
 
     public void Initialize(Vector2 direction)
     {
@@ -16,6 +22,7 @@ public class Fireball : MonoBehaviour
     private void Update()
     {
         transform.Translate(moveDirection * speed * Time.deltaTime);
+        anim.SetFloat("VelocityX", moveDirection.x);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
