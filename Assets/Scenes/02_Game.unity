@@ -31126,8 +31126,8 @@ MonoBehaviour:
     creatureName: Lumenwing
     creaturePrefab: {fileID: 2299412231005582585, guid: d4230695048c0ec4fb0a719d3459444e, type: 3}
     maxAlive: 1
-    minSpawnInterval: 25
-    maxSpawnInterval: 50
+    minSpawnInterval: 5
+    maxSpawnInterval: 6
     spawnPoints:
     - {fileID: 610356629}
     - {fileID: 1051625577}

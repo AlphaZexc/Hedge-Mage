@@ -5,16 +5,22 @@ using System.Collections.Generic;
 
 public class Flyer : MonoBehaviour
 {
+    [Header("General")]
     public float cooldown = 60f;
+    public GameObject carriedLetterVisual; // Assign a child GameObject to show the letter
+
+    [Header("Movement")]
+    public float flyOverDuration = 2f;
+    public float circleDistance = 4f;
+    public float circleBetweenSwoopsDuration = 1.5f; // New: circling time between swoops
+    public float minDropDistanceFromPlayer = 5f;
     public int maxSwoopAttempts = 3;
     [Range(0f, 1f)] public float stealSuccessPercent = 0.3f; // Set to 1.0 for testing
-    public float minDropDistanceFromPlayer = 5f;
-    public float flyOverDuration = 2f;
-    public GameObject carriedLetterVisual; // Assign a child GameObject to show the letter
 
     private Animator animator; // Reference to the Animator
     private FlyerGlowController glowController; // Reference to the glow controller
 
+    private Collider2D flyerCollider;
     private Transform player;
     private PlayerInventory playerInventory => PlayerInventory.Instance;
     private LetterObject carriedLetterObject;
@@ -27,6 +33,8 @@ public class Flyer : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         carriedLetterVisual.SetActive(false);
+        flyerCollider = GetComponent<Collider2D>();
+
         // Get Animator from child 'Visuals'
         var visuals = transform.Find("Visuals");
         if (visuals != null)
@@ -44,41 +52,57 @@ public class Flyer : MonoBehaviour
 
     private IEnumerator FlyerRoutine()
     {
-        // 1. Circling phase
-        float timer = 0f;
-        while (timer < flyOverDuration)
-        {
-            timer += Time.deltaTime;
-            CirclePlayer();
-            yield return null;
-        }
-        // 2. Swoop attempts
+        // Initial circling phase
+        yield return CirclePlayerForDuration(flyOverDuration);
+
+        // Swoop attempts with circling in between
         while (swoopAttempts < maxSwoopAttempts && !hasStolenLetter)
         {
             yield return SwoopAttempt();
             swoopAttempts++;
+            if (!hasStolenLetter && swoopAttempts < maxSwoopAttempts)
+            {
+                yield return CirclePlayerForDuration(circleBetweenSwoopsDuration);
+            }
         }
-        // 3. If letter stolen, carry and drop
+
+        // If letter stolen, carry and drop
         if (hasStolenLetter)
         {
             carriedLetterVisual.SetActive(true);
             yield return CarryAndDropLetter();
         }
-        // 4. Escape
+        // Escape
         yield return EscapeAndDespawn();
     }
 
-    private void CirclePlayer()
+
+    private IEnumerator CirclePlayerForDuration(float duration)
     {
-        // Simple circling logic (can be replaced with animation/path)
-        float radius = 4f;
-        float speed = 2f;
-        float angle = Time.time * speed;
-        Vector3 offset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius;
-        Vector3 newPos = player.position + offset;
-        SetAnimatorDirection(newPos - transform.position);
-        transform.position = newPos;
+        float timer = 0f;
+        // Calculate the current angle based on the Flyer's position
+        float radius = circleDistance;
+        Vector3 offset = transform.position - player.position;
+        float angle = Mathf.Atan2(offset.y, offset.x);
+
+        float speed = 2f; // radians per second
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            angle += speed * Time.deltaTime;
+
+            // Always use the latest player position as the center
+            Vector3 center = player.position;
+            Vector3 newOffset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius;
+            Vector3 newPos = center + newOffset;
+            SetAnimatorDirection(newPos - transform.position);
+            transform.position = newPos;
+            yield return null;
+        }
     }
+
+
 
     // Helper to set animator direction based on movement vector
     private void SetAnimatorDirection(Vector3 move)
@@ -97,45 +121,75 @@ public class Flyer : MonoBehaviour
     private IEnumerator SwoopAttempt()
     {
         Debug.Log($"[FlyerDebug] Swoop attempt {swoopAttempts + 1} started. Player has {playerInventory.collectedLetters.Count} letters.");
+        flyerCollider.enabled = false;
 
-        // Swoop over player, try to steal letter
+        // Calculate circle parameters
+        float radius = circleDistance;
+        Vector3 center = player.position;
+        Vector3 flyerToCenter = (transform.position - center).normalized;
+        Vector3 start = center + flyerToCenter * radius;
+
+        // Find the opposite point on the circle
+        Vector3 end = center - flyerToCenter * radius;
+
+        // Control point: at player's position, but lower (for a nice arc)
+        Vector3 control = player.position + Vector3.down * 1.1f;
+
         float swoopTime = 1f;
-        Vector3 start = transform.position;
-        Vector3 end = player.position + Vector3.up * 2f;
-
         float t = 0f;
+        bool hasTriedSteal = false;
+
         while (t < 1f)
         {
             t += Time.deltaTime / swoopTime;
-            Vector3 newPos = Vector3.Lerp(start, end, t);
+            Vector3 newPos = Mathf.Pow(1 - t, 2) * start + 2 * (1 - t) * t * control + Mathf.Pow(t, 2) * end;
             SetAnimatorDirection(newPos - transform.position);
             transform.position = newPos;
+
+            if (!hasTriedSteal && t >= 0.5f)
+            {
+                hasTriedSteal = true;
+                TryStealLetter();
+            }
+
             yield return null;
         }
-        // Attempt to steal
+
+        // Snap to end point to avoid large jumps in next phase
+        transform.position = end;
+
+        yield return new WaitForSeconds(0.5f);
+        flyerCollider.enabled = true;
+
+    }
+
+    private void TryStealLetter()
+    {
         if (playerInventory.hasItem && Random.value < stealSuccessPercent)
         {
-            // Take the first letter from the player's inventory
             var letters = playerInventory.collectedLetters;
             if (letters.Count > 0)
             {
                 carriedLetterObject = letters[0];
 
-                Debug.Log("Current carriedLetterObject:" + carriedLetterObject.letter);
+                // Only update if not already parented/active
+                if (carriedLetterObject.transform.parent != carriedLetterVisual.transform)
+                    carriedLetterObject.transform.SetParent(carriedLetterVisual.transform, false);
 
-                carriedLetterVisual.SetActive(true);
-                carriedLetterObject.gameObject.SetActive(true);
+                if (!carriedLetterVisual.activeSelf)
+                    carriedLetterVisual.SetActive(true);
 
-                if (carriedLetterObject.TryGetComponent<SpriteRenderer>(out var sr)) sr.enabled = true;
-                if (carriedLetterObject.TryGetComponent<Collider2D>(out var col)) col.enabled = false;
+                if (!carriedLetterObject.gameObject.activeSelf)
+                    carriedLetterObject.gameObject.SetActive(true);
 
-                // Attach to Flyer visual
-                carriedLetterObject.transform.SetParent(carriedLetterVisual.transform);
+                if (carriedLetterObject.TryGetComponent<SpriteRenderer>(out var sr) && !sr.enabled)
+                    sr.enabled = true;
+                if (carriedLetterObject.TryGetComponent<Collider2D>(out var col) && col.enabled)
+                    col.enabled = false;
+
                 carriedLetterObject.transform.localPosition = Vector3.zero;
 
-
                 hasStolenLetter = true;
-                // Boost glow colour to red/orange when carrying a stolen letter
                 glowController?.SetGlowColor(new Color(2.5f, 0.6f, 0f, 1f));
                 Debug.Log($"[FlyerDebug] Flyer stole letter '{carriedLetterObject.letter}' from player.");
 
@@ -147,7 +201,6 @@ public class Flyer : MonoBehaviour
         {
             Debug.Log("[FlyerDebug] Swoop attempt failed: no letter stolen.");
         }
-        yield return new WaitForSeconds(0.5f);
     }
 
     private IEnumerator CarryAndDropLetter()
@@ -205,11 +258,6 @@ public class Flyer : MonoBehaviour
     private Vector3 FindDropPosition()
     {
         AStarGridManager grid = FindFirstObjectByType<AStarGridManager>();
-        if (grid == null)
-        {
-            Debug.LogWarning("[Flyer] No AStarGridManager found. Falling back to random position.");
-            return player.position + (Vector3)(Random.insideUnitCircle.normalized * minDropDistanceFromPlayer);
-        }
 
         List<Node> walkableNodes = grid.GetAllWalkableNodes();
         List<Node> validNodes = new List<Node>();
@@ -221,12 +269,7 @@ public class Flyer : MonoBehaviour
             if (distance < minDropDistanceFromPlayer)
                 continue;
 
-            // Check that player can actually reach this node
-            var path = grid.FindPath(player.position, node.worldPosition);
-            if (path != null && path.Count > 0)
-            {
-                validNodes.Add(node);
-            }
+            validNodes.Add(node);
         }
 
         if (validNodes.Count > 0)
