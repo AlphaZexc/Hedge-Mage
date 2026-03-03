@@ -30,8 +30,6 @@ public class PlayerInventory : MonoBehaviour
 
             if (letterObj.TryGetComponent(out Collider2D col)) col.enabled = false;
             if (letterObj.TryGetComponent(out SpriteRenderer sr)) sr.enabled = false;
-
-            BookLetterPage.Instance.RefreshFromInventory();
         }
     }
 
