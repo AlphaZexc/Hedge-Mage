@@ -15,8 +15,8 @@ public class PlayerSpell : MonoBehaviour
         Vector2 direction = playerMovement.GetLastMoveDirection();
 
         // Fallback safety (in case something strange happens)
-        if (direction == Vector2.zero)
-            direction = Vector2.down;
+        if (direction == Vector2.zero || direction == null)
+            direction = Vector2.right;
 
         GameObject fireball = Instantiate(
             fireballPrefab,

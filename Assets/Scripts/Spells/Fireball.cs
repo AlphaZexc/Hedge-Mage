@@ -7,22 +7,29 @@ public class Fireball : MonoBehaviour
 
     private Vector2 moveDirection;
     private Animator anim;
+    private Rigidbody2D rb;
 
-    private void Start()
+    private void Awake()
     {
         anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     public void Initialize(Vector2 direction)
     {
-        moveDirection = direction.normalized;
+        moveDirection = direction;
         Destroy(gameObject, lifetime);
+    }
+
+    private void FixedUpdate()
+    {
+        // Ensure velocity stays consistent (optional but safe)
+        rb.linearVelocity = moveDirection * speed;
     }
 
     private void Update()
     {
-        transform.Translate(moveDirection * speed * Time.deltaTime);
-        anim.SetFloat("VelocityX", moveDirection.x);
+        anim.SetFloat("VelocityX", rb.linearVelocity.x);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
