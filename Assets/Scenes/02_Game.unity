@@ -27394,7 +27394,7 @@ MonoBehaviour:
   smoothSpeed: 0.125
   offset: {x: 0, y: 0, z: -10}
   mazeZoom: 3
-  courtyardZoom: 6
+  courtyardZoom: 4.5
   zoomSmoothSpeed: 1
   mainLight2D: {fileID: 263878322}
   mazeLightRadius: 6
