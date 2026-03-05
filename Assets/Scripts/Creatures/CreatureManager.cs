@@ -69,8 +69,6 @@ public class CreatureManager : MonoBehaviour
     private PlayerInventory playerInventory => PlayerInventory.Instance;
     private int totalCreaturesAlive = 0;
 
-    #region Unity Lifecycle
-
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -101,8 +99,6 @@ public class CreatureManager : MonoBehaviour
     {
         difficultyScaling.UpdateDifficulty(Time.time);
     }
-
-    #endregion
 
     #region Mirelights
 
@@ -280,8 +276,6 @@ public class CreatureManager : MonoBehaviour
 
     #endregion
 
-    #region Reset
-
     public void ResetCreatures()
     {
         StopAllCoroutines();
@@ -307,6 +301,4 @@ public class CreatureManager : MonoBehaviour
 
         Start();
     }
-
-    #endregion
 }
