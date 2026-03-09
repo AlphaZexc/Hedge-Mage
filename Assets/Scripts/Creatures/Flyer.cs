@@ -102,8 +102,6 @@ public class Flyer : MonoBehaviour
         }
     }
 
-
-
     // Helper to set animator direction based on movement vector
     private void SetAnimatorDirection(Vector3 move)
     {

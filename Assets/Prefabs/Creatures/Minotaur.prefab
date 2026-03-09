@@ -243,7 +243,7 @@ MonoBehaviour:
   maxChargeDuration: 2.5
   lineOfSightMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 576
   showGizmos: 1
   wanderPathColor: {r: 0, g: 1, b: 1, a: 1}
   chasePathColor: {r: 1, g: 0, b: 0, a: 1}
