@@ -7,6 +7,7 @@ public class Spell_Fireball : SpellBase
     public Spell_Fireball(GameObject fireballPrefab, Transform firePoint)
     {
         spellName = "FIREBALL";
+        spellDescription = "A condensed orb of fire erupts forward with haste, scorching anything foolish enough to stand within range.";
         GenerateMaskedSpell(NUMBER_MASKED_CHARS);
 
         spellType = SpellType.Attack;

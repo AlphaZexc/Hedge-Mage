@@ -13,6 +13,7 @@ public abstract class SpellBase
     }
 
     public string spellName;              // Full spell word (e.g. "JUMP")
+    public string spellDescription;
     public SpellType spellType;
     protected string maskedSpell;          // Masked version (e.g. "J_M_")
     protected HashSet<char> missingLetters = new HashSet<char>();

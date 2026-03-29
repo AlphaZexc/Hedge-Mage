@@ -52,7 +52,7 @@ public class BookController : MonoBehaviour
 
     private void Start()
     {
-        // --- NEW: Populate all the pages with their data at the start ---
+        // Populate all the pages with their data at the start
         PopulateAllPages();
         // Then, show the first page.
         ShowPage(0);

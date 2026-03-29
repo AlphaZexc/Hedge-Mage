@@ -9,6 +9,7 @@ public class Spell_Jump : SpellBase
     public Spell_Jump()
     {
         spellName = "JUMP";
+        spellDescription = "For a fleeting moment, the path loosens its grip, allowing you to vault cleanly over the hedge.";
         GenerateMaskedSpell(NUMBER_MASKED_CHARS);
         spellType = SpellType.Mobility;
     }

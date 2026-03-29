@@ -1,6 +1,5 @@
 using UnityEngine;
 using TMPro;
-using BookCurlPro;
 
 public class LevelPopupManager : MonoBehaviour
 {
@@ -17,6 +16,7 @@ public class LevelPopupManager : MonoBehaviour
     public TMP_Text completeTimeText;
 
     private string finalTimeFormatted;
+    private bool isBookOpen = false;
 
     private void Awake()
     {
@@ -34,10 +34,7 @@ public class LevelPopupManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (bookPopup.activeInHierarchy)
-                CloseBookPopup();
-            else
-                ShowBookPopup();
+            ToggleBookPopup();
         }
     }
 
@@ -68,6 +65,22 @@ public class LevelPopupManager : MonoBehaviour
         int minutes = Mathf.FloorToInt(timeInSeconds / 60F);
         int seconds = Mathf.FloorToInt(timeInSeconds % 60F);
         finalTimeFormatted = $"{minutes:00}:{seconds:00}";
+    }
+    public void ToggleBookPopup()
+    {
+        PlayerMovement playerMovement = FindFirstObjectByType<PlayerMovement>();
+
+        isBookOpen = !isBookOpen;
+        playerMovement.SetMovementEnabled(!isBookOpen);
+
+        if (isBookOpen)
+        {
+            ShowBookPopup();
+        }
+        else
+        {
+            CloseBookPopup();
+        }
     }
 
     public void ShowBookPopup()

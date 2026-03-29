@@ -5,6 +5,7 @@ public class Spell_Restore : SpellBase
     public Spell_Restore()
     {
         spellName = "RESTORE";
+        spellDescription = "Your wounds draw themselves shut as flesh and body are forcibly woven back together.";
         GenerateMaskedSpell(NUMBER_MASKED_CHARS);
 
         spellType = SpellType.Support;

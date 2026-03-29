@@ -33,14 +33,6 @@ public class GameManager : MonoBehaviour
         tutorialPanel.SetActive(true);
     }
 
-    private void Update()
-    {
-        if (CurrentState == GameState.Tutorial && Input.GetKeyDown(KeyCode.Escape))
-        {
-            CloseTutorial();
-        }
-    }
-
     public void SetState(GameState newState)
     {
         CurrentState = newState;

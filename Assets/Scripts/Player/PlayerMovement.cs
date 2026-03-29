@@ -10,17 +10,12 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed = 5f;
 
     private PlayerHealth playerHealth => PlayerHealth.Instance;
-
     private Vector2 movement;
     private Vector2 lastMoveDirection = Vector2.down;
     private bool canMove = true;
-    private bool isBookOpen = false;
-
 
     void Update()
     {
-        HandleBookToggle();
-
         if (playerHealth != null && playerHealth.isDead)
         {
             movement = Vector2.zero;
@@ -111,34 +106,6 @@ public class PlayerMovement : MonoBehaviour
             movement = Vector2.zero;
             rb.linearVelocity = Vector2.zero;
         }
-    }
-
-    void HandleBookToggle()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ToggleBookPopup();
-        }
-    }
-
-    public void ToggleBookPopup()
-    {
-        isBookOpen = !isBookOpen;
-
-        if (isBookOpen)
-        {
-            LevelPopupManager.Instance.ShowBookPopup();
-        }
-        else
-        {
-            LevelPopupManager.Instance.CloseBookPopup();
-        }
-    }
-
-    public void ToggleBookPopupFromUI()
-    {
-        Debug.Log("Book button clicked!");
-        ToggleBookPopup();
     }
 
     public Vector2 GetLastMoveDirection()

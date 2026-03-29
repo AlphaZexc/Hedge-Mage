@@ -10,6 +10,7 @@ public class BookSpellEntry : MonoBehaviour
     [SerializeField] private GameObject letterTextPrefab;   // TMP text prefab
     [SerializeField] private SpellLetterSlotUI slotPrefab;  // Drop slot prefab
     [SerializeField] private Button completeButton;
+    public TextMeshProUGUI descriptionText;
 
     [HideInInspector] public SpellBase spell;
 
@@ -23,6 +24,7 @@ public class BookSpellEntry : MonoBehaviour
 
         BuildSpellUI();
 
+        descriptionText.text = spell.spellDescription;
         completeButton.onClick.RemoveAllListeners();
         completeButton.onClick.AddListener(OnButtonClicked);
 
