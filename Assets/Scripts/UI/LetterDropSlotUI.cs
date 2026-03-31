@@ -43,9 +43,20 @@ public class LetterDropSlotUI : MonoBehaviour, IDropHandler
     {
         currentLetter = letter;
 
-        letter.transform.SetParent(transform);
         RectTransform rect = letter.GetComponent<RectTransform>();
+
+        letter.transform.SetParent(transform, false); // VERY IMPORTANT
+
+        // Force proper anchoring
+        rect.anchorMin = new Vector2(0.5f, 0.5f);
+        rect.anchorMax = new Vector2(0.5f, 0.5f);
+        rect.pivot = new Vector2(0.5f, 0.5f);
+
         rect.anchoredPosition = Vector2.zero;
+        rect.sizeDelta = ((RectTransform)transform).rect.size;
+        rect.localScale = Vector3.one; // prevent weird scaling issues
+
+        gameObject.GetComponent<Image>().enabled = false; // hide slot background
     }
 
     public bool HasLetter()
