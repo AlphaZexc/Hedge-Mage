@@ -39,7 +39,6 @@ public class LetterManager : MonoBehaviour
     {
         availableSpots = new List<Transform>(spawnPoints);
         string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
         
         // Count duplicates correctly
         Dictionary<char, int> letterCounts = new Dictionary<char, int>();

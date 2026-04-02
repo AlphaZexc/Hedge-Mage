@@ -50,7 +50,9 @@ public class CreatureManager : MonoBehaviour
     public GameObject mirelightPrefab;
     public GameObject lightPostPrefab;
     public Transform[] mirelightSpawnPoints;
+    public float minMirelightSpacing = 5f;
     public int mirelightCount = 5;
+
 
     [Space(10)]
     public float minMirelightActivationTime = 15f;
@@ -65,6 +67,7 @@ public class CreatureManager : MonoBehaviour
 
     private Dictionary<string, List<ManagedCreature>> activeCreatures;
     private Dictionary<string, CreatureSpawnConfig> creatureConfigMap;
+    private List<GameObject> spawnedLightPosts = new List<GameObject>();
 
     private PlayerInventory playerInventory => PlayerInventory.Instance;
     private int totalCreaturesAlive = 0;
@@ -84,7 +87,10 @@ public class CreatureManager : MonoBehaviour
     private void Start()
     {
         difficultyScaling.Initialize(difficultyTiers);
+    }
 
+    public void InitializeSpawning()
+    {
         if (mirelightEnabled)
         {
             PlaceInitialMirelights();
@@ -109,25 +115,26 @@ public class CreatureManager : MonoBehaviour
         if (mirelightSpawnPoints == null || mirelightSpawnPoints.Length == 0)
             return;
 
-        List<Transform> shuffledPoints =
-            mirelightSpawnPoints.OrderBy(x => Random.value).ToList();
+        List<Transform> shuffledPoints = mirelightSpawnPoints.OrderBy(x => Random.value).ToList();
 
-        int mirelightsToSpawn = Mathf.Min(mirelightCount, shuffledPoints.Count);
+        List<Vector3> placedMirelightPositions = new List<Vector3>();
+        int mirelightsPlaced = 0;
 
-        for (int i = 0; i < mirelightsToSpawn; i++)
+        foreach (Transform point in shuffledPoints)
         {
-            Instantiate(mirelightPrefab,
-                        shuffledPoints[i].position,
-                        shuffledPoints[i].rotation);
-        }
+            bool tooClose = placedMirelightPositions.Any(
+                pos => Vector2.Distance(point.position, pos) < minMirelightSpacing);
 
-        for (int i = mirelightsToSpawn; i < shuffledPoints.Count; i++)
-        {
-            if (lightPostPrefab != null)
+            if (!tooClose && mirelightsPlaced < mirelightCount)
             {
-                Instantiate(lightPostPrefab,
-                            shuffledPoints[i].position,
-                            shuffledPoints[i].rotation);
+                Instantiate(mirelightPrefab, point.position, point.rotation);
+                placedMirelightPositions.Add(point.position);
+                mirelightsPlaced++;
+            }
+            else if (lightPostPrefab != null)
+            {
+                GameObject post = Instantiate(lightPostPrefab, point.position, point.rotation);
+                spawnedLightPosts.Add(post);
             }
         }
     }
@@ -290,6 +297,14 @@ public class CreatureManager : MonoBehaviour
             for (int i = Mirelight.AllMirelights.Count - 1; i >= 0; i--)
                 if (Mirelight.AllMirelights[i] != null)
                     Destroy(Mirelight.AllMirelights[i].gameObject);
+
+            Mirelight.AllMirelights.Clear();
+
+            foreach (GameObject post in spawnedLightPosts)
+                if (post != null)
+                    Destroy(post);
+
+            spawnedLightPosts.Clear();
         }
 
         activeCreatures.Clear();
@@ -299,6 +314,6 @@ public class CreatureManager : MonoBehaviour
         difficultyScaling.Reset();
         difficultyScaling.Initialize(difficultyTiers);
 
-        Start();
+        InitializeSpawning();
     }
 }

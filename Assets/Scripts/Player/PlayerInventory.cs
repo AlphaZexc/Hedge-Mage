@@ -59,4 +59,10 @@ public class PlayerInventory : MonoBehaviour
     {
         lastCompletedSpell = spell;
     }
+
+    public void ResetInventory()
+    {
+        collectedLetters.Clear();
+        lastCompletedSpell = null;
+    }
 }

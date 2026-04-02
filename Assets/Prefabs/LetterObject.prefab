@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4554111132338463307}
   - component: {fileID: 1772849218492212817}
   - component: {fileID: 1967927371803232}
-  - component: {fileID: 8891512630225139406}
+  - component: {fileID: 2363517457225469892}
   m_Layer: 8
   m_Name: LetterObject
   m_TagString: Letter
@@ -106,8 +106,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d5b178eb859beb4085a09183fe43e46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  letter: 0
   spriteRenderer: {fileID: 4554111132338463307}
+  pickupClip: {fileID: 8300000, guid: 3a558d4dc0726954bbe7b9e967a14a93, type: 3}
+  pickupVolume: 1
 --- !u!61 &1967927371803232
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -154,7 +155,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!82 &8891512630225139406
+--- !u!82 &2363517457225469892
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,15 +166,15 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 5471752082457406622, guid: a68056325a3e8f74b8ede53c4e6d1959, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 3a558d4dc0726954bbe7b9e967a14a93, type: 3}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
-  m_Volume: 0.932
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 126
+  Priority: 128
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

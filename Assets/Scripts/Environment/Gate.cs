@@ -26,13 +26,16 @@ public class Gate : MonoBehaviour
     [Header("Gate Settings")]
     [Tooltip("Which cardinal direction this gate faces.")]
     public GateDirection gateDirection;
-
     [Tooltip("Prevent the gate from being opened until unlocked via script.")]
     public bool isLocked = false;
 
     [Header("References")]
     [Tooltip("Animator on this gate's sprite. Auto-found if left empty.")]
     public Animator animator;
+
+    [Header("Sound")]
+    [SerializeField] private AudioClip openClip;
+    [SerializeField][Range(0f, 1f)] private float openVolume = 1f;
 
     /// <summary>True once the open animation has been triggered.</summary>
     public bool IsOpen { get; private set; } = false;
@@ -54,13 +57,11 @@ public class Gate : MonoBehaviour
             Debug.Log($"{gateDirection} Gate is already open.");
             return;
         }
-
         if (isLocked)
         {
             Debug.Log($"{gateDirection} Gate is locked.");
             return;
         }
-
         OpenGate();
     }
 
@@ -84,6 +85,8 @@ public class Gate : MonoBehaviour
         BoxCollider2D collider2D = GetComponent<BoxCollider2D>();
         collider2D.enabled = false;
 
+        PlaySound();
+
         if (animator != null)
         {
             animator.SetTrigger("Open");
@@ -93,5 +96,19 @@ public class Gate : MonoBehaviour
         {
             Debug.LogWarning($"{gateDirection} Gate has no Animator assigned.");
         }
+    }
+
+    private void PlaySound()
+    {
+        if (openClip == null) return;
+
+        GameObject soundObj = new GameObject("GateOpenSound");
+        AudioSource source = soundObj.AddComponent<AudioSource>();
+        source.clip = openClip;
+        source.spatialBlend = 0f;
+        source.volume = openVolume;
+        source.Play();
+
+        Destroy(soundObj, openClip.length + 0.1f);
     }
 }

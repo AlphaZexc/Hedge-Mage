@@ -72,6 +72,15 @@ public class GameManager : MonoBehaviour
         SetState(GameState.Playing);
     }
 
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+
     private void OnDestroy()
     {
         Time.timeScale = 1f;

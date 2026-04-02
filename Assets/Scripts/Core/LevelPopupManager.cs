@@ -102,9 +102,8 @@ public class LevelPopupManager : MonoBehaviour
         // Hide popups
         if (levelFailPopup != null) levelFailPopup.SetActive(false);
         if (levelCompletePopup != null) levelCompletePopup.SetActive(false);
+        ShowBookButton();
 
-        PlayerHealth.Instance.ResetForNewLevel();
-        CreatureManager.Instance.ResetCreatures();
         WordProgressManager.Instance.RetrySameWord();
 
         Time.timeScale = 1f;
@@ -117,9 +116,8 @@ public class LevelPopupManager : MonoBehaviour
         // Hide popups
         if (levelFailPopup != null) levelFailPopup.SetActive(false);
         if (levelCompletePopup != null) levelCompletePopup.SetActive(false);
+        ShowBookButton();
 
-        PlayerHealth.Instance.ResetForNewLevel();
-        CreatureManager.Instance.ResetCreatures();
         WordProgressManager.Instance.AdvanceToNextWord();
 
         Time.timeScale = 1f;

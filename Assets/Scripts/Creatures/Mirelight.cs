@@ -25,6 +25,7 @@ public class Mirelight : MonoBehaviour
     [SerializeField] private float flickerIntensityMax = 1.4f;
     [SerializeField] private float flickerSpeedMin = 15f;
     [SerializeField] private float flickerSpeedMax = 35f;
+    [SerializeField] private float flickerDuration = 2f;
 
     private float flickerSpeed;
     private float flickerSeed;
@@ -211,7 +212,7 @@ public class Mirelight : MonoBehaviour
         currentState = State.Attacking;
 
         animator.SetTrigger("Transform");
-
+        
         yield return new WaitForSeconds(1.5f); // length of transform anim
 
         animator.SetTrigger("Pounce");
@@ -230,17 +231,20 @@ public class Mirelight : MonoBehaviour
         float maxChaseTime = 1.5f; // prevents infinite chase
         float timer = 0f;
 
-        // FORWARD POUNCE
-        while (timer < maxChaseTime && hasDealtDamage == false)
+        if (PlayerInRange(2))
         {
-            if (!player) break;
+            // FORWARD POUNCE
+            while (timer < maxChaseTime && hasDealtDamage == false)
+            {
+                if (!player) break;
 
-            timer += Time.deltaTime;
+                timer += Time.deltaTime;
 
-            Vector3 direction = (player.position - transform.position).normalized;
-            transform.position += direction * pounceSpeed * Time.deltaTime;
+                Vector3 direction = (player.position - transform.position).normalized;
+                transform.position += direction * pounceSpeed * Time.deltaTime;
 
-            yield return null;
+                yield return null;
+            }
         }
 
         yield return new WaitForSeconds(0.1f);
@@ -293,10 +297,10 @@ public class Mirelight : MonoBehaviour
         );
     }
 
-    private bool PlayerInRange()
+    private bool PlayerInRange(float rangeMultiplier = 1f)
     {
         if (!player) return false;
-        return Vector2.Distance(transform.position, player.position) <= attackRange;
+        return Vector2.Distance(transform.position, player.position) <= attackRange * rangeMultiplier;
     }
 
     #endregion

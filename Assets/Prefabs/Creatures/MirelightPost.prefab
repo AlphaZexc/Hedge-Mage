@@ -179,7 +179,7 @@ MonoBehaviour:
   attackRange: 4
   pounceSpeed: 20
   pounceDamage: 40
-  armingTime: 3
+  armingTime: 2
   lightConeTransform: {fileID: 1586083215075517262}
   attackPoint: {fileID: 3357975942492281832}
   flickerIntensityMin: 0.1

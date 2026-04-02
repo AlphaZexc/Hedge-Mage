@@ -8,7 +8,7 @@ public class BookWordPage : MonoBehaviour
     public GameObject letterSlotPrefab;
     public Transform letterSlotContainer;
 
-    private WordProgressManager wpi => WordProgressManager.Instance;
+    private WordProgressManager wpm => WordProgressManager.Instance;
 
     public void Refresh()
     {
@@ -18,7 +18,7 @@ public class BookWordPage : MonoBehaviour
 
     private void SetupLetterSlots()
     {
-        char[] chars = wpi.targetWord.ToCharArray();
+        char[] chars = wpm.targetWord.ToCharArray();
 
         // Create LetterSLotUI elements for each letter in target word and initialize them
         for (int i = 0; i < chars.Length; i++)
@@ -30,10 +30,9 @@ public class BookWordPage : MonoBehaviour
 
             slot.Initialize(letter, LetterSpriteDatabase.Instance.GetUncollectedSprite(letter)); 
 
-            // Set sprite to collected if player has the letter
-            foreach (char c in wpi.collectedLetters)
+            if (wpm.HasCollectedLetter(letter))
             {
-                if (c == letter) slot.SetSprite(LetterSpriteDatabase.Instance.GetCollectedSprite(letter));
+                slot.SetSprite(LetterSpriteDatabase.Instance.GetCollectedSprite(letter));
             }
 
             // Set image to proper siee

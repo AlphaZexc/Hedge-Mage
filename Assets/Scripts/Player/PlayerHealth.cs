@@ -60,7 +60,6 @@ public class PlayerHealth : MonoBehaviour
 
     public void ResetForNewLevel()
     {
-
         // Snap player to the center of the closest tile
         Vector3Int playerCell = gridManager.walkableTilemap.WorldToCell(transform.position);
         Vector3 snappedPos = gridManager.walkableTilemap.GetCellCenterWorld(playerCell);

@@ -69,7 +69,6 @@ public class SpellManager : MonoBehaviour
                 Destroy(letter.gameObject);
         }
 
-        WordProgressManager.Instance.UpdateCollectedLetters();
         BookLetterPage page = FindFirstObjectByType<BookLetterPage>();
         if (page != null)
             page.RefreshFromInventory();
