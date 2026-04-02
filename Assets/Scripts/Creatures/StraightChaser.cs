@@ -25,6 +25,7 @@ public class StraightChaser : BaseCreature
     [Header("Pathing")]
     public float waypointProximity = 0.2f;
     public float pathRequestCooldown = 0.1f;
+    [SerializeField] private float minotaurPlayerProximity = 20f;
 
     [Header("Charging")]
     public float stunDuration = 1.0f;
@@ -333,6 +334,12 @@ public class StraightChaser : BaseCreature
     private void StartWandering()
     {
         Node node = grid.GetRandomWalkableNode();
+
+        while (Vector2.Distance(node.worldPosition, player.transform.position) > minotaurPlayerProximity)
+        {
+            node = grid.GetRandomWalkableNode();
+        }
+
         if (node != null)
             RequestPath(node.worldPosition);
     }

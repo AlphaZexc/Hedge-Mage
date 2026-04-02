@@ -236,6 +236,7 @@ MonoBehaviour:
   chargeSightRange: 8
   waypointProximity: 0.2
   pathRequestCooldown: 0.1
+  minotaurPlayerProximity: 10
   stunDuration: 1
   stunMinImpactSpeed: 9
   windupDuration: 1.5

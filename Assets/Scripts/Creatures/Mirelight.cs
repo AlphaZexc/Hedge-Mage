@@ -25,7 +25,6 @@ public class Mirelight : MonoBehaviour
     [SerializeField] private float flickerIntensityMax = 1.4f;
     [SerializeField] private float flickerSpeedMin = 15f;
     [SerializeField] private float flickerSpeedMax = 35f;
-    [SerializeField] private float flickerDuration = 2f;
 
     private float flickerSpeed;
     private float flickerSeed;
@@ -34,7 +33,6 @@ public class Mirelight : MonoBehaviour
     private Animator animator;
     private Light2D lampLight;
     private Transform player;
-    private PlayerHealth playerHealth;
 
     private Vector3 originalPosition;
     private Quaternion originalLightRotation;
@@ -69,11 +67,7 @@ public class Mirelight : MonoBehaviour
     private void Start()
     {
         GameObject p = GameObject.FindGameObjectWithTag("Player");
-        if (p)
-        {
-            player = p.transform;
-            playerHealth = p.GetComponent<PlayerHealth>();
-        }
+        player = p.transform;
 
         SetIdleImmediate();
     }
