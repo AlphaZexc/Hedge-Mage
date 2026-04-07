@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: fd0d0787f82b6f2458442c35095b98dd
+guid: fa8e88d5d2de6444f90397bbd240f429
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4778199275003658449
-    second: FireBall_Frame09_Impact_0
+      213: -6889262784104118102
+    second: FireBall_VERT_Frame02_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FireBall_Frame09_Impact_0
+      name: FireBall_VERT_Frame02_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 17
-        height: 17
+        x: 4
+        y: 4
+        width: 9
+        height: 9
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1d04f94bce29f4240800000000000000
-      internalID: 4778199275003658449
+      spriteID: aa8c72daffb6460a0800000000000000
+      internalID: -6889262784104118102
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      FireBall_Frame09_Impact_0: 4778199275003658449
+      FireBall_VERT_Frame02_0: -6889262784104118102
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
