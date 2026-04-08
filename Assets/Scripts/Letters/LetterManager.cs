@@ -38,67 +38,71 @@ public class LetterManager : MonoBehaviour
     private void SpawnLetters(string targetWord)
     {
         availableSpots = new List<Transform>(spawnPoints);
+
+        // Shuffle spots once upfront for randomness
+        for (int i = availableSpots.Count - 1; i > 0; i--)
+        {
+            int j = Random.Range(0, i + 1);
+            (availableSpots[i], availableSpots[j]) = (availableSpots[j], availableSpots[i]);
+        }
+
         string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        
-        // Count duplicates correctly
+        string upperWord = targetWord.ToUpper();
+
+        // Count letters in target word
         Dictionary<char, int> letterCounts = new Dictionary<char, int>();
-        foreach (char c in targetWord)
+        foreach (char c in upperWord)
         {
-            char upper = char.ToUpper(c);
-            if (letterCounts.ContainsKey(upper))
-                letterCounts[upper]++;
-            else
-                letterCounts[upper] = 1;
+            if (letterCounts.ContainsKey(c)) letterCounts[c]++;
+            else letterCounts[c] = 1;
         }
 
-        // Spawn correct letters (including duplicates)
+        // Spawn correct letters
         foreach (var kvp in letterCounts)
-        {
             for (int i = 0; i < kvp.Value; i++)
-            {
                 SpawnLetter(kvp.Key);
-            }
-        }
 
-        // Spawn in guaranteed letters
-        List<char> lettersToInclude = new List<char>() { 'j', 'u', 'm', 'p', 'f', 'i', 'r', 'e', 'b', 'a', 'l', 's', 't', 'o' };
-        foreach (char letter in lettersToInclude)
+        // Spawn guaranteed letters (skip if already spawned for the target word)
+        List<char> guaranteed = new List<char> { 'J', 'U', 'M', 'P', 'F', 'I', 'R', 'E', 'B', 'A', 'L', 'S', 'T', 'O' };
+        foreach (char c in guaranteed)
+            SpawnLetter(c); // Duplicates are fine — extra copies are valid
+
+        // Spawn decoys — build a safe candidate list first
+        List<char> decoyPool = new List<char>();
+        foreach (char c in alphabet)
+            if (!upperWord.Contains(c.ToString()))
+                decoyPool.Add(c);
+
+        // Shuffle decoy pool
+        for (int i = decoyPool.Count - 1; i > 0; i--)
         {
-            char upper = char.ToUpper(letter);
-            SpawnLetter(upper);
+            int j = Random.Range(0, i + 1);
+            (decoyPool[i], decoyPool[j]) = (decoyPool[j], decoyPool[i]);
         }
 
-        // Spawn decoys
         int decoysPlaced = 0;
-        while (decoysPlaced < numberOfDecoys && availableSpots.Count > 0)
+        foreach (char c in decoyPool)
         {
-            char randomLetter = alphabet[Random.Range(0, alphabet.Length)];
-            if (!targetWord.Contains(randomLetter.ToString()))
-            {
-                SpawnLetter(randomLetter);
-                decoysPlaced++;
-            }
+            if (decoysPlaced >= numberOfDecoys || availableSpots.Count == 0) break;
+            SpawnLetter(c);
+            decoysPlaced++;
         }
 
         Debug.Log($"Spawned {spawnedLetters.Count} letters for word: {targetWord}");
-
     }
 
     private void SpawnLetter(char letter)
     {
-        if (availableSpots.Count == 0) return;
+        if (availableSpots.Count == 0)
+        {
+            Debug.LogWarning($"No available spots left — could not spawn: {letter}");
+            return;
+        }
 
-        int index = Random.Range(0, availableSpots.Count);
+        // Since spots are pre-shuffled, just take the last one (O(1) removal)
+        int index = availableSpots.Count - 1;
         Transform spot = availableSpots[index];
         availableSpots.RemoveAt(index);
-
-        // Check for existing letter at the spot
-        Collider2D hit = Physics2D.OverlapCircle(spot.position, 0.1f, LayerMask.GetMask("Letter"));
-        if (hit != null)
-        {
-            Debug.LogWarning($"Spawn blocked at {spot.position}, already occupied by: {hit.gameObject.name}");
-            return; // Skip this spawn to avoid overlap
-        }
 
         GameObject obj = Instantiate(letterPrefab, spot.position, Quaternion.identity);
         obj.SetActive(true);
@@ -106,9 +110,7 @@ public class LetterManager : MonoBehaviour
 
         LetterObject letterObj = obj.GetComponent<LetterObject>();
         if (letterObj != null)
-        {
             letterObj.SetLetter(letter);
-        }
     }
 }
 

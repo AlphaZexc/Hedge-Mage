@@ -11,13 +11,11 @@ public class Fireball : MonoBehaviour
     private Vector2 moveDirection;
     private Animator anim;
     private Rigidbody2D rb;
-    private Light2D fireLight;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        fireLight = GetComponentInChildren<Light2D>();
     }
 
     public void Initialize(Vector2 direction)
@@ -40,12 +38,6 @@ public class Fireball : MonoBehaviour
         rb.linearVelocity = moveDirection * speed;
     }
 
-    private void Update()
-    {
-        if (fireLight != null)
-            fireLight.intensity = 1f + Mathf.Sin(Time.time * 20f) * 0.15f;
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Wall") || other.CompareTag("Enemy"))
@@ -57,10 +49,7 @@ public class Fireball : MonoBehaviour
         rb.linearVelocity = Vector2.zero;
         GetComponent<Collider2D>().enabled = false;
 
-        if (fireLight != null)
-            fireLight.intensity = 0.3f;
-
-        anim.Play("Hit");
+        anim.SetTrigger("Hit");
         yield return new WaitForSeconds(hitAnimationDuration);
 
         Destroy(gameObject);
