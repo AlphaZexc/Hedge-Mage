@@ -19,11 +19,6 @@ public class LetterManager : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-        SpawnLetters(WordProgressManager.Instance.targetWord);
-    }
-
     public void ResetLettersForNewWord(string newWord)
     {
         foreach (var obj in spawnedLetters)
