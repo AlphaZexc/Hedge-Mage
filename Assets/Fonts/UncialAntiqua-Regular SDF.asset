@@ -6,7 +6,7 @@ Texture2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: UncialAntiqua-Regular Atlas
+  m_Name: UncialAntiqua-Regular SDF Atlas
   m_ImageContentsHash:
     serializedVersion: 2
     Hash: 00000000000000000000000000000000
@@ -109,7 +109,7 @@ Material:
     - _GlowOffset: 0
     - _GlowOuter: 0.05
     - _GlowPower: 0.75
-    - _GradientScale: 10
+    - _GradientScale: 1
     - _LightAngle: 3.1416
     - _MaskSoftnessX: 0
     - _MaskSoftnessY: 0
@@ -119,9 +119,9 @@ Material:
     - _OutlineWidth: 0
     - _PerspectiveFilter: 0.875
     - _Reflectivity: 10
-    - _ScaleRatioA: 0.9
-    - _ScaleRatioB: 0.73125
-    - _ScaleRatioC: 0.73125
+    - _ScaleRatioA: 0
+    - _ScaleRatioB: 0
+    - _ScaleRatioC: 0
     - _ScaleX: 1
     - _ScaleY: 1
     - _ShaderFlags: 0
@@ -132,8 +132,8 @@ Material:
     - _StencilOp: 0
     - _StencilReadMask: 255
     - _StencilWriteMask: 255
-    - _TextureHeight: 1024
-    - _TextureWidth: 1024
+    - _TextureHeight: 2048
+    - _TextureWidth: 2048
     - _UnderlayDilate: 0
     - _UnderlayOffsetX: 0
     - _UnderlayOffsetY: 0
@@ -172,24 +172,24 @@ MonoBehaviour:
     m_FaceIndex: 0
     m_FamilyName: Uncial Antiqua
     m_StyleName: Regular
-    m_PointSize: 90
+    m_PointSize: 332
     m_Scale: 1
     m_UnitsPerEM: 2048
-    m_LineHeight: 118.43262
-    m_AscentLine: 88.725586
-    m_CapLine: 81
-    m_MeanLine: 48
+    m_LineHeight: 436.8848
+    m_AscentLine: 327.29883
+    m_CapLine: 299
+    m_MeanLine: 175
     m_Baseline: 0
-    m_DescentLine: -29.707031
-    m_SuperscriptOffset: 88.725586
+    m_DescentLine: -109.585945
+    m_SuperscriptOffset: 327.29883
     m_SuperscriptSize: 0.5
-    m_SubscriptOffset: -29.707031
+    m_SubscriptOffset: -109.585945
     m_SubscriptSize: 0.5
-    m_UnderlineOffset: -11.953125
-    m_UnderlineThickness: 1.8017578
-    m_StrikethroughOffset: 19.2
-    m_StrikethroughThickness: 1.8017578
-    m_TabWidth: 23
+    m_UnderlineOffset: -44.09375
+    m_UnderlineThickness: 6.646485
+    m_StrikethroughOffset: 70
+    m_StrikethroughThickness: 6.646485
+    m_TabWidth: 83
   m_Material: {fileID: -2564580229444265472}
   m_SourceFontFileGUID: 4879d992d37e5194fb37571701031f52
   m_CreationSettings:
@@ -197,19 +197,19 @@ MonoBehaviour:
     sourceFontFileGUID: 4879d992d37e5194fb37571701031f52
     faceIndex: 0
     pointSizeSamplingMode: 0
-    pointSize: 90
-    padding: 9
-    paddingMode: 2
-    packingMode: 0
-    atlasWidth: 1024
-    atlasHeight: 1024
-    characterSetSelectionMode: 7
-    characterSequence: 
+    pointSize: 332
+    padding: 0
+    paddingMode: 1
+    packingMode: 4
+    atlasWidth: 2048
+    atlasHeight: 2048
+    characterSetSelectionMode: 0
+    characterSequence: 32 - 126, 160, 8203, 8230, 9633
     referencedFontAssetGUID: 
     referencedTextAssetGUID: 
     fontStyle: 0
     fontStyleModifier: 0
-    renderMode: 4165
+    renderMode: 32806
     includeFontFeatures: 0
   m_SourceFontFile: {fileID: 12800000, guid: 4879d992d37e5194fb37571701031f52, type: 3}
   m_SourceFontFilePath: 
@@ -223,16 +223,16 @@ MonoBehaviour:
   m_IsMultiAtlasTexturesEnabled: 0
   m_GetFontFeatures: 1
   m_ClearDynamicDataOnBuild: 1
-  m_AtlasWidth: 1024
-  m_AtlasHeight: 1024
-  m_AtlasPadding: 9
-  m_AtlasRenderMode: 4165
+  m_AtlasWidth: 2048
+  m_AtlasHeight: 2048
+  m_AtlasPadding: 0
+  m_AtlasRenderMode: 32806
   m_UsedGlyphRects: []
   m_FreeGlyphRects:
   - m_X: 0
     m_Y: 0
-    m_Width: 1023
-    m_Height: 1023
+    m_Width: 2047
+    m_Height: 2047
   m_FontFeatureTable:
     m_MultipleSubstitutionRecords: []
     m_LigatureSubstitutionRecords: []

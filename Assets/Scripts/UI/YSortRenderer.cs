@@ -5,7 +5,7 @@ public class YSortRenderer : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
 
-    [Tooltip("Offset to apply to Y-position for sorting (e.g., if pivot isn't at the feet).")]
+    [Tooltip("Offset applied to Y before sorting. Positive moves the sort point up.")]
     public float yOffset = 0f;
 
     void Awake()
@@ -15,7 +15,7 @@ public class YSortRenderer : MonoBehaviour
 
     void LateUpdate()
     {
-        float yPosition = transform.position.y + yOffset;
-        spriteRenderer.sortingOrder = -(int)(yPosition * 100);
+        // Use world-space Y of this transform + offset
+        spriteRenderer.sortingOrder = Mathf.RoundToInt(-(transform.position.y + yOffset) * 100);
     }
 }
