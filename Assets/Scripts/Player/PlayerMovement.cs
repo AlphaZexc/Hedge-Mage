@@ -49,7 +49,11 @@ public class PlayerMovement : MonoBehaviour
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        movement = new Vector2(horizontal, vertical);
+        // Prioritize horizontal or vertical — no diagonal movement
+        if (horizontal != 0)
+            movement = new Vector2(horizontal, 0f);
+        else
+            movement = new Vector2(0f, vertical);
 
         if (movement != Vector2.zero)
             lastMoveDirection = movement.normalized;
