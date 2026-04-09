@@ -78,6 +78,7 @@ public class StraightChaser : BaseCreature
 
         lastMoveDir = Vector2.down;
         Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Interactable"));
+        Physics2D.IgnoreLayerCollision(gameObject.layer, LayerMask.NameToLayer("Creature"));
 
         ChangeState(CreatureState.Wandering);
     }

@@ -52,12 +52,20 @@ public class Flyer : MonoBehaviour
 
     private IEnumerator FlyerRoutine()
     {
+        PlayerHealth playerHealth = FindFirstObjectByType<PlayerHealth>();
+
         // Initial circling phase
         yield return CirclePlayerForDuration(flyOverDuration);
 
         // Swoop attempts with circling in between
         while (swoopAttempts < maxSwoopAttempts && !hasStolenLetter)
         {
+            if (playerHealth.isDead)
+            {
+                Destroy(gameObject);
+                yield break;
+            }
+
             yield return SwoopAttempt();
             swoopAttempts++;
             if (!hasStolenLetter && swoopAttempts < maxSwoopAttempts)
@@ -242,6 +250,7 @@ public class Flyer : MonoBehaviour
         float t = 0f;
         float escapeTime = 1.5f;
         Vector3 start = transform.position;
+
         while (t < 1f)
         {
             t += Time.deltaTime / escapeTime;
@@ -250,6 +259,7 @@ public class Flyer : MonoBehaviour
             transform.position = newPos;
             yield return null;
         }
+
         Destroy(gameObject);
     }
 

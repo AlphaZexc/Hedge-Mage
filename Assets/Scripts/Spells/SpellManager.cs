@@ -88,6 +88,8 @@ public class SpellManager : MonoBehaviour
         // Reset cooldown
         spell.ResetCooldown();
 
+        LevelPopupManager.Instance.CloseBookPopup();
+
         Debug.Log($"Completed spell: {spell.spellName}");
         return true;
     }
