@@ -25,7 +25,8 @@ public class StraightChaser : BaseCreature
     [Header("Pathing")]
     public float waypointProximity = 0.2f;
     public float pathRequestCooldown = 0.1f;
-    [SerializeField] private float minotaurPlayerProximity = 20f;
+    [SerializeField] private float basePlayerProximity = 30f;
+    [SerializeField] private float letterProximityReductionValue = 3f; // Larger value means more aggressive scaling as player collects letters
 
     [Header("Charging")]
     public float stunDuration = 1.0f;
@@ -36,6 +37,10 @@ public class StraightChaser : BaseCreature
 
     [Header("Detection")]
     public LayerMask lineOfSightMask;
+
+    private float lastDamageTime;
+    [Header("Contact Damage")]
+    [SerializeField] private float contactDamageCooldown = 1f;
 
     [Header("Gizmos")]
     public bool showGizmos = true;
@@ -59,11 +64,11 @@ public class StraightChaser : BaseCreature
     private float chargeEndTime;
 
     private float stuckTimer;
+    private float minotaurPlayerProximity;
 
     private Vector2 lastMoveDir;
     private Vector2 chargeDirection;
 
-    // Line of sight visuals
     private bool hasLineOfSight;
     private Vector2 lastLOSOrigin;
     private Vector2 lastLOSDirection;
@@ -90,6 +95,10 @@ public class StraightChaser : BaseCreature
             ChangeState(CreatureState.Wandering);
             return;
         }
+
+        // Minotaur gets more aggressive as player collects letters
+        minotaurPlayerProximity = Mathf.Max(5, 
+            basePlayerProximity - (PlayerInventory.Instance.collectedLetters.Count / letterProximityReductionValue) * WordProgressManager.Instance.targetWord.Length);
 
         HandleTimers();
         UpdateStateLogic();
@@ -126,17 +135,17 @@ public class StraightChaser : BaseCreature
                 break;
 
             case CreatureState.Chasing:
+                lastMoveDir = Vector2.zero;
                 lastKnownPlayerPos = player.transform.position;
                 RequestPath(lastKnownPlayerPos);
                 break;
 
             case CreatureState.Charging:
-                // Find out which direction player is in
                 Vector2 toPlayer = player.transform.position - transform.position;
 
                 if (Mathf.Abs(toPlayer.x) > Mathf.Abs(toPlayer.y))
                     chargeDirection = new Vector2(Mathf.Sign(toPlayer.x), 0f);
-                else 
+                else
                     chargeDirection = new Vector2(0f, Mathf.Sign(toPlayer.y));
 
                 chargeEndTime = Time.time + maxChargeDuration;
@@ -167,7 +176,6 @@ public class StraightChaser : BaseCreature
                 break;
 
             case CreatureState.Chasing:
-
                 if (HasLineOfSightToPlayer())
                 {
                     ChangeState(CreatureState.Charging);
@@ -195,7 +203,6 @@ public class StraightChaser : BaseCreature
             ChangeState(CreatureState.Cooldown);
     }
 
-    // Charge with line of sight
     private bool HasLineOfSightToPlayer()
     {
         if (player == null)
@@ -204,7 +211,6 @@ public class StraightChaser : BaseCreature
         Vector2 origin = transform.position;
         Vector2 toPlayer = player.transform.position - transform.position;
 
-        // Cardinal direction only
         if (Mathf.Abs(toPlayer.x) > Mathf.Abs(toPlayer.y))
             toPlayer = new Vector2(Mathf.Sign(toPlayer.x), 0f);
         else
@@ -234,22 +240,40 @@ public class StraightChaser : BaseCreature
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (!collision.gameObject.CompareTag("Player"))
-            return;
+        if (!collision.gameObject.CompareTag("Player")) return;
+        if (playerHealth == null || playerHealth.isDead) return;
 
-        if (playerHealth == null || playerHealth.isDead)
-            return;
+        TryDealContactDamage();
 
-        playerHealth.TakeDamage(damage);
-
-        // ALWAYS enter cooldown after hitting player
-        ChangeState(CreatureState.Cooldown);
+        // Only enter cooldown state if we were charging
+        if (state == CreatureState.Charging)
+            ChangeState(CreatureState.Cooldown);
     }
 
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (!collision.gameObject.CompareTag("Player")) return;
+        if (playerHealth == null || playerHealth.isDead) return;
 
-    // Movement
+        TryDealContactDamage();
+    }
+
+    private void TryDealContactDamage()
+    {
+        if (Time.time - lastDamageTime < contactDamageCooldown) return;
+
+        lastDamageTime = Time.time;
+        playerHealth.TakeDamage(damage);
+    }
+
     private void FollowPath()
     {
+        if (state != CreatureState.Chasing && state != CreatureState.Wandering)
+        {
+            rb.linearVelocity = Vector2.zero;
+            return;
+        }
+
         if (path == null || waypointIndex >= path.Count)
         {
             rb.linearVelocity = Vector2.zero;
@@ -305,25 +329,19 @@ public class StraightChaser : BaseCreature
         Node currentNode = grid.NodeFromWorldPoint(transform.position);
 
         if (currentNode != null)
-        {
-            // Temporarily block this tile so A* avoids it
             grid.SetNodeTemporarilyUnwalkable(currentNode.worldPosition, 0.5f);
-        }
 
-        // Small physical nudge toward target to escape corners
         if (state == CreatureState.Chasing && path != null && waypointIndex < path.Count)
         {
             Vector2 escapeDir = (path[waypointIndex] - transform.position).normalized;
-            rb.position += escapeDir * 0.1f; // small positional correction
+            rb.position += escapeDir * 0.1f;
         }
 
-        // Force fresh path
         if (state == CreatureState.Chasing)
             RequestPath(lastKnownPlayerPos);
         else if (state == CreatureState.Wandering)
             StartWandering();
     }
-
 
     private void RequestPath(Vector3 target)
     {
@@ -334,18 +352,27 @@ public class StraightChaser : BaseCreature
 
     private void StartWandering()
     {
-        Node node = grid.GetRandomWalkableNode();
+        Node node = null;
+        int maxAttempts = 50;
 
-        while (Vector2.Distance(node.worldPosition, player.transform.position) > minotaurPlayerProximity)
+        for (int i = 0; i < maxAttempts; i++)
         {
-            node = grid.GetRandomWalkableNode();
+            Node candidate = grid.GetRandomWalkableNode();
+            if (Vector2.Distance(candidate.worldPosition, player.transform.position) <= minotaurPlayerProximity)
+            {
+                node = candidate;
+                break;
+            }
         }
+
+        // Fall back to any walkable node if nothing found near the player
+        if (node == null)
+            node = grid.GetRandomWalkableNode();
 
         if (node != null)
             RequestPath(node.worldPosition);
     }
 
-    // Animation
     private void UpdateAnimator()
     {
         if (!animator) return;
@@ -363,10 +390,7 @@ public class StraightChaser : BaseCreature
     {
         if (!showGizmos || path == null) return;
 
-        Gizmos.color =
-            state == CreatureState.Chasing
-            ? chasePathColor
-            : wanderPathColor;
+        Gizmos.color = state == CreatureState.Chasing ? chasePathColor : wanderPathColor;
 
         for (int i = 0; i < path.Count; i++)
         {
@@ -376,7 +400,6 @@ public class StraightChaser : BaseCreature
                 Gizmos.DrawLine(path[i], path[i + 1]);
         }
 
-        // Draw line of sight ray
         if (Application.isPlaying && lastLOSDirection != Vector2.zero)
         {
             Gizmos.color = hasLineOfSight ? Color.green : Color.red;
@@ -385,6 +408,5 @@ public class StraightChaser : BaseCreature
                 lastLOSOrigin + lastLOSDirection * chargeSightRange
             );
         }
-
     }
 }
