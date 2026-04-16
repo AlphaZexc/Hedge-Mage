@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 2167121762977020580}
   - component: {fileID: 6097331300630707512}
   - component: {fileID: -1454193063034667229}
+  - component: {fileID: 3966901076600536673}
   m_Layer: 7
   m_Name: MirelightPost
   m_TagString: Enemy
@@ -182,6 +183,7 @@ MonoBehaviour:
   armingTime: 2
   lightConeTransform: {fileID: 1586083215075517262}
   attackPoint: {fileID: 3357975942492281832}
+  attackCollider: {fileID: 3966901076600536673}
   flickerIntensityMin: 0.1
   flickerIntensityMax: 1.4
   flickerSpeedMin: 4
@@ -223,6 +225,52 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.77}
   m_Size: {x: 0.54, y: 0.4}
   m_Direction: 0
+--- !u!61 &3966901076600536673
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4853918066849092202}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.9375, y: 2.3125}
+    newSize: {x: 1, y: 2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.9375, y: 2.3125}
+  m_EdgeRadius: 0
 --- !u!1 &7525605558733047138
 GameObject:
   m_ObjectHideFlags: 0

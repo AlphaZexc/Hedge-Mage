@@ -19,6 +19,7 @@ public class Mirelight : MonoBehaviour
     [Header("References")]
     public Transform lightConeTransform;
     public Transform attackPoint;
+    public BoxCollider2D attackCollider;
 
     [Header("Flicker Settings")]
     [SerializeField] private float flickerIntensityMin = 0.2f;
@@ -57,6 +58,8 @@ public class Mirelight : MonoBehaviour
 
         if (lightConeTransform)
             originalLightRotation = lightConeTransform.rotation;
+
+        attackCollider.enabled = false;
     }
 
     private void OnDestroy()
@@ -209,6 +212,8 @@ public class Mirelight : MonoBehaviour
         
         yield return new WaitForSeconds(1.5f); // length of transform anim
 
+        attackCollider.enabled = true;
+
         animator.SetTrigger("Pounce");
 
         yield return new WaitForSeconds(0.3f);
@@ -216,6 +221,8 @@ public class Mirelight : MonoBehaviour
         yield return StartCoroutine(Pounce());
 
         yield return new WaitForSeconds(1f);
+
+        attackCollider.enabled = false;
 
         GoIdle();
     }
