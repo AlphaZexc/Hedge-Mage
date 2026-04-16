@@ -189,7 +189,7 @@ MonoBehaviour:
   circleBetweenSwoopsDuration: 1.5
   minDropDistanceFromPlayer: 5
   maxSwoopAttempts: 2
-  stealSuccessPercent: 0.35
+  stealSuccessPercent: 0.4
 --- !u!50 &3642758770867956012
 Rigidbody2D:
   serializedVersion: 5

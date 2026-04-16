@@ -12,6 +12,8 @@ public class Spell_Jump : SpellBase
         spellDescription = "For a fleeting moment, the path loosens its grip, allowing you to vault cleanly over the hedge.";
         GenerateMaskedSpell(NUMBER_MASKED_CHARS);
         spellType = SpellType.Mobility;
+
+        cooldownDuration = 20f;
     }
 
     public override void Cast(GameObject player)

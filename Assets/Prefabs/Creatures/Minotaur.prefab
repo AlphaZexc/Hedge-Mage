@@ -239,7 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f90880138efe3184a96798d3435278d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StraightChaser
-  detectionRange: 5
+  detectionRange: 4
   moveSpeed: 3
   damage: 25
   maxLifeDuration: -1
@@ -250,7 +250,7 @@ MonoBehaviour:
   chargeSightRange: 8
   waypointProximity: 0.2
   pathRequestCooldown: 0.1
-  minotaurPlayerProximity: 20
+  minotaurPlayerProximity: 15
   stunDuration: 1
   stunMinImpactSpeed: 9
   windupDuration: 1.5

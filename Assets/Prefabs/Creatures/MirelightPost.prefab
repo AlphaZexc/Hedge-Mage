@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28e1e8d25b3b5094980a505276db2c25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackRange: 4
+  attackRange: 4.5
   pounceSpeed: 20
   pounceDamage: 40
   armingTime: 2

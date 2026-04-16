@@ -14,6 +14,7 @@ public class Flyer : MonoBehaviour
     public float circleDistance = 4f;
     public float circleBetweenSwoopsDuration = 1.5f; // New: circling time between swoops
     public float minDropDistanceFromPlayer = 5f;
+    public float maxDropDistanceFromPlayer = 20f;
     public int maxSwoopAttempts = 3;
     [Range(0f, 1f)] public float stealSuccessPercent = 0.3f; // Set to 1.0 for testing
 
@@ -274,7 +275,7 @@ public class Flyer : MonoBehaviour
         {
             // Check minimum distance from player
             float distance = Vector3.Distance(player.position, node.worldPosition);
-            if (distance < minDropDistanceFromPlayer)
+            if (distance < minDropDistanceFromPlayer || distance > maxDropDistanceFromPlayer)
                 continue;
 
             validNodes.Add(node);
