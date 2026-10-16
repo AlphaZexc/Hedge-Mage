@@ -191,6 +191,9 @@ MonoBehaviour:
   maxDropDistanceFromPlayer: 20
   maxSwoopAttempts: 2
   stealSuccessPercent: 0.4
+  circleAngularSpeed: 2
+  approachSpeed: 8
+  spawnVisionPadding: 1.5
   swoopTime: 1.15
   swoopDipDepth: 1.1
   nadirHoldDuration: 0.12

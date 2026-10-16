@@ -16,6 +16,9 @@ public class Flyer : MonoBehaviour
     public float maxDropDistanceFromPlayer = 20f;
     public int maxSwoopAttempts = 3;
     [Range(0f, 1f)] public float stealSuccessPercent = 0.3f;
+    [SerializeField] private float circleAngularSpeed = 2f;
+    [SerializeField] private float approachSpeed = 8f;
+    [SerializeField] private float spawnVisionPadding = 1.5f;
 
     [Header("Swoop")]
     [SerializeField] private float swoopTime = 1.15f;
@@ -41,6 +44,10 @@ public class Flyer : MonoBehaviour
     private bool hasStolenLetter = false;
     private Coroutine letterFlightRoutine;
 
+    /// <summary>Polar angle on the circle around the player (radians).</summary>
+    private float circleAngle;
+    private Vector3 lastFacingDir = Vector3.down;
+
 
     void Start()
     {
@@ -49,7 +56,6 @@ public class Flyer : MonoBehaviour
         flyerCollider = GetComponent<Collider2D>();
         rb = GetComponent<Rigidbody2D>();
 
-        // Prefer kinematic so Bezier / position writes are not fought by Dynamic physics
         if (rb != null)
         {
             rb.bodyType = RigidbodyType2D.Kinematic;
@@ -68,6 +74,8 @@ public class Flyer : MonoBehaviour
         }
         else
             Debug.LogWarning("[Flyer] Could not find 'Visuals' child for Animator/Glow reference.");
+
+        RelocateOutsidePlayerVision();
         StartCoroutine(FlyerRoutine());
     }
 
@@ -75,6 +83,8 @@ public class Flyer : MonoBehaviour
     {
         PlayerHealth playerHealth = FindFirstObjectByType<PlayerHealth>();
 
+        // Fly in to the circle perimeter, then begin circling (not appear mid-orbit)
+        yield return ApproachCirclePerimeter();
         yield return CirclePlayerForDuration(flyOverDuration);
 
         while (swoopAttempts < maxSwoopAttempts && !hasStolenLetter)
@@ -87,15 +97,16 @@ public class Flyer : MonoBehaviour
 
             yield return SwoopAttempt();
             swoopAttempts++;
+
+            // Resume circling from the opposite perimeter after each swoop
             if (!hasStolenLetter && swoopAttempts < maxSwoopAttempts)
-            {
                 yield return CirclePlayerForDuration(circleBetweenSwoopsDuration);
-            }
+            else if (hasStolenLetter)
+                break;
         }
 
         if (hasStolenLetter)
         {
-            // Wait for letter flight tween to finish parenting before carry/drop
             if (letterFlightRoutine != null)
                 yield return letterFlightRoutine;
 
@@ -106,46 +117,169 @@ public class Flyer : MonoBehaviour
         yield return EscapeAndDespawn();
     }
 
-
-    private IEnumerator CirclePlayerForDuration(float duration)
+    /// <summary>
+    /// Place the flyer outside the player's current vision (light radius / camera frustum).
+    /// </summary>
+    private void RelocateOutsidePlayerVision()
     {
-        float timer = 0f;
-        float radius = circleDistance;
-        Vector3 offset = transform.position - player.position;
-        float angle = Mathf.Atan2(offset.y, offset.x);
+        if (player == null) return;
 
-        float speed = 2f;
+        float visionRadius = GetPlayerVisionRadius() + spawnVisionPadding;
+        Vector2 dir = Random.insideUnitCircle;
+        if (dir.sqrMagnitude < 0.01f)
+            dir = Vector2.right;
+        dir.Normalize();
 
-        while (timer < duration)
+        Vector3 spawnPos = player.position + (Vector3)(dir * visionRadius);
+        SetFlyerPosition(spawnPos);
+        circleAngle = Mathf.Atan2(dir.y, dir.x);
+        SetAnimatorDirection(player.position - spawnPos);
+    }
+
+    /// <summary>
+    /// Vision ≈ max(player Light2D / CameraFollow light radii, camera half-diagonal).
+    /// Scene values: mazeLightRadius 6, courtyardLightRadius 9.
+    /// </summary>
+    private float GetPlayerVisionRadius()
+    {
+        float radius = 8f;
+
+        CameraFollow camFollow = FindFirstObjectByType<CameraFollow>();
+        if (camFollow != null)
         {
-            timer += Time.deltaTime;
-            angle += speed * Time.deltaTime;
+            if (camFollow.mainLight2D != null)
+                radius = Mathf.Max(radius, camFollow.mainLight2D.pointLightOuterRadius);
+            else
+                radius = Mathf.Max(camFollow.mazeLightRadius, camFollow.courtyardLightRadius);
+        }
 
-            Vector3 center = player.position;
-            Vector3 newOffset = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * radius;
-            Vector3 newPos = center + newOffset;
-            SetAnimatorDirection(newPos - transform.position);
-            SetFlyerPosition(newPos);
+        // Player candle / child lights (often the real fog-of-war radius in maze)
+        if (player != null)
+        {
+            var playerLights = player.GetComponentsInChildren<UnityEngine.Rendering.Universal.Light2D>(true);
+            foreach (var light in playerLights)
+            {
+                if (light != null && light.pointLightOuterRadius > 0.1f)
+                    radius = Mathf.Max(radius, light.pointLightOuterRadius);
+            }
+        }
+
+        Camera cam = Camera.main;
+        if (cam != null && cam.orthographic)
+        {
+            float halfH = cam.orthographicSize;
+            float halfW = halfH * cam.aspect;
+            float camCorner = Mathf.Sqrt(halfW * halfW + halfH * halfH);
+            radius = Mathf.Max(radius, camCorner);
+        }
+
+        return radius;
+    }
+
+    private IEnumerator ApproachCirclePerimeter()
+    {
+        // Pick a perimeter entry point in the direction we spawned from
+        Vector3 offset = transform.position - player.position;
+        if (offset.sqrMagnitude < 0.01f)
+            offset = Vector3.right;
+        circleAngle = Mathf.Atan2(offset.y, offset.x);
+
+        while (true)
+        {
+            Vector3 target = GetCirclePoint(circleAngle);
+            Vector3 toTarget = target - transform.position;
+            float dist = toTarget.magnitude;
+
+            if (dist <= 0.15f)
+            {
+                SetFlyerPosition(target);
+                break;
+            }
+
+            float step = approachSpeed * Time.deltaTime;
+            Vector3 next = Vector3.MoveTowards(transform.position, target, step);
+            MoveFlyerAndFace(next);
             yield return null;
         }
     }
 
+    private IEnumerator CirclePlayerForDuration(float duration)
+    {
+        float timer = 0f;
+
+        // Sync angle from current pose so we resume smoothly after a swoop
+        Vector3 offset = transform.position - player.position;
+        if (offset.sqrMagnitude > 0.01f)
+            circleAngle = Mathf.Atan2(offset.y, offset.x);
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            circleAngle += circleAngularSpeed * Time.deltaTime;
+
+            Vector3 newPos = GetCirclePoint(circleAngle);
+            MoveFlyerAndFace(newPos);
+            yield return null;
+        }
+    }
+
+    private Vector3 GetCirclePoint(float angle)
+    {
+        Vector3 center = player.position;
+        return center + new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f) * circleDistance;
+    }
+
+    /// <summary>
+    /// Animator Any-State transitions require |secondary axis| &lt; 0.2, so diagonal
+    /// tangents never fire Up/Down/Left/Right. Snap to the dominant cardinal.
+    /// </summary>
     private void SetAnimatorDirection(Vector3 move)
     {
         if (animator == null) return;
-        if (move.magnitude < 0.01f) return;
+        if (move.sqrMagnitude < 0.0001f) return;
 
-        Vector3 normalized = move.normalized;
-        animator.SetFloat("MoveX", normalized.x);
-        animator.SetFloat("MoveY", normalized.y);
+        Vector2 dir = ((Vector2)move).normalized;
+        lastFacingDir = dir;
+
+        float moveX;
+        float moveY;
+        if (Mathf.Abs(dir.x) >= Mathf.Abs(dir.y))
+        {
+            moveX = Mathf.Sign(dir.x);
+            moveY = 0f;
+        }
+        else
+        {
+            moveX = 0f;
+            moveY = Mathf.Sign(dir.y);
+        }
+
+        animator.SetFloat("MoveX", moveX);
+        animator.SetFloat("MoveY", moveY);
+    }
+
+    private void MoveFlyerAndFace(Vector3 newPos)
+    {
+        Vector3 from = GetFlyerPosition();
+        Vector3 delta = newPos - from;
+        SetFlyerPosition(newPos);
+        if (delta.sqrMagnitude > 0.00001f)
+            SetAnimatorDirection(delta);
+        else if (lastFacingDir.sqrMagnitude > 0.01f)
+            SetAnimatorDirection(lastFacingDir);
+    }
+
+    private Vector3 GetFlyerPosition()
+    {
+        return transform.position;
     }
 
     private void SetFlyerPosition(Vector3 worldPos)
     {
+        // Write transform immediately so facing deltas are not one frame behind RB sync
+        transform.position = worldPos;
         if (rb != null)
             rb.position = worldPos;
-        else
-            transform.position = worldPos;
     }
 
     private IEnumerator SwoopAttempt()
@@ -155,58 +289,62 @@ public class Flyer : MonoBehaviour
 
         PlaySfx(swoopWhooshClip);
 
-        // Start from current position (no first-frame snap onto a distant curve start)
-        Vector3 start = transform.position;
-        Vector3 center = player.position;
-        Vector3 flyerToCenter = (start - center);
-        if (flyerToCenter.sqrMagnitude < 0.0001f)
-            flyerToCenter = Vector3.right;
-        flyerToCenter.Normalize();
+        // Lock swoop to current circle perimeter → opposite perimeter (180°)
+        Vector3 liveOffset = transform.position - player.position;
+        if (liveOffset.sqrMagnitude > 0.01f)
+            circleAngle = Mathf.Atan2(liveOffset.y, liveOffset.x);
 
-        Vector3 end = center - flyerToCenter * circleDistance;
-        Vector3 control = player.position + Vector3.down * swoopDipDepth;
+        float startAngle = circleAngle;
+        float endAngle = startAngle + Mathf.PI;
+
+        // Snap to perimeter start so geometry is exact
+        Vector3 start = GetCirclePoint(startAngle);
+        SetFlyerPosition(start);
+
+        Vector3 end = GetCirclePoint(endAngle);
 
         float t = 0f;
         bool hasTriedSteal = false;
-        bool heldAtNadir = false;
 
         while (t < 1f)
         {
             float dt = Time.deltaTime / swoopTime;
             t += dt;
 
-            // Ease climb-out after nadir for a clearer pull-away
             float sampleT = t <= 0.5f
                 ? t
                 : 0.5f + 0.5f * EaseOutCubic((t - 0.5f) / 0.5f);
-
             sampleT = Mathf.Clamp01(sampleT);
-            Vector3 newPos = EvaluateQuadraticBezier(start, control, end, sampleT);
-            SetAnimatorDirection(newPos - transform.position);
+
+            // Keep endpoints on the live circle as the player moves slightly
+            Vector3 liveStart = GetCirclePoint(startAngle);
+            Vector3 liveEnd = GetCirclePoint(endAngle);
+            Vector3 liveControl = player.position + Vector3.down * swoopDipDepth;
+
+            Vector3 newPos = EvaluateQuadraticBezier(liveStart, liveControl, liveEnd, sampleT);
+            // Face path tangent (derivative of quadratic Bezier)
+            Vector3 tangent = EvaluateQuadraticBezierTangent(liveStart, liveControl, liveEnd, sampleT);
             SetFlyerPosition(newPos);
+            if (tangent.sqrMagnitude > 0.0001f)
+                SetAnimatorDirection(tangent);
+            else if (lastFacingDir.sqrMagnitude > 0.01f)
+                SetAnimatorDirection(lastFacingDir);
 
             if (!hasTriedSteal && t >= 0.5f)
             {
                 hasTriedSteal = true;
-
-                // Brief nadir hold so the steal / miss reads as contact
-                if (!heldAtNadir && nadirHoldDuration > 0f)
-                {
-                    heldAtNadir = true;
-                    TryStealLetter();
-                    yield return new WaitForSeconds(nadirHoldDuration);
-                    continue;
-                }
-
                 TryStealLetter();
+                if (nadirHoldDuration > 0f)
+                    yield return new WaitForSeconds(nadirHoldDuration);
             }
 
             yield return null;
         }
 
-        SetFlyerPosition(end);
+        // Land on opposite perimeter and resume circling from there
+        circleAngle = endAngle;
+        SetFlyerPosition(GetCirclePoint(circleAngle));
 
-        yield return new WaitForSeconds(0.35f);
         flyerCollider.enabled = true;
     }
 
@@ -214,6 +352,12 @@ public class Flyer : MonoBehaviour
     {
         float u = 1f - t;
         return u * u * a + 2f * u * t * b + t * t * c;
+    }
+
+    private static Vector3 EvaluateQuadraticBezierTangent(Vector3 a, Vector3 b, Vector3 c, float t)
+    {
+        // B'(t) = 2(1-t)(b-a) + 2t(c-b)
+        return 2f * (1f - t) * (b - a) + 2f * t * (c - b);
     }
 
     private static float EaseOutCubic(float x)
@@ -255,7 +399,6 @@ public class Flyer : MonoBehaviour
         if (letter == null || carriedLetterVisual == null)
             yield break;
 
-        // Visible at player world position, unparented, then curve to carry socket
         letter.transform.SetParent(null, true);
 
         if (!letter.gameObject.activeSelf)
@@ -282,7 +425,6 @@ public class Flyer : MonoBehaviour
             float eased = EaseOutCubic(u);
 
             Vector3 target = carriedLetterVisual.transform.position;
-            // Slight upward arc so the snatch reads in screen space
             Vector3 mid = Vector3.Lerp(flightStart, target, 0.5f) + Vector3.up * 0.45f;
             letter.transform.position = EvaluateQuadraticBezier(flightStart, mid, target, eased);
             yield return null;
@@ -317,8 +459,7 @@ public class Flyer : MonoBehaviour
         {
             t += Time.deltaTime / travelTime;
             Vector3 newPos = Vector3.Lerp(start, dropPosition, t);
-            SetAnimatorDirection(newPos - transform.position);
-            SetFlyerPosition(newPos);
+            MoveFlyerAndFace(newPos);
             yield return null;
         }
 
@@ -340,6 +481,8 @@ public class Flyer : MonoBehaviour
     private IEnumerator EscapeAndDespawn()
     {
         Vector3 escapeDir = (transform.position - player.position).normalized;
+        if (escapeDir.sqrMagnitude < 0.01f)
+            escapeDir = Vector3.right;
         Vector3 escapeTarget = transform.position + escapeDir * 20f;
         float t = 0f;
         float escapeTime = 1.5f;
@@ -349,8 +492,7 @@ public class Flyer : MonoBehaviour
         {
             t += Time.deltaTime / escapeTime;
             Vector3 newPos = Vector3.Lerp(start, escapeTarget, t);
-            SetAnimatorDirection(newPos - transform.position);
-            SetFlyerPosition(newPos);
+            MoveFlyerAndFace(newPos);
             yield return null;
         }
 
