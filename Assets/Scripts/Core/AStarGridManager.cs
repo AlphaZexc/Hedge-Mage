@@ -243,6 +243,14 @@ public class AStarGridManager : MonoBehaviour
         return 10 * (dstX + dstY);
     }
     
+    /// <summary>
+    /// Public wrapper for enemies that need an alternate walkable target near a failed path node.
+    /// </summary>
+    public Node FindClosestWalkableNodePublic(Node node)
+    {
+        return FindClosestWalkableNode(node);
+    }
+
     private Node FindClosestWalkableNode(Node node)
     {
         Queue<Node> queue = new Queue<Node>();
