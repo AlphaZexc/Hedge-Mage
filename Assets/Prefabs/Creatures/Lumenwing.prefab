@@ -188,8 +188,18 @@ MonoBehaviour:
   circleDistance: 4
   circleBetweenSwoopsDuration: 1.5
   minDropDistanceFromPlayer: 5
+  maxDropDistanceFromPlayer: 20
   maxSwoopAttempts: 2
   stealSuccessPercent: 0.4
+  circleAngularSpeed: 2
+  approachSpeed: 8
+  spawnVisionPadding: 1.5
+  swoopTime: 0.9
+  swoopDipDepth: 1.1
+  letterFlightDuration: 0.32
+  swoopWhooshClip: {fileID: 8300000, guid: 3a558d4dc0726954bbe7b9e967a14a93, type: 3}
+  stealClip: {fileID: 8300000, guid: 3a558d4dc0726954bbe7b9e967a14a93, type: 3}
+  sfxVolume: 0.85
 --- !u!50 &3642758770867956012
 Rigidbody2D:
   serializedVersion: 5
@@ -198,14 +208,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2299412231005582585}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2

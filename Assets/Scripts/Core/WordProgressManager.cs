@@ -86,6 +86,18 @@ public class WordProgressManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Refresh word/book UI after a letter is removed (e.g. Lumenwing steal).
+    /// Mirrors the collect path so progress stays in sync.
+    /// </summary>
+    public void OnLetterRemoved(char removedChar)
+    {
+        removedChar = char.ToUpper(removedChar);
+        wordPage.Refresh();
+        AllLettersCollected = CheckAllLettersCollected();
+        Debug.Log("Removed Letter: " + removedChar);
+    }
+
     // Checks whether all needed letters have been collected, checks frequency as well
     private bool CheckAllLettersCollected()
     {

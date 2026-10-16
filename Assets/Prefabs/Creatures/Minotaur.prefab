@@ -249,13 +249,17 @@ MonoBehaviour:
   chargeSpeed: 7
   chargeSightRange: 8
   waypointProximity: 0.2
-  pathRequestCooldown: 0.1
-  minotaurPlayerProximity: 15
+  pathRequestCooldown: 0.4
+  basePlayerProximity: 30
+  letterProximityReductionValue: 3
   stunDuration: 1
-  stunMinImpactSpeed: 9
+  stunMinImpactSpeed: 5
   windupDuration: 1.5
   cooldownAfterHit: 4
   maxChargeDuration: 2.5
+  chargeObstacleMask:
+    serializedVersion: 2
+    m_Bits: 512
   lineOfSightMask:
     serializedVersion: 2
     m_Bits: 576

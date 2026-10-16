@@ -52,7 +52,16 @@ public class PlayerInventory : MonoBehaviour
 
     public bool RemoveLetter(LetterObject letter)
     {
-        return collectedLetters.Remove(letter);
+        if (!collectedLetters.Remove(letter))
+            return false;
+
+        if (WordProgressManager.Instance != null)
+            WordProgressManager.Instance.OnLetterRemoved(letter.letter);
+
+        if (BookLetterPage.Instance != null)
+            BookLetterPage.Instance.RefreshFromInventory();
+
+        return true;
     }
 
     public void SetLastCompletedSpell(SpellBase spell)
