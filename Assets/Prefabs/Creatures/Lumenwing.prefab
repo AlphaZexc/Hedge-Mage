@@ -194,9 +194,8 @@ MonoBehaviour:
   circleAngularSpeed: 2
   approachSpeed: 8
   spawnVisionPadding: 1.5
-  swoopTime: 1.15
+  swoopTime: 0.9
   swoopDipDepth: 1.1
-  nadirHoldDuration: 0.12
   letterFlightDuration: 0.32
   swoopWhooshClip: {fileID: 8300000, guid: 3a558d4dc0726954bbe7b9e967a14a93, type: 3}
   stealClip: {fileID: 8300000, guid: 3a558d4dc0726954bbe7b9e967a14a93, type: 3}

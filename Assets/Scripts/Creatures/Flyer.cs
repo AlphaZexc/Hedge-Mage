@@ -21,9 +21,8 @@ public class Flyer : MonoBehaviour
     [SerializeField] private float spawnVisionPadding = 1.5f;
 
     [Header("Swoop")]
-    [SerializeField] private float swoopTime = 1.15f;
+    [SerializeField] private float swoopTime = 0.9f;
     [SerializeField] private float swoopDipDepth = 1.1f;
-    [SerializeField] private float nadirHoldDuration = 0.12f;
     [SerializeField] private float letterFlightDuration = 0.32f;
 
     [Header("Audio")]
@@ -98,9 +97,9 @@ public class Flyer : MonoBehaviour
             yield return SwoopAttempt();
             swoopAttempts++;
 
-            // Resume circling from the opposite perimeter after each swoop
+            // Resume circling from the exact opposite-perimeter angle (no Atan2 resync snap)
             if (!hasStolenLetter && swoopAttempts < maxSwoopAttempts)
-                yield return CirclePlayerForDuration(circleBetweenSwoopsDuration);
+                yield return CirclePlayerForDuration(circleBetweenSwoopsDuration, resyncAngleFromPosition: false);
             else if (hasStolenLetter)
                 break;
         }
@@ -203,14 +202,20 @@ public class Flyer : MonoBehaviour
         }
     }
 
-    private IEnumerator CirclePlayerForDuration(float duration)
+    /// <param name="resyncAngleFromPosition">
+    /// When false, keep the existing <see cref="circleAngle"/> (used after a swoop so we
+    /// continue from the exact opposite-perimeter end with no Atan2 wrap / radius snap).
+    /// </param>
+    private IEnumerator CirclePlayerForDuration(float duration, bool resyncAngleFromPosition = true)
     {
         float timer = 0f;
 
-        // Sync angle from current pose so we resume smoothly after a swoop
-        Vector3 offset = transform.position - player.position;
-        if (offset.sqrMagnitude > 0.01f)
-            circleAngle = Mathf.Atan2(offset.y, offset.x);
+        if (resyncAngleFromPosition)
+        {
+            Vector3 offset = transform.position - player.position;
+            if (offset.sqrMagnitude > 0.01f)
+                circleAngle = Mathf.Atan2(offset.y, offset.x);
+        }
 
         while (timer < duration)
         {
@@ -289,7 +294,8 @@ public class Flyer : MonoBehaviour
 
         PlaySfx(swoopWhooshClip);
 
-        // Lock swoop to current circle perimeter → opposite perimeter (180°)
+        // Lock swoop to current circle angle → opposite perimeter (180°).
+        // Do not snap onto a different start point — continue from the live orbit pose.
         Vector3 liveOffset = transform.position - player.position;
         if (liveOffset.sqrMagnitude > 0.01f)
             circleAngle = Mathf.Atan2(liveOffset.y, liveOffset.x);
@@ -297,32 +303,20 @@ public class Flyer : MonoBehaviour
         float startAngle = circleAngle;
         float endAngle = startAngle + Mathf.PI;
 
-        // Snap to perimeter start so geometry is exact
-        Vector3 start = GetCirclePoint(startAngle);
-        SetFlyerPosition(start);
-
-        Vector3 end = GetCirclePoint(endAngle);
-
         float t = 0f;
         bool hasTriedSteal = false;
 
         while (t < 1f)
         {
-            float dt = Time.deltaTime / swoopTime;
-            t += dt;
+            t += Time.deltaTime / swoopTime;
+            // Fast for most of the swoop; slight taper only near the end (no mid-pause)
+            float sampleT = FastSwoopThenTaper(Mathf.Clamp01(t));
 
-            float sampleT = t <= 0.5f
-                ? t
-                : 0.5f + 0.5f * EaseOutCubic((t - 0.5f) / 0.5f);
-            sampleT = Mathf.Clamp01(sampleT);
-
-            // Keep endpoints on the live circle as the player moves slightly
             Vector3 liveStart = GetCirclePoint(startAngle);
             Vector3 liveEnd = GetCirclePoint(endAngle);
             Vector3 liveControl = player.position + Vector3.down * swoopDipDepth;
 
             Vector3 newPos = EvaluateQuadraticBezier(liveStart, liveControl, liveEnd, sampleT);
-            // Face path tangent (derivative of quadratic Bezier)
             Vector3 tangent = EvaluateQuadraticBezierTangent(liveStart, liveControl, liveEnd, sampleT);
             SetFlyerPosition(newPos);
             if (tangent.sqrMagnitude > 0.0001f)
@@ -330,22 +324,38 @@ public class Flyer : MonoBehaviour
             else if (lastFacingDir.sqrMagnitude > 0.01f)
                 SetAnimatorDirection(lastFacingDir);
 
-            if (!hasTriedSteal && t >= 0.5f)
+            // Steal at closest approach without freezing movement
+            if (!hasTriedSteal && sampleT >= 0.5f)
             {
                 hasTriedSteal = true;
                 TryStealLetter();
-                if (nadirHoldDuration > 0f)
-                    yield return new WaitForSeconds(nadirHoldDuration);
             }
 
             yield return null;
         }
 
-        // Land on opposite perimeter and resume circling from there
+        // Exact opposite-perimeter end; preserve this angle for continuous orbit resume
         circleAngle = endAngle;
-        SetFlyerPosition(GetCirclePoint(circleAngle));
+        SetFlyerPosition(GetCirclePoint(endAngle));
 
         flyerCollider.enabled = true;
+    }
+
+    /// <summary>
+    /// Nearly linear (fast) progress for most of the swoop; ease-out only after <paramref name="taperStart"/>.
+    /// </summary>
+    private static float FastSwoopThenTaper(float t, float taperStart = 0.78f)
+    {
+        t = Mathf.Clamp01(t);
+        if (taperStart >= 1f)
+            return t;
+        if (t <= taperStart)
+            return t;
+
+        float u = (t - taperStart) / (1f - taperStart);
+        // Quadratic ease-out on the final segment only
+        float eased = 1f - (1f - u) * (1f - u);
+        return taperStart + (1f - taperStart) * eased;
     }
 
     private static Vector3 EvaluateQuadraticBezier(Vector3 a, Vector3 b, Vector3 c, float t)
