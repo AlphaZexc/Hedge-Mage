@@ -8,13 +8,17 @@ using UnityEngine;
 public class LeafFallWind : MonoBehaviour
 {
     [SerializeField] Sprite leafSprite;
-    [SerializeField] float emissionRate = 1.4f;
-    [SerializeField] float lifetime = 3.2f;
-    [SerializeField] float startSize = 0.08f;
-    [SerializeField] float gravityModifier = 0.18f;
-    [SerializeField] float windForceScale = 0.55f;
+    [SerializeField] float emissionRate = 1.15f;
+    [SerializeField] float lifetime = 1.35f;
+    [SerializeField] float startSize = 0.035f;
+    [SerializeField] float gravityModifier = 0.1f;
+    [SerializeField] float windForceScale = 0.18f;
+    [SerializeField] float startSpeedMin = 0.02f;
+    [SerializeField] float startSpeedMax = 0.07f;
     [SerializeField] int sortingOrderOffset = 2;
-    [SerializeField] Color leafTint = new Color(0.55f, 0.72f, 0.42f, 1f);
+    // Dominant canopy pink from free_bundle_2_trees_0 (~196,135,240).
+    [SerializeField] Color leafTint = new Color(0.769f, 0.529f, 0.941f, 1f);
+    [SerializeField] Color leafTintEnd = new Color(0.51f, 0.35f, 0.81f, 1f);
 
     ParticleSystem _ps;
     ParticleSystem.ForceOverLifetimeModule _force;
@@ -35,7 +39,7 @@ public class LeafFallWind : MonoBehaviour
         Vector2 wind = AmbientWind.GetVelocityOrDefault();
         var force = _force;
         force.x = wind.x * windForceScale;
-        force.y = wind.y * windForceScale * 0.35f - 0.05f;
+        force.y = wind.y * windForceScale * 0.25f - 0.02f;
         _force = force;
 
         // Keep leaves just above the canopy sort order when YSort updates the parent.
@@ -69,12 +73,12 @@ public class LeafFallWind : MonoBehaviour
         main.loop = true;
         main.playOnAwake = true;
         main.startLifetime = lifetime;
-        main.startSpeed = new ParticleSystem.MinMaxCurve(0.05f, 0.2f);
+        main.startSpeed = new ParticleSystem.MinMaxCurve(startSpeedMin, startSpeedMax);
         main.startSize = startSize;
         main.startColor = leafTint;
         main.gravityModifier = gravityModifier;
         main.simulationSpace = ParticleSystemSimulationSpace.World;
-        main.maxParticles = 32;
+        main.maxParticles = 24;
         main.scalingMode = ParticleSystemScalingMode.Hierarchy;
 
         var emission = _ps.emission;
@@ -84,7 +88,7 @@ public class LeafFallWind : MonoBehaviour
         var shape = _ps.shape;
         shape.enabled = true;
         shape.shapeType = ParticleSystemShapeType.Circle;
-        shape.radius = 0.18f;
+        shape.radius = 0.12f;
         shape.radiusThickness = 1f;
 
         var colorOverLifetime = _ps.colorOverLifetime;
@@ -94,20 +98,20 @@ public class LeafFallWind : MonoBehaviour
             new[]
             {
                 new GradientColorKey(leafTint, 0f),
-                new GradientColorKey(new Color(0.45f, 0.38f, 0.22f), 1f)
+                new GradientColorKey(leafTintEnd, 1f)
             },
             new[]
             {
                 new GradientAlphaKey(0f, 0f),
-                new GradientAlphaKey(1f, 0.12f),
-                new GradientAlphaKey(0.85f, 0.7f),
+                new GradientAlphaKey(1f, 0.1f),
+                new GradientAlphaKey(0.9f, 0.65f),
                 new GradientAlphaKey(0f, 1f)
             });
         colorOverLifetime.color = gradient;
 
         var rotation = _ps.rotationOverLifetime;
         rotation.enabled = true;
-        rotation.z = new ParticleSystem.MinMaxCurve(-120f * Mathf.Deg2Rad, 120f * Mathf.Deg2Rad);
+        rotation.z = new ParticleSystem.MinMaxCurve(-90f * Mathf.Deg2Rad, 90f * Mathf.Deg2Rad);
 
         _force = _ps.forceOverLifetime;
         _force.enabled = true;
@@ -115,9 +119,9 @@ public class LeafFallWind : MonoBehaviour
 
         var noise = _ps.noise;
         noise.enabled = true;
-        noise.strength = 0.08f;
-        noise.frequency = 0.4f;
-        noise.scrollSpeed = 0.2f;
+        noise.strength = 0.035f;
+        noise.frequency = 0.35f;
+        noise.scrollSpeed = 0.15f;
         noise.quality = ParticleSystemNoiseQuality.Medium;
 
         if (_renderer != null)
@@ -127,7 +131,7 @@ public class LeafFallWind : MonoBehaviour
             _renderer.sortingOrder = 14;
             _renderer.renderMode = ParticleSystemRenderMode.Billboard;
             _renderer.minParticleSize = 0f;
-            _renderer.maxParticleSize = 0.35f;
+            _renderer.maxParticleSize = 0.12f;
 
             Shader shader = Shader.Find("Universal Render Pipeline/2D/Sprite-Unlit-Default");
             if (shader == null)

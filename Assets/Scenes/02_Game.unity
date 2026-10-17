@@ -4847,11 +4847,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b14e6930f23343efb821b6de5e5aca9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: {x: 1, y: 0.2}
+  direction: {x: 1, y: 0.15}
   strength: 1
   useStrengthNoise: 1
-  noiseAmplitude: 0.25
+  noiseAmplitude: 0.2
   noiseSpeed: 0.35
+  reverseDirection: 1
+  minHoldSeconds: 3.5
+  maxHoldSeconds: 8
+  flipBlendSeconds: 1.25
 --- !u!1 &384837013
 GameObject:
   m_ObjectHideFlags: 0
@@ -5019,7 +5023,7 @@ TilemapRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9f2561529c524e7f87d69cc497aadd51, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
